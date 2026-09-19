@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dj7junk2a6xyl"]
+
+[ext_resource type="Script" uid="uid://brh3byy7ww3ep" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dkgn04rt6w7l3" path="res://scenes/pickable.gd" id="2_g2els"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ymk7a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ymk7a"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1811429097]
+script = ExtResource("1_3vyb7")
+
+[node name="Pivot" type="MeshInstance3D" parent="." unique_id=605268361]
+mesh = SubResource("CapsuleMesh_ymk7a")
+
+[node name="CHaracter" type="Node3D" parent="Pivot" unique_id=741086720]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1067286585]
+shape = SubResource("CapsuleShape3D_ymk7a")
+
+[node name="Head" type="Node3D" parent="." unique_id=2084579038]
+
+[node name="Main_Camera" type="Camera3D" parent="Head" unique_id=1985709892]
+cull_mask = 1047553
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Main_Camera" unique_id=1357793559]
+target_position = Vector3(0, 0, -4)
+collision_mask = 3
+
+[node name="Hand" type="Node3D" parent="Head" unique_id=441796266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="Photo_Camera" type="Camera3D" parent="Head" unique_id=2018008743]
+
+[node name="pickup_script" type="Node" parent="." unique_id=5075468]
+script = ExtResource("2_g2els")
+
+[node name="Control" type="Control" parent="." unique_id=1844139223]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control" unique_id=1521420394]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 296.0
+offset_right = 733.0
+offset_bottom = 388.0
+text = "some text here hello"
+
+[node name="TakePhoto" type="Timer" parent="." unique_id=616452903]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="TakePhoto" to="." method="_on_take_photo_timeout"]

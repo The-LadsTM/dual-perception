@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://2mn83u16j2mf"]
+
+[ext_resource type="PackedScene" uid="uid://cbeg00hunek4g" path="res://assets/proto_dual.glb" id="1_wmjt6"]
+
+[node name="proto_dual" unique_id=1439551600 instance=ExtResource("1_wmjt6")]
+
+[node name="Sphere" parent="." index="5" unique_id=1198520605]
+transform = Transform3D(0.31221974, 0, 0, 0, 0.31221974, 0, 0, 0, 0.31221974, 1.0841014, 0.5977117, 0)

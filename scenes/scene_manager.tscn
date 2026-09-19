@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bn2pcwdlyuc3q"]
+
+[ext_resource type="Script" uid="uid://dd3e3ngosl0ve" path="res://scripts/scene_manager.gd" id="1_we8k5"]
+
+[node name="SceneManager" type="CanvasLayer" unique_id=1583047021]
+script = ExtResource("1_we8k5")
+
+[node name="Photo_cooldown" type="Timer" parent="." unique_id=1199097215]
+wait_time = 3.0
+one_shot = true
+
+[node name="Photo" type="TextureRect" parent="." unique_id=1595032485]
+offset_left = 488.0
+offset_top = 192.0
+offset_right = 839.0
+offset_bottom = 411.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CameraCooldown" type="Timer" parent="." unique_id=665141930]
+wait_time = 10.0
+one_shot = true
+
+[node name="CameraCooldownBar" type="ProgressBar" parent="." unique_id=316223973]
+offset_left = 27.0
+offset_top = 24.0
+offset_right = 207.0
+offset_bottom = 51.0
+
+[connection signal="timeout" from="Photo_cooldown" to="." method="_on_photo_cooldown_timeout"]
+[connection signal="timeout" from="CameraCooldown" to="." method="_on_camera_cooldown_timeout"]
