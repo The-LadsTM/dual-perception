@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 			#
 			#holding.linear_velocity = Vector3(0.1, 3, 0.1);
 			#holding = null
-	
+	#
 	if holding != null:
 		holding.global_position = hand.global_position
 		holding.global_rotation = hand.global_rotation
