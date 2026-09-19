@@ -31,7 +31,6 @@ func add_to_gallery(pic):
 
 func _on_photo_cooldown_timeout() -> void:
 	photo.visible = false;
-	pass # Replace with function body.
 
 
 func _on_camera_cooldown_timeout() -> void:

@@ -19,10 +19,10 @@ func _process(delta: float) -> void:
 				if holding:
 					holding.linear_velocity = Vector3(0.1, 3, 0.1)
 				holding = object;
-		elif Input.is_action_pressed("interact"):
-			
-			holding.linear_velocity = Vector3(0.1, 3, 0.1);
-			holding = null
+		#elif Input.is_action_pressed("interact"):
+			#
+			#holding.linear_velocity = Vector3(0.1, 3, 0.1);
+			#holding = null
 	
 	if holding != null:
 		holding.global_position = hand.global_position
