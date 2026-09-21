@@ -2,7 +2,7 @@ extends CanvasLayer
 
 var player: Player
 var photo_gallery = []
-@onready var photo = $Photo
+@onready var photo = $PhotoContainer/Photo
 @onready var photo_cooldown = $Photo_cooldown
 @onready var cooldown_bar = $CameraCooldownBar
 
@@ -10,7 +10,7 @@ signal change_texture;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#photo.visible = false;
+	$PhotoContainer.visible = false;
 	pass # Replace with function body.
 
 
@@ -26,12 +26,12 @@ func _process(delta: float) -> void:
 
 func add_to_gallery(pic):
 	photo_gallery.append(pic);
-	photo.visible = true
+	$PhotoContainer.visible = true
 	photo_cooldown.start()
 
 
 func _on_photo_cooldown_timeout() -> void:
-	photo.visible = false;
+	$PhotoContainer.visible = false;
 
 
 func _on_camera_cooldown_timeout() -> void:

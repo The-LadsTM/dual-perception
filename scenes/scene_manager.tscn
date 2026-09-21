@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" uid="uid://dd3e3ngosl0ve" path="res://scripts/scene_manager.gd" id="1_we8k5"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we8k5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+
 [node name="SceneManager" type="CanvasLayer" unique_id=1583047021]
 script = ExtResource("1_we8k5")
 
 [node name="Photo_cooldown" type="Timer" parent="." unique_id=1199097215]
 wait_time = 3.0
 one_shot = true
-
-[node name="Photo" type="TextureRect" parent="." unique_id=1595032485]
-offset_left = 488.0
-offset_top = 192.0
-offset_right = 839.0
-offset_bottom = 411.0
-expand_mode = 3
-stretch_mode = 5
 
 [node name="CameraCooldown" type="Timer" parent="." unique_id=665141930]
 wait_time = 10.0
@@ -26,6 +26,23 @@ offset_left = 27.0
 offset_top = 24.0
 offset_right = 207.0
 offset_bottom = 51.0
+
+[node name="PhotoContainer" type="PanelContainer" parent="." unique_id=924945033]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 152.88892
+offset_top = 86.0
+offset_right = -152.88892
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_we8k5")
+
+[node name="Photo" type="TextureRect" parent="PhotoContainer" unique_id=1595032485]
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
 
 [connection signal="timeout" from="Photo_cooldown" to="." method="_on_photo_cooldown_timeout"]
 [connection signal="timeout" from="CameraCooldown" to="." method="_on_camera_cooldown_timeout"]
