@@ -65,6 +65,7 @@ func _input(event: InputEvent) -> void:
 		if curr == camera.name:
 			photo.make_current()
 			photo_taken.start()
+			SceneManager.change_texture.emit(true);
 			#var picture = get_viewport().get_texture().get_image()
 			#SceneManager.add_to_gallery(picture);
 			#$CameraCooldown.start()
@@ -83,3 +84,4 @@ func _on_take_photo_timeout() -> void:
 	cooldown.start()
 	retake = false;
 	camera.make_current()
+	SceneManager.change_texture.emit(false);

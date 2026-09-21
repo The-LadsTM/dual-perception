@@ -6,6 +6,7 @@ var photo_gallery = []
 @onready var photo_cooldown = $Photo_cooldown
 @onready var cooldown_bar = $CameraCooldownBar
 
+signal change_texture;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

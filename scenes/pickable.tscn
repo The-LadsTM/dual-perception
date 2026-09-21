@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bj3uqiyolvfn2"]
+
+[ext_resource type="Script" uid="uid://dsyvlvlg3r71w" path="res://scripts/item_pickable.gd" id="1_7w8xg"]
+[ext_resource type="Material" uid="uid://1cptudk53ehf" path="res://assets/textures/mesh_false.tres" id="2_ue70n"]
+[ext_resource type="Material" uid="uid://vy73bvttglo5" path="res://assets/textures/mesh_true.tres" id="3_nx5es"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ymk7a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymk7a"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ymk7a"]
+material = SubResource("StandardMaterial3D_ymk7a")
+
+[node name="pickable" type="RigidBody3D" unique_id=162705130 groups=["pickable"]]
+script = ExtResource("1_7w8xg")
+false_texture = ExtResource("2_ue70n")
+true_texture = ExtResource("3_nx5es")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1550494922]
+shape = SubResource("SphereShape3D_ymk7a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=555990930]
+mesh = SubResource("SphereMesh_ymk7a")
