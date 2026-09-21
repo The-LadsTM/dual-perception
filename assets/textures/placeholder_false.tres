@@ -1,0 +1,11 @@
+[gd_resource type="MeshTexture" format=3 uid="uid://b5w6oi7krb216"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jaqwp"]
+vertex_color_is_srgb = true
+albedo_color = Color(0.3450187, 0.39179042, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_opg14"]
+material = SubResource("StandardMaterial3D_jaqwp")
+
+[resource]
+mesh = SubResource("SphereMesh_opg14")

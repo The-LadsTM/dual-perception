@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dj7junk2a6xyl" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="LightmapGIData" uid="uid://cx7mac6p7ptv6" path="res://scenes/test.lmbake" id="2_0wfyh"]
 [ext_resource type="ArrayOccluder3D" uid="uid://dnd6r7l0uta8v" path="res://scenes/test.occ" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bj3uqiyolvfn2" path="res://scenes/pickable.tscn" id="5_tbgi4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ymk7a"]
 
@@ -23,10 +24,6 @@ size = Vector3(51, 0.0126953125, 27)
 lightmap_size_hint = Vector2i(40, 65)
 add_uv2 = true
 size = Vector3(2.2768555, 3.5020752, 4.934021)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ymk7a"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_ymk7a"]
 
 [node name="Main" type="Node" unique_id=1980799685]
 script = ExtResource("1_jyhfs")
@@ -71,20 +68,5 @@ mesh = SubResource("BoxMesh_u6ng3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 occluder = ExtResource("3_sugp2")
 
-[node name="pickable" type="RigidBody3D" parent="." unique_id=402397473 groups=["pickable"]]
+[node name="pickable" parent="." unique_id=162705130 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.485245, 0, -4.1182723)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="pickable" unique_id=2062658573]
-shape = SubResource("SphereShape3D_ymk7a")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="pickable" unique_id=1636826121]
-mesh = SubResource("SphereMesh_ymk7a")
-
-[node name="pickable2" type="RigidBody3D" parent="." unique_id=1609800887 groups=["pickable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1414604, 0, -4.1182723)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="pickable2" unique_id=1409710413]
-shape = SubResource("SphereShape3D_ymk7a")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="pickable2" unique_id=401546567]
-mesh = SubResource("SphereMesh_ymk7a")
