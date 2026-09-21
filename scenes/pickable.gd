@@ -16,6 +16,21 @@ func _process(_delta: float) -> void:
 		else:
 			pick_up_object()
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	var object = raycasting.get_collider()
+	if raycasting.is_colliding():
+		if object.is_in_group("pickable"):
+			if Input.is_action_pressed("interact"):
+				if holding:
+					holding.linear_velocity = Vector3(0.1, 3, 0.1)
+				holding = object;
+		#elif Input.is_action_pressed("interact"):
+			#
+			#holding.linear_velocity = Vector3(0.1, 3, 0.1);
+			#holding = null
+			print_debug("akljfnk")
+	
 	if holding != null:
 		holding.global_transform = hand.global_transform
 
