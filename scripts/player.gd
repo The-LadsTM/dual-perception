@@ -11,6 +11,7 @@ class_name Player extends CharacterBody3D
 var input_direction: Vector2
 var retake = true
 var active_wall: InteractiveWall = null
+var wall_lock_position: Vector3
 
 @onready var head = $Head
 @onready var camera = $Head/Main_Camera
@@ -48,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		if not is_instance_valid(active_wall):
 			active_wall = null
 		else:
-			global_position = active_wall.get_player_lock_position()
+			global_position = wall_lock_position
 			velocity = Vector3.ZERO
 			return
 
@@ -97,7 +98,7 @@ func handle_interact() -> void:
 
 func enter_wall_interaction(wall: InteractiveWall) -> void:
 	active_wall = wall
-	global_position = wall.get_player_lock_position()
+	wall_lock_position = global_position
 	velocity = Vector3.ZERO
 
 
