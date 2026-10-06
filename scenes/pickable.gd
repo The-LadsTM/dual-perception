@@ -9,20 +9,23 @@ var original_freeze: bool
 
 
 func _process(_delta: float) -> void:
-	# Use just_pressed to prevent repeatedly picking up and dropping every frame
-	if Input.is_action_just_pressed("interact"):
-		if holding != null:
-			drop_object()
-		else:
-			pick_up_object()
-
 	if holding != null:
 		holding.global_transform = hand.global_transform
 
 
-func pick_up_object() -> void:
+func try_interact() -> bool:
+	# The player owns the shared interact input and asks this controller first.
+	# Dropping a held object keeps the original one-click behavior.
+	if holding != null:
+		drop_object()
+		return true
+
+	return pick_up_object()
+
+
+func pick_up_object() -> bool:
 	if not raycasting.is_colliding():
-		return
+		return false
 
 	var object = raycasting.get_collider()
 
@@ -37,6 +40,9 @@ func pick_up_object() -> void:
 		holding.angular_velocity = Vector3.ZERO
 		holding.freeze = true
 		holding.collision_layer = 2
+		return true
+
+	return false
 
 
 func drop_object() -> void:

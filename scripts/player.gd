@@ -10,10 +10,13 @@ class_name Player extends CharacterBody3D
 
 var input_direction: Vector2
 var retake = true
+var active_wall: InteractiveWall = null
 
 @onready var head = $Head
 @onready var camera = $Head/Main_Camera
+@onready var interaction_raycast: RayCast3D = $Head/Main_Camera/RayCast3D
 @onready var photo = $Head/Photo_Camera
+@onready var pickup_controller = $pickup_script
 @onready var cooldown = SceneManager.get_node("CameraCooldown")
 @onready var photo_taken = $TakePhoto
 
@@ -29,12 +32,25 @@ func _unhandled_input(event: InputEvent) -> void:
 		photo.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 		
 	if Input.is_action_just_pressed("escape"):
+		if active_wall != null:
+			exit_wall_interaction()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 	if event is InputEventMouseButton and event.pressed:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+	if event.is_action_pressed("interact"):
+		handle_interact()
+		get_viewport().set_input_as_handled()
 		
 func _physics_process(delta: float) -> void:
+	if active_wall != null:
+		if not is_instance_valid(active_wall):
+			active_wall = null
+		else:
+			global_position = active_wall.get_player_lock_position()
+			velocity = Vector3.ZERO
+			return
 
 	if not is_on_floor():
 		velocity += get_gravity()*delta
@@ -59,6 +75,35 @@ func _physics_process(delta: float) -> void:
 		velocity.z = horizontal_velocity.z
 	
 	move_and_slide()
+
+
+func handle_interact() -> void:
+	if active_wall != null:
+		exit_wall_interaction()
+		return
+
+	# Pick-up/drop gets first refusal so the existing left-click behavior and
+	# wall interaction can never both run for the same input event.
+	if pickup_controller.try_interact():
+		return
+
+	if not interaction_raycast.is_colliding():
+		return
+
+	var collider = interaction_raycast.get_collider()
+	if collider is InteractiveWall:
+		enter_wall_interaction(collider)
+
+
+func enter_wall_interaction(wall: InteractiveWall) -> void:
+	active_wall = wall
+	global_position = wall.get_player_lock_position()
+	velocity = Vector3.ZERO
+
+
+func exit_wall_interaction() -> void:
+	active_wall = null
+	velocity = Vector3.ZERO
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("photo") and retake:
