@@ -10,6 +10,7 @@ class_name Player extends CharacterBody3D
 
 var input_direction: Vector2
 var retake = true
+var inventory;
 
 @onready var head = $Head
 @onready var camera = $Head/Main_Camera

@@ -44,5 +44,9 @@ layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
 
+[node name="Gallery" type="PanelContainer" parent="." unique_id=829102234]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="timeout" from="Photo_cooldown" to="." method="_on_photo_cooldown_timeout"]
 [connection signal="timeout" from="CameraCooldown" to="." method="_on_camera_cooldown_timeout"]
