@@ -71,16 +71,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.843559, 1.2510376, 1.9670
 layers = 2
 mesh = SubResource("BoxMesh_u6ng3")
 
-[node name="InteractiveWallFront" parent="." instance=ExtResource("6_wall")]
+[node name="InteractiveWallFront" parent="." unique_id=2060022215 instance=ExtResource("6_wall")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -7)
 wall_material = ExtResource("7_wall_blue")
 
-[node name="InteractiveWallRight" parent="." instance=ExtResource("6_wall")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 8, 0.5, 0)
+[node name="InteractiveWallRight" parent="." unique_id=1682394197 instance=ExtResource("6_wall")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.944374, 0.5, 0)
 wall_material = ExtResource("8_wall_pink")
 
-[node name="InteractiveWallLeft" parent="." instance=ExtResource("6_wall")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -8, 0.5, 0)
+[node name="InteractiveWallLeft" parent="." unique_id=82186844 instance=ExtResource("6_wall")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.4357924, 0.5, 0)
 wall_material = SubResource("StandardMaterial3D_wall_green")
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1514518630]
