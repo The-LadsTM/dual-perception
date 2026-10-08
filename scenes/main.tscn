@@ -5,6 +5,7 @@
 [ext_resource type="LightmapGIData" uid="uid://cx7mac6p7ptv6" path="res://scenes/test.lmbake" id="2_0wfyh"]
 [ext_resource type="ArrayOccluder3D" uid="uid://dnd6r7l0uta8v" path="res://scenes/test.occ" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bj3uqiyolvfn2" path="res://scenes/pickable.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://dmtl5jmiwtrol" path="res://prefabs/pickable_sprite.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" path="res://scenes/interactive_wall.tscn" id="6_wall"]
 [ext_resource type="Material" uid="uid://1cptudk53ehf" path="res://assets/textures/mesh_false.tres" id="7_wall_blue"]
 [ext_resource type="Material" uid="uid://vy73bvttglo5" path="res://assets/textures/mesh_true.tres" id="8_wall_pink"]
@@ -24,9 +25,9 @@ add_uv2 = true
 size = Vector3(51, 0.0126953125, 27)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u6ng3"]
-lightmap_size_hint = Vector2i(40, 65)
+lightmap_size_hint = Vector2i(103, 174)
 add_uv2 = true
-size = Vector3(2.2768555, 3.5020752, 4.934021)
+size = Vector3(2.2768555, 8.014679, 17.606445)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall_green"]
 albedo_color = Color(0.294, 0.78, 0.49, 1)
@@ -58,16 +59,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 texel_scale = 0.2
 light_data = ExtResource("2_0wfyh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=635146083]
+[node name="wall" type="MeshInstance3D" parent="." unique_id=635146083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9617743, 1.2510376, 2.890564)
 mesh = SubResource("BoxMesh_u6ng3")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1145392503]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5471444, 1.2510376, 8.630262)
+[node name="wall2" type="MeshInstance3D" parent="." unique_id=1145392503]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -3.5471444, 1.2510376, 8.630262)
 mesh = SubResource("BoxMesh_u6ng3")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=443241546]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.843559, 1.2510376, 1.9670105)
+[node name="kitchen" type="MeshInstance3D" parent="." unique_id=443241546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.843559, 3.5073395, -1.0427551)
 layers = 2
 mesh = SubResource("BoxMesh_u6ng3")
 
@@ -89,3 +90,7 @@ occluder = ExtResource("3_sugp2")
 
 [node name="pickable" parent="." unique_id=162705130 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.485245, 0, -4.1182723)
+
+[node name="mixer" parent="." unique_id=916987357 instance=ExtResource("6_tefeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.461545, 1.4056537, -0.091324806)
+true_item = "salt"

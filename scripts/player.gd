@@ -12,6 +12,7 @@ class_name Player extends CharacterBody3D
 
 var input_direction: Vector2
 var retake = true
+var inventory;
 var active_wall: InteractiveWall = null
 var wall_lock_position: Vector3
 var wall_look_base_yaw: float

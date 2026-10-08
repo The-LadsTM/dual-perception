@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dmtl5jmiwtrol"]
+
+[ext_resource type="Script" uid="uid://d1gyo3c576aeh" path="res://prefabs/pickable_sprite.gd" id="1_am0qy"]
+[ext_resource type="Texture2D" uid="uid://dlwyhmjxuqhdc" path="res://assets/SPR_KitchenAssets_Merged_v03.png" id="1_pk285"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ymk7a"]
+radius = 2.4424596
+
+[node name="PickableSprite" type="RigidBody3D" unique_id=916987357 groups=["pickable"]]
+script = ExtResource("1_am0qy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=649627084]
+shape = SubResource("SphereShape3D_ymk7a")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2111538894]
+billboard = 2
+texture = ExtResource("1_pk285")
+region_enabled = true
+region_rect = Rect2(0, 1056.0411, 464.0172, 479.95886)

@@ -6,11 +6,14 @@ var photo_gallery = []
 @onready var photo_cooldown = $Photo_cooldown
 @onready var cooldown_bar = $CameraCooldownBar
 
+var pair_dict = { "sugar_flour": false, "butter_cheese": false, "salt_soda": false }
+
 signal change_texture;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PhotoContainer.visible = false;
+	swap_items();
 	pass # Replace with function body.
 
 
@@ -36,3 +39,20 @@ func _on_photo_cooldown_timeout() -> void:
 
 func _on_camera_cooldown_timeout() -> void:
 	player.retake = true
+
+func get_random_item(true_item: String):
+	for pair in pair_dict:
+		if pair.contains(true_item):
+			var string = pair.replace(true_item, "");
+			string = string.remove_chars("_");
+			if pair_dict[pair]:
+				return string;
+			else:
+				return true_item;
+
+func swap_items():
+	for pair in pair_dict:
+		if randi() % 2:
+			pair_dict[pair] = false
+		else:
+			pair_dict[pair] = true
