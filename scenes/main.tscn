@@ -6,6 +6,9 @@
 [ext_resource type="ArrayOccluder3D" uid="uid://dnd6r7l0uta8v" path="res://scenes/test.occ" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bj3uqiyolvfn2" path="res://scenes/pickable.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://dmtl5jmiwtrol" path="res://prefabs/pickable_sprite.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" path="res://scenes/interactive_wall.tscn" id="6_wall"]
+[ext_resource type="Material" uid="uid://1cptudk53ehf" path="res://assets/textures/mesh_false.tres" id="7_wall_blue"]
+[ext_resource type="Material" uid="uid://vy73bvttglo5" path="res://assets/textures/mesh_true.tres" id="8_wall_pink"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ymk7a"]
 
@@ -25,6 +28,10 @@ size = Vector3(51, 0.0126953125, 27)
 lightmap_size_hint = Vector2i(103, 174)
 add_uv2 = true
 size = Vector3(2.2768555, 8.014679, 17.606445)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall_green"]
+albedo_color = Color(0.294, 0.78, 0.49, 1)
+roughness = 0.75
 
 [node name="Main" type="Node" unique_id=1980799685]
 script = ExtResource("1_jyhfs")
@@ -64,6 +71,18 @@ mesh = SubResource("BoxMesh_u6ng3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.843559, 3.5073395, -1.0427551)
 layers = 2
 mesh = SubResource("BoxMesh_u6ng3")
+
+[node name="InteractiveWallFront" parent="." unique_id=2060022215 instance=ExtResource("6_wall")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -7)
+wall_material = ExtResource("7_wall_blue")
+
+[node name="InteractiveWallRight" parent="." unique_id=1682394197 instance=ExtResource("6_wall")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.944374, 0.5, 0)
+wall_material = ExtResource("8_wall_pink")
+
+[node name="InteractiveWallLeft" parent="." unique_id=82186844 instance=ExtResource("6_wall")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.4357924, 0.5, 0)
+wall_material = SubResource("StandardMaterial3D_wall_green")
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1514518630]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
