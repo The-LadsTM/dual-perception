@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://gdmokmw4ub56"]
+
+[ext_resource type="PackedScene" uid="uid://krl5it4f5lmw" path="res://assets/kitchen_3D_test/kitchen_TEST.fbx" id="1_7ilqw"]
+
+[node name="Node3D" type="Node3D" unique_id=1141478606]
+
+[node name="kitchen_TEST" parent="." unique_id=1114722350 instance=ExtResource("1_7ilqw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55900383, 0, 0.100124)
