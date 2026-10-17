@@ -41,7 +41,10 @@ func pick_up_object() -> bool:
 		holding.freeze = true
 		holding.collision_layer = 2
 		return true
-
+	elif object is StaticSprite:
+		print_debug("dsgf")
+		object.generate_consumable()
+		object.toggle_state()
 	return false
 
 

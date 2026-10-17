@@ -109,6 +109,8 @@ func handle_wall_interact() -> void:
 	var collider = interaction_raycast.get_collider()
 	if collider is InteractiveWall:
 		enter_wall_interaction(collider)
+#		#figure out how to click on items
+		#Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 
 func enter_wall_interaction(wall: InteractiveWall) -> void:

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/interactive_wall.tscn" id="6_wall"]
 [ext_resource type="Material" uid="uid://1cptudk53ehf" path="res://assets/textures/mesh_false.tres" id="7_wall_blue"]
 [ext_resource type="Material" uid="uid://vy73bvttglo5" path="res://assets/textures/mesh_true.tres" id="8_wall_pink"]
+[ext_resource type="PackedScene" uid="uid://b05tgatqgassy" path="res://prefabs/static_sprite.tscn" id="10_choun"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ymk7a"]
 
@@ -94,3 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.485245, 0, -4.1182723)
 [node name="mixer" parent="." unique_id=916987357 instance=ExtResource("6_tefeu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.461545, 1.4056537, -0.091324806)
 true_item = "salt"
+
+[node name="sugarJar" parent="." unique_id=1309829926 instance=ExtResource("10_choun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6515656, 1.0108588, -6.9370766)
+objectName = "sugarJar"

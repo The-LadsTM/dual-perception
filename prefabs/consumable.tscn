@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://c02ny5q477n4r"]
+
+[ext_resource type="Script" uid="uid://b150q6k1rkfu8" path="res://scripts/consumable.gd" id="1_vhoni"]
+[ext_resource type="Texture2D" uid="uid://cgf8hi6wkwvh8" path="res://assets/Sprites/flourScoop_Full.png" id="2_i5kn6"]
+[ext_resource type="Texture2D" uid="uid://c01mrkx7mts46" path="res://assets/Sprites/teaspoon_Full.png" id="3_6om6e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ymk7a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ymk7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i5kn6")
+}],
+"loop": 1,
+"name": &"scoop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6om6e")
+}],
+"loop": 1,
+"name": &"teaspoon",
+"speed": 5.0
+}]
+
+[node name="Consumable" type="RigidBody3D" unique_id=652538628]
+script = ExtResource("1_vhoni")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=55999565]
+shape = SubResource("SphereShape3D_ymk7a")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1607302313]
+sprite_frames = SubResource("SpriteFrames_ymk7a")
+animation = &"teaspoon"
