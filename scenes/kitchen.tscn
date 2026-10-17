@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://gdmokmw4ub56"]
 
 [ext_resource type="PackedScene" uid="uid://krl5it4f5lmw" path="res://assets/kitchen_3D_test/kitchen_TEST.fbx" id="1_7ilqw"]
+[ext_resource type="PackedScene" uid="uid://dmtl5jmiwtrol" path="res://prefabs/pickable_sprite.tscn" id="2_mrp8g"]
 
 [node name="Node3D" type="Node3D" unique_id=1141478606]
 
 [node name="kitchen_TEST" parent="." unique_id=1114722350 instance=ExtResource("1_7ilqw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55900383, 0, 0.100124)
+
+[node name="PickableSprite" parent="." unique_id=916987357 instance=ExtResource("2_mrp8g")]
+transform = Transform3D(0.008607202, 0, -0.4199118, 0, 0.42, 0, 0.4199118, 0, 0.008607202, -4.1753464, 2.6858397, 1.6304743)

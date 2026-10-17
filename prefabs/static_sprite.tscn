@@ -9,9 +9,11 @@
 script = ExtResource("1_lv8av")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=296090848]
+transform = Transform3D(1.53, 0, 0, 0, 1.53, 0, 0, 0, 1.53, 0, 0, 0)
 shape = SubResource("SphereShape3D_ymk7a")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1679392805]
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
 texture = ExtResource("2_4otk0")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

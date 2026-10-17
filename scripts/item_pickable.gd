@@ -10,7 +10,6 @@ class_name Pickable extends RigidBody3D
 func _ready() -> void:
 	SceneManager.change_texture.connect(changeTexture)
 	mesh.set_surface_override_material(0, false_texture)
-	print_debug("laksjfgkldf")
 	pass # Replace with function body.
 
 
