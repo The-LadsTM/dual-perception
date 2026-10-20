@@ -9,6 +9,16 @@
 [ext_resource type="PackedScene" path="res://scenes/interactive_wall.tscn" id="6_wall"]
 [ext_resource type="Material" uid="uid://1cptudk53ehf" path="res://assets/textures/mesh_false.tres" id="7_wall_blue"]
 [ext_resource type="Material" uid="uid://vy73bvttglo5" path="res://assets/textures/mesh_true.tres" id="8_wall_pink"]
+[ext_resource type="PackedScene" uid="uid://b05tgatqgassy" path="res://prefabs/static_sprite.tscn" id="10_choun"]
+[ext_resource type="Texture2D" uid="uid://pm4kjro5mxhx" path="res://assets/Sprites/milkCarton.png" id="11_eb6dy"]
+[ext_resource type="Shader" uid="uid://bab584q52a4cu" path="res://shaders/reusable_outline.gdshader" id="11_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://c02ny5q477n4r" path="res://prefabs/consumable.tscn" id="11_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://f6mbha7mwgkn" path="res://assets/Sprites/vanillaExtract.png" id="12_trceg"]
+[ext_resource type="Texture2D" uid="uid://0ngnrl48jsm" path="res://assets/Sprites/pepperShaker.png" id="13_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://bf2snf7r5c402" path="res://assets/Sprites/saltShaker.png" id="14_muem4"]
+[ext_resource type="Script" uid="uid://b10rsh0muyils" path="res://scripts/reusable_item.gd" id="15_reusable"]
+[ext_resource type="PackedScene" path="res://prefabs/recipe_tin.tscn" id="16_recipe_tin"]
+[ext_resource type="PackedScene" uid="uid://krl5it4f5lmw" path="res://assets/kitchen_3D_test/kitchen_TEST.fbx" id="18_dp3eg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ymk7a"]
 
@@ -24,6 +34,8 @@ lightmap_size_hint = Vector2i(394, 261)
 add_uv2 = true
 size = Vector3(51, 0.0126953125, 27)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_u6ng3"]
 lightmap_size_hint = Vector2i(103, 174)
 add_uv2 = true
@@ -32,6 +44,17 @@ size = Vector3(2.2768555, 8.014679, 17.606445)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall_green"]
 albedo_color = Color(0.294, 0.78, 0.49, 1)
 roughness = 0.75
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c265p"]
+size = Vector3(0.6, 1, 0.6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8y0u"]
+render_priority = 0
+shader = ExtResource("11_jkv2x")
+shader_parameter/sprite_texture = ExtResource("11_eb6dy")
+shader_parameter/is_hovered = false
+shader_parameter/outline_color = Color(1, 0.85, 0.1, 1)
+shader_parameter/outline_width = 4.000000142499999
 
 [node name="Main" type="Node" unique_id=1980799685]
 script = ExtResource("1_jyhfs")
@@ -47,13 +70,16 @@ shape = SubResource("BoxShape3D_u6ng3")
 material_override = SubResource("StandardMaterial3D_o5qli")
 mesh = SubResource("BoxMesh_ymk7a")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ground" unique_id=2060859976]
+shape = SubResource("WorldBoundaryShape3D_ymk7a")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1223600713]
 transform = Transform3D(0.8660254, 2.1855694e-08, -0.5, 0.5, -3.7855173e-08, 0.8660254, 0, -1, -4.371139e-08, -1, 1, 0)
 light_bake_mode = 1
 
 [node name="Player" parent="." unique_id=1811429097 instance=ExtResource("1_o5qli")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -13.793707, 0.86465096, -8.787964)
 
 [node name="LightmapGI" type="LightmapGI" parent="." unique_id=858285469]
 texel_scale = 0.2
@@ -64,11 +90,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9617743, 1.2510376, 2.89056
 mesh = SubResource("BoxMesh_u6ng3")
 
 [node name="wall2" type="MeshInstance3D" parent="." unique_id=1145392503]
-transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -3.5471444, 1.2510376, 8.630262)
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -3.5471444, 1.2510376, 9.121)
 mesh = SubResource("BoxMesh_u6ng3")
 
 [node name="kitchen" type="MeshInstance3D" parent="." unique_id=443241546]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.843559, 3.5073395, -1.0427551)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.843559, 3.5073395, 10.018566)
 layers = 2
 mesh = SubResource("BoxMesh_u6ng3")
 
@@ -89,8 +115,79 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 occluder = ExtResource("3_sugp2")
 
 [node name="pickable" parent="." unique_id=162705130 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.485245, 0, -4.1182723)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.485245, -1.0268874, 3.5265627)
 
 [node name="mixer" parent="." unique_id=916987357 instance=ExtResource("6_tefeu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.461545, 1.4056537, -0.091324806)
 true_item = "salt"
+
+[node name="sugarJar" parent="." unique_id=1309829926 instance=ExtResource("10_choun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6515656, -0.016028643, 0.7077584)
+true_item = "sugarJar"
+Consumable = ExtResource("11_ya4ey")
+
+[node name="milk" type="StaticBody3D" parent="." unique_id=2064393701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.005281, 1.4761851, -12.923333)
+script = ExtResource("15_reusable")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="milk" unique_id=122912299]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004794121, -0.13541532, 7.644835)
+shape = SubResource("BoxShape3D_c265p")
+
+[node name="Sprite3D" type="Sprite3D" parent="milk" unique_id=1354548166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.464609, -0.11140752, 3.7596598)
+material_override = SubResource("ShaderMaterial_a8y0u")
+pixel_size = 0.003
+billboard = 1
+texture = ExtResource("11_eb6dy")
+
+[node name="pepper" type="StaticBody3D" parent="." unique_id=1196036157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.634892, 1.1722195, -12.943435)
+script = ExtResource("15_reusable")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pepper" unique_id=1652005414]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.004793167, -0.13541508, 7.644835)
+shape = SubResource("BoxShape3D_c265p")
+
+[node name="Sprite3D" type="Sprite3D" parent="pepper" unique_id=1260115535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11140752, 7.644835)
+material_override = SubResource("ShaderMaterial_a8y0u")
+pixel_size = 0.003
+billboard = 1
+texture = ExtResource("13_jbj1t")
+
+[node name="salt" type="StaticBody3D" parent="." unique_id=436478525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.472408, 1.1644778, -13.274018)
+script = ExtResource("15_reusable")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="salt" unique_id=828800994]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.004793167, -0.13541532, 7.644835)
+shape = SubResource("BoxShape3D_c265p")
+
+[node name="Sprite3D" type="Sprite3D" parent="salt" unique_id=891569037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11140752, 7.644835)
+material_override = SubResource("ShaderMaterial_a8y0u")
+pixel_size = 0.003
+billboard = 1
+texture = ExtResource("14_muem4")
+
+[node name="VanillaExtract" type="StaticBody3D" parent="." unique_id=1403310549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.957172, 1.3086355, -13.844525)
+script = ExtResource("15_reusable")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VanillaExtract" unique_id=1305414683]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.004793167, -0.13541532, 7.644835)
+shape = SubResource("BoxShape3D_c265p")
+
+[node name="Sprite3D" type="Sprite3D" parent="VanillaExtract" unique_id=1879001140]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11140752, 7.644835)
+material_override = SubResource("ShaderMaterial_a8y0u")
+pixel_size = 0.006
+billboard = 1
+texture = ExtResource("12_trceg")
+
+[node name="RecipeTin" parent="." unique_id=1803055007 instance=ExtResource("16_recipe_tin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.832771, 0.5043582, -4.6299596)
+
+[node name="kitchen_TEST" parent="." unique_id=1068051791 instance=ExtResource("18_dp3eg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.523403, -1.0268874, -8.464426)

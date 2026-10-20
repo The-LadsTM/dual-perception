@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/recipe_tin.gd" id="1_tin"]
+[ext_resource type="Texture2D" path="res://assets/Sprites/recipeTin_Closed.png" id="2_closed"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tin"]
+size = Vector3(0.82, 0.54, 0.82)
+
+[node name="RecipeTin" type="StaticBody3D"]
+script = ExtResource("1_tin")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.65, 0)
+shape = SubResource("BoxShape3D_tin")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+position = Vector3(0, 0.65, 0)
+pixel_size = 0.004
+billboard = 1
+texture = ExtResource("2_closed")

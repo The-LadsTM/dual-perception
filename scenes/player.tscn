@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brh3byy7ww3ep" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dkgn04rt6w7l3" path="res://scenes/pickable.gd" id="2_g2els"]
+[ext_resource type="PackedScene" path="res://scenes/recipe_card_view.tscn" id="3_recipe_card"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ymk7a"]
 
@@ -19,6 +20,7 @@ mesh = SubResource("CapsuleMesh_ymk7a")
 shape = SubResource("CapsuleShape3D_ymk7a")
 
 [node name="Head" type="Node3D" parent="." unique_id=2084579038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Main_Camera" type="Camera3D" parent="Head" unique_id=1985709892]
 cull_mask = 1047553
@@ -27,6 +29,9 @@ cull_mask = 1047553
 target_position = Vector3(0, 0, -4)
 collision_mask = 3
 
+[node name="HandSocket" type="Marker3D" parent="Head/Main_Camera" unique_id=1662785973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.25, -0.65)
+
 [node name="Hand" type="Node3D" parent="Head" unique_id=441796266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
@@ -34,6 +39,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
 [node name="pickup_script" type="Node" parent="." unique_id=5075468]
 script = ExtResource("2_g2els")
+
+[node name="RecipeCardView" parent="." instance=ExtResource("3_recipe_card")]
 
 [node name="Control" type="Control" parent="." unique_id=1844139223]
 visible = false

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b05tgatqgassy"]
+
+[ext_resource type="Script" uid="uid://cdr6h0v5vkfwr" path="res://scripts/static_sprite.gd" id="1_lv8av"]
+[ext_resource type="Texture2D" uid="uid://kkxrgtsras61" path="res://assets/Sprites/flourJar_Closed.png" id="2_4otk0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ymk7a"]
+
+[node name="StaticSprite" type="StaticBody3D" unique_id=1309829926]
+script = ExtResource("1_lv8av")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=296090848]
+transform = Transform3D(1.53, 0, 0, 0, 1.53, 0, 0, 0, 1.53, 0, 0, 0)
+shape = SubResource("SphereShape3D_ymk7a")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1679392805]
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
+billboard = 2
+texture = ExtResource("2_4otk0")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

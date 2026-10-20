@@ -1,0 +1,114 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/recipe_card_view.gd" id="1_view"]
+[ext_resource type="Texture2D" path="res://assets/Sprites/recipeCard_Small.png" id="2_card"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_card"]
+
+[node name="RecipeCardView" type="CanvasLayer"]
+layer = 100
+visible = false
+script = ExtResource("1_view")
+
+[node name="Overlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backdrop" type="ColorRect" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.035, 0.045, 0.045, 0.8)
+
+[node name="Margin" type="MarginContainer" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 40
+
+[node name="Column" type="VBoxContainer" parent="Overlay/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Aspect" type="AspectRatioContainer" parent="Overlay/Margin/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+ratio = 1.725
+
+[node name="CardButton" type="Button" parent="Overlay/Margin/Column/Aspect"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_card")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_card")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_card")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_card")
+
+[node name="Paper" type="TextureRect" parent="Overlay/Margin/Column/Aspect/CardButton"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_card")
+expand_mode = 1
+
+[node name="Content" type="MarginContainer" parent="Overlay/Margin/Column/Aspect/CardButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Overlay/Margin/Column/Aspect/CardButton/Content"]
+layout_mode = 2
+mouse_filter = 1
+horizontal_scroll_mode = 0
+
+[node name="Text" type="VBoxContainer" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.18, 0.15, 0.12, 1)
+text = "Recipe Card"
+autowrap_mode = 3
+
+[node name="Body" type="Label" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.18, 0.15, 0.12, 1)
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="Overlay/Margin/Column"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94, 0.92, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "Click the card to put it back and close the tin  |  Esc to close"
+horizontal_alignment = 1
+autowrap_mode = 3
