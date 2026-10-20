@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b05tgatqgassy" path="res://prefabs/static_sprite.tscn" id="4_bems3"]
 [ext_resource type="PackedScene" uid="uid://c02ny5q477n4r" path="res://prefabs/consumable.tscn" id="5_v3ycp"]
 [ext_resource type="PackedScene" uid="uid://c5ly7iqhvhmik" path="res://scenes/tool_sprite.tscn" id="6_g3o0j"]
+[ext_resource type="PackedScene" uid="uid://tsr4ikkiqnkv" path="res://prefabs/reusable_item.tscn" id="7_58u3k"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
 
@@ -13,7 +14,10 @@
 script = ExtResource("1_2b6py")
 
 [node name="kitchen_TEST" parent="." unique_id=1114722350 instance=ExtResource("1_7ilqw")]
-transform = Transform3D(0.745, 0, 0, 0, 0.745, 0, 0, 0, 0.745, -0.55900383, 0, 0.100124)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55900383, 0, 0.100124)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="kitchen_TEST" unique_id=1728724310]
+transform = Transform3D(1, 0, 0, 0, 0.31154016, 0.950233, 0, -0.950233, 0.31154016, 0, 9.247669, 0)
 
 [node name="Player" parent="." unique_id=1811429097 instance=ExtResource("2_mrp8g")]
 unique_name_in_owner = true
@@ -27,19 +31,35 @@ transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0,
 shape = SubResource("WorldBoundaryShape3D_ymk7a")
 
 [node name="flourJar" parent="." unique_id=1309829926 instance=ExtResource("4_bems3")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.4560783, 1.8761382, 3.0514507)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.4560783, 2.39218, 3.5872974)
 true_item = "flourJar"
 Consumable = ExtResource("5_v3ycp")
 
 [node name="sugarJar" parent="." unique_id=1833116709 instance=ExtResource("4_bems3")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -0.30217505, 1.8386381, 3.0514507)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -0.30217505, 2.425272, 3.681686)
 true_item = "sugarJar"
 Consumable = ExtResource("5_v3ycp")
 
 [node name="cakePan" parent="." unique_id=2142255679 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1094546, 1.9963517, 2.810239)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7381454, 2.4423432, 2.810239)
 objectName = "cakePan"
 
 [node name="mixer" parent="." unique_id=852364789 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9126706, 1.9963517, 2.810239)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9126706, 2.5046117, 4.0028014)
 objectName = "mixer"
+
+[node name="milkCarton" parent="." unique_id=1199836084 instance=ExtResource("7_58u3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.682541, 2.878089, 3.7024922)
+true_item = "milkCarton"
+
+[node name="salt" parent="." unique_id=348972104 instance=ExtResource("7_58u3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2591667, 2.878089, 3.7024922)
+true_item = "saltShaker"
+
+[node name="pepper" parent="." unique_id=325910496 instance=ExtResource("7_58u3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7558374, 2.878089, 3.7024922)
+true_item = "pepperShaker"
+
+[node name="vanilla" parent="." unique_id=1654556683 instance=ExtResource("7_58u3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4433646, 2.878089, 3.7024922)
+true_item = "vanillaExtract"

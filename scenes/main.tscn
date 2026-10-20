@@ -79,7 +79,7 @@ light_bake_mode = 1
 
 [node name="Player" parent="." unique_id=1811429097 instance=ExtResource("1_o5qli")]
 unique_name_in_owner = true
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -13.793707, 0.86465096, -8.787964)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.793707, 0.86465096, -8.787964)
 
 [node name="LightmapGI" type="LightmapGI" parent="." unique_id=858285469]
 texel_scale = 0.2
@@ -129,6 +129,7 @@ Consumable = ExtResource("11_ya4ey")
 [node name="milk" type="StaticBody3D" parent="." unique_id=2064393701]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.005281, 1.4761851, -12.923333)
 script = ExtResource("15_reusable")
+held_height = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="milk" unique_id=122912299]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004794121, -0.13541532, 7.644835)
@@ -144,6 +145,7 @@ texture = ExtResource("11_eb6dy")
 [node name="pepper" type="StaticBody3D" parent="." unique_id=1196036157]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.634892, 1.1722195, -12.943435)
 script = ExtResource("15_reusable")
+held_height = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pepper" unique_id=1652005414]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.004793167, -0.13541508, 7.644835)
@@ -157,15 +159,15 @@ billboard = 1
 texture = ExtResource("13_jbj1t")
 
 [node name="salt" type="StaticBody3D" parent="." unique_id=436478525]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.472408, 1.1644778, -13.274018)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.472408, 1.1644778, -6.1548395)
 script = ExtResource("15_reusable")
+held_height = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="salt" unique_id=828800994]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.004793167, -0.13541532, 7.644835)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 shape = SubResource("BoxShape3D_c265p")
 
 [node name="Sprite3D" type="Sprite3D" parent="salt" unique_id=891569037]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11140752, 7.644835)
 material_override = SubResource("ShaderMaterial_a8y0u")
 pixel_size = 0.003
 billboard = 1
@@ -174,6 +176,7 @@ texture = ExtResource("14_muem4")
 [node name="VanillaExtract" type="StaticBody3D" parent="." unique_id=1403310549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.957172, 1.3086355, -13.844525)
 script = ExtResource("15_reusable")
+held_height = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VanillaExtract" unique_id=1305414683]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.004793167, -0.13541532, 7.644835)

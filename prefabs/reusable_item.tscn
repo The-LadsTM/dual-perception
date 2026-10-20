@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://tsr4ikkiqnkv"]
+
+[ext_resource type="Script" uid="uid://b10rsh0muyils" path="res://scripts/reusable_item.gd" id="1_ajgyk"]
+[ext_resource type="Texture2D" uid="uid://pm4kjro5mxhx" path="res://assets/Sprites/milkCarton.png" id="2_a5nce"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ymk7a"]
+size = Vector3(1, 0.68359375, 0.44433594)
+
+[node name="ReusableItem" type="StaticBody3D" unique_id=1199836084]
+script = ExtResource("1_ajgyk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1716531392]
+shape = SubResource("BoxShape3D_ymk7a")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1185922637]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+billboard = 1
+texture = ExtResource("2_a5nce")

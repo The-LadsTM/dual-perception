@@ -2,8 +2,10 @@ class_name ToolSprite extends StaticBody3D
 
 var state = "empty"
 @export var objectName: String
-var full = false
+const HALF = 4;
+var full = 0
 var close = true
+
 @onready var sprite = $AnimatedSprite3D
 
 
@@ -17,7 +19,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if objectName == "mixer":
 		var string;
-		if full:
+		if full > HALF:
 			string = "_Full"
 		else:
 			string = "_Empty"
@@ -27,11 +29,11 @@ func _process(delta: float) -> void:
 			string += "_Open"
 		sprite.animation = objectName+ string
 	else:
-		if full:
+		if full > 0:
 			sprite.animation = objectName + "_Empty"
 		else:
 			sprite.animation = objectName + "_Full"
 	pass
 
 func add_to_bowl():
-	full = true;
+	full +=1;

@@ -5,6 +5,8 @@ const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader"
 
 @export_range(0.1, 1.0, 0.01) var held_height: float = 0.42
 
+@export var true_item: String;
+
 @onready var sprite: Sprite3D = $Sprite3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
@@ -22,6 +24,8 @@ func _ready() -> void:
 
 	original_collision_layer = collision_layer
 	original_collision_mask = collision_mask
+	
+	sprite.texture = load("res://assets/Sprites/" + true_item + ".png")
 
 	var mat := sprite.material_override as ShaderMaterial
 	if mat != null:
@@ -34,6 +38,8 @@ func _ready() -> void:
 	mat.set_shader_parameter("is_hovered", false)
 	sprite.extra_cull_margin = 0.05
 	_fit_collision_to_sprite()
+	
+	
 
 
 func _fit_collision_to_sprite() -> void:

@@ -12,15 +12,17 @@
 script = ExtResource("1_3vyb7")
 
 [node name="Pivot" type="MeshInstance3D" parent="." unique_id=605268361]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_ymk7a")
 
 [node name="CHaracter" type="Node3D" parent="Pivot" unique_id=741086720]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1067286585]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_ymk7a")
 
 [node name="Head" type="Node3D" parent="." unique_id=2084579038]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Main_Camera" type="Camera3D" parent="Head" unique_id=1985709892]
 cull_mask = 1047553
@@ -40,7 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 [node name="pickup_script" type="Node" parent="." unique_id=5075468]
 script = ExtResource("2_g2els")
 
-[node name="RecipeCardView" parent="." instance=ExtResource("3_recipe_card")]
+[node name="RecipeCardView" parent="." unique_id=10433263 instance=ExtResource("3_recipe_card")]
 
 [node name="Control" type="Control" parent="." unique_id=1844139223]
 visible = false

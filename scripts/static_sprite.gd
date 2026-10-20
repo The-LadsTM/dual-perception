@@ -2,6 +2,7 @@ class_name StaticSprite extends StaticBody3D
 @export var true_item: String;
 var random_item;
 @export var Consumable: PackedScene;
+const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
 var state = "close"
 var close_true;
 var open_true;
@@ -24,7 +25,18 @@ func _ready() -> void:
 	close_true = load("res://assets/Sprites/" + true_item + "_Closed.png")
 	open_true = load("res://assets/Sprites/" + true_item + "_Open.png")
 	
-	pass # Replace with function body.
+	var mat := sprite.material_override as ShaderMaterial
+	if mat != null:
+		mat = mat.duplicate() as ShaderMaterial
+	else:
+		mat = ShaderMaterial.new()
+	mat.shader = OUTLINE_SHADER
+	sprite.material_override = mat
+	mat.set_shader_parameter("sprite_texture", sprite.texture)
+	mat.set_shader_parameter("is_hovered", false)
+	sprite.extra_cull_margin = 0.05
+	#_fit_collision_to_sprite()
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
