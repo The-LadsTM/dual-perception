@@ -19,6 +19,7 @@ mesh = SubResource("CapsuleMesh_ymk7a")
 shape = SubResource("CapsuleShape3D_ymk7a")
 
 [node name="Head" type="Node3D" parent="." unique_id=2084579038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Main_Camera" type="Camera3D" parent="Head" unique_id=1985709892]
 cull_mask = 1047553
