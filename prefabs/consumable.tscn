@@ -34,7 +34,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Consumable" type="RigidBody3D" unique_id=652538628]
+[node name="Consumable" type="RigidBody3D" unique_id=652538628 groups=["pickable"]]
 script = ExtResource("1_vhoni")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=55999565]
