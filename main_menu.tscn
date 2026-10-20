@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://okh5vssvytux"]
+
+[ext_resource type="FontFile" uid="uid://ccwttcqeyhrht" path="res://fonts/ArexaDemo-Regular.otf" id="1_06t4h"]
+
+[node name="MainMenu" type="Control" unique_id=352977372]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=529236163]
+layout_mode = 0
+offset_left = -115858.0
+offset_top = -37838.0
+offset_right = 132556.0
+offset_bottom = 87556.0
+color = Color(0, 0, 0, 1)
+
+[node name="MenuLayout" type="VBoxContainer" parent="." unique_id=2020666578]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MenuLayout" unique_id=1080114420]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 200
+text = "Dual Perception"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="MenuLayout" unique_id=153295792]
+custom_minimum_size = Vector2(600, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 14.93
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 50
+text = "PLAY"
+
+[node name="SettingsButton" type="Button" parent="MenuLayout" unique_id=197394941]
+custom_minimum_size = Vector2(600, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 50
+text = "SETTINGS"
+
+[node name="ExitButton" type="Button" parent="MenuLayout" unique_id=611101763]
+custom_minimum_size = Vector2(600, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
