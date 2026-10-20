@@ -12,13 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://b05tgatqgassy" path="res://prefabs/static_sprite.tscn" id="10_choun"]
 [ext_resource type="Texture2D" uid="uid://pm4kjro5mxhx" path="res://assets/Sprites/milkCarton.png" id="11_eb6dy"]
 [ext_resource type="Shader" uid="uid://bab584q52a4cu" path="res://shaders/reusable_outline.gdshader" id="11_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://c02ny5q477n4r" path="res://prefabs/consumable.tscn" id="11_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://f6mbha7mwgkn" path="res://assets/Sprites/vanillaExtract.png" id="12_trceg"]
 [ext_resource type="Texture2D" uid="uid://0ngnrl48jsm" path="res://assets/Sprites/pepperShaker.png" id="13_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://bf2snf7r5c402" path="res://assets/Sprites/saltShaker.png" id="14_muem4"]
 [ext_resource type="Script" uid="uid://b10rsh0muyils" path="res://scripts/reusable_item.gd" id="15_reusable"]
 [ext_resource type="PackedScene" path="res://prefabs/recipe_tin.tscn" id="16_recipe_tin"]
 [ext_resource type="PackedScene" uid="uid://krl5it4f5lmw" path="res://assets/kitchen_3D_test/kitchen_TEST.fbx" id="18_dp3eg"]
-[ext_resource type="PackedScene" uid="uid://c02ny5q477n4r" path="res://prefabs/consumable.tscn" id="11_ya4ey"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ymk7a"]
 
@@ -79,7 +79,7 @@ light_bake_mode = 1
 
 [node name="Player" parent="." unique_id=1811429097 instance=ExtResource("1_o5qli")]
 unique_name_in_owner = true
-transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, -13.793707, 0.86465096, -8.787964)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -13.793707, 0.86465096, -8.787964)
 
 [node name="LightmapGI" type="LightmapGI" parent="." unique_id=858285469]
 texel_scale = 0.2
