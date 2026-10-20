@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://b10rsh0muyils" path="res://scripts/reusable_item.gd" id="15_reusable"]
 [ext_resource type="PackedScene" path="res://prefabs/recipe_tin.tscn" id="16_recipe_tin"]
 [ext_resource type="PackedScene" uid="uid://krl5it4f5lmw" path="res://assets/kitchen_3D_test/kitchen_TEST.fbx" id="18_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://c02ny5q477n4r" path="res://prefabs/consumable.tscn" id="11_ya4ey"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ymk7a"]
 
@@ -32,6 +33,8 @@ metallic = 0.7
 lightmap_size_hint = Vector2i(394, 261)
 add_uv2 = true
 size = Vector3(51, 0.0126953125, 27)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u6ng3"]
 lightmap_size_hint = Vector2i(103, 174)
@@ -66,6 +69,9 @@ shape = SubResource("BoxShape3D_u6ng3")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1839440012]
 material_override = SubResource("StandardMaterial3D_o5qli")
 mesh = SubResource("BoxMesh_ymk7a")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ground" unique_id=2060859976]
+shape = SubResource("WorldBoundaryShape3D_ymk7a")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1223600713]
 transform = Transform3D(0.8660254, 2.1855694e-08, -0.5, 0.5, -3.7855173e-08, 0.8660254, 0, -1, -4.371139e-08, -1, 1, 0)
@@ -117,7 +123,8 @@ true_item = "salt"
 
 [node name="sugarJar" parent="." unique_id=1309829926 instance=ExtResource("10_choun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6515656, -0.016028643, 0.7077584)
-objectName = "sugarJar"
+true_item = "sugarJar"
+Consumable = ExtResource("11_ya4ey")
 
 [node name="milk" type="StaticBody3D" parent="." unique_id=2064393701]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.005281, 1.4761851, -12.923333)

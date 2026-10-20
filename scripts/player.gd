@@ -51,6 +51,7 @@ var _mouse_mode_before_recipe: Input.MouseMode = Input.MOUSE_MODE_CAPTURED
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	camera.make_current()
 	interaction_raycast.add_exception(self)
 	recipe_card_view.closed.connect(_on_recipe_card_closed)
 

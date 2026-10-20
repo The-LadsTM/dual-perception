@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://c5ly7iqhvhmik"]
+
+[ext_resource type="Script" uid="uid://bbcjevbedhii0" path="res://scripts/tool_sprite.gd" id="1_mvf1b"]
+[ext_resource type="Texture2D" uid="uid://xd0x6m7ebfyh" path="res://assets/Sprites/cakePan_Empty.png" id="2_8e7si"]
+[ext_resource type="Texture2D" uid="uid://odouvcuy4b3e" path="res://assets/Sprites/mixer_Empty_Close.png" id="2_n83mf"]
+[ext_resource type="Texture2D" uid="uid://x166mosq66i2" path="res://assets/Sprites/mixer_Empty_Open.png" id="3_ccisf"]
+[ext_resource type="Texture2D" uid="uid://dqogyp6hm2no4" path="res://assets/Sprites/cakePan_Full.png" id="3_lfwx2"]
+[ext_resource type="Texture2D" uid="uid://xeftyahebri7" path="res://assets/Sprites/mixer_Full_Close.png" id="4_8e7si"]
+[ext_resource type="Texture2D" uid="uid://h5hj4haq7se7" path="res://assets/Sprites/mixer_Full_Open.png" id="5_lfwx2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mvf1b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lv8av"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8e7si")
+}],
+"loop": 1,
+"name": &"cakePan_Empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lfwx2")
+}],
+"loop": 1,
+"name": &"cakePan_Full",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n83mf")
+}],
+"loop": 1,
+"name": &"mixer_Empty_Close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ccisf")
+}],
+"loop": 1,
+"name": &"mixer_Empty_Open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8e7si")
+}],
+"loop": 1,
+"name": &"mixer_Full_Close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lfwx2")
+}],
+"loop": 1,
+"name": &"mixer_Full_Open",
+"speed": 5.0
+}]
+
+[node name="ToolSprite" type="StaticBody3D" unique_id=2142255679]
+script = ExtResource("1_mvf1b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=521486050]
+shape = SubResource("SphereShape3D_mvf1b")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=36617680]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_lv8av")
+animation = &"mixer_Empty_Open"
