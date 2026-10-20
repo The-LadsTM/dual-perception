@@ -6,11 +6,19 @@ extends Node
 var holding: RigidBody3D = null
 var original_collision_layer: int
 var original_freeze: bool
+var raycast_receiver;
 
 
 func _process(_delta: float) -> void:
 	if holding != null:
 		holding.global_transform = hand.global_transform
+	#get interactable sprites to react on hover
+	if raycast_receiver is StaticSprite:
+		raycast_receiver.get_hovered = false
+	if raycasting.is_colliding():
+		raycast_receiver = raycasting.get_collider()
+		if raycast_receiver is StaticSprite:
+			raycast_receiver.get_hovered = true
 
 
 func try_interact() -> bool:
@@ -42,9 +50,14 @@ func pick_up_object() -> bool:
 		holding.collision_layer = 2
 		return true
 	elif object is StaticSprite:
-		print_debug("dsgf")
-		object.generate_consumable()
-		object.toggle_state()
+		if object.Consumable:
+			holding = object.generate_consumable()
+	elif object is ToolSprite:
+		if holding != null:
+			object.add_to_bowl(holding);
+		else: holding = object;
+			
+		pass
 	return false
 
 

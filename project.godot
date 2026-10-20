@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dual Perception"
-run/main_scene="uid://bg0gnpqd7fj0r"
+run/main_scene="uid://gdmokmw4ub56"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -5,15 +5,17 @@ var photo_gallery = []
 @onready var photo = $PhotoContainer/Photo
 @onready var photo_cooldown = $Photo_cooldown
 @onready var cooldown_bar = $CameraCooldownBar
+var bowl_array = [];
 
-var pair_dict = { "sugar_flour": false, "butter_cheese": false, "salt_soda": false }
+var pair_dict = { "sugarJar_flourJar": false, "butter_cheese": false, "salt_soda": false }
 
 signal change_texture;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$PhotoContainer.visible = false;
 	swap_items();
+	print_debug("swapped")
+	$PhotoContainer.visible = false;
 	pass # Replace with function body.
 
 
@@ -41,8 +43,10 @@ func _on_camera_cooldown_timeout() -> void:
 	player.retake = true
 
 func get_random_item(true_item: String):
+	print_debug("random")
 	for pair in pair_dict:
 		if pair.contains(true_item):
+			print_debug("whoa")
 			var string = pair.replace(true_item, "");
 			string = string.remove_chars("_");
 			if pair_dict[pair]:
@@ -56,3 +60,6 @@ func swap_items():
 			pair_dict[pair] = false
 		else:
 			pair_dict[pair] = true
+
+func add_to_bowl(ingredient: String):
+	bowl_array.append(ingredient)
