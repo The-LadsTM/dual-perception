@@ -30,7 +30,10 @@ func _update_animation() -> void:
 	if objectName == "mixer":
 		var suffix: String = "_Close" if close else "_Open"
 		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty") + suffix
-	else:
+	elif objectName == "oven":
+		var suffix: String = "_Close" if close else "_Open"
+		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty") + suffix
+	elif objectName == "cakePan":
 		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty")
 		
 
