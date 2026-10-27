@@ -32,9 +32,9 @@ target_position = Vector3(0, 0, -4)
 collision_mask = 3
 
 [node name="HandSocket" type="Marker3D" parent="Head/Main_Camera" unique_id=1662785973]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.25, -0.65)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="Hand" type="Node3D" parent="Head" unique_id=441796266]
+[node name="Hand" type="Marker3D" parent="Head" unique_id=1376405707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
 [node name="Photo_Camera" type="Camera3D" parent="Head" unique_id=2018008743]

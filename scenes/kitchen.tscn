@@ -63,3 +63,7 @@ true_item = "pepperShaker"
 [node name="vanilla" parent="." unique_id=1654556683 instance=ExtResource("7_58u3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4433646, 2.878089, 3.7024922)
 true_item = "vanillaExtract"
+
+[node name="ToolSprite" parent="." unique_id=273789271 instance=ExtResource("6_g3o0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21068382, 1.1896131, 2.8182702)
+objectName = "oven"

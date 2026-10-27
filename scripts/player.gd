@@ -28,6 +28,14 @@ var wall_look_pitch_offset: float = 0.0
 var held_reusable_item: ReusableItem = null
 var hovered_reusable_item: ReusableItem = null
 
+# Static Sprite
+var hovered_static_sprite: StaticSprite = null
+var held_consumable: Consumable = null
+
+# Static Sprite
+var hovered_tool_sprite: ToolSprite = null
+var held_tool: ToolSprite = null
+
 var hovered_recipe_tin: RecipeTin = null
 var active_recipe_tin: RecipeTin = null
 var _mouse_mode_before_recipe: Input.MouseMode = Input.MOUSE_MODE_CAPTURED
@@ -121,7 +129,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		if active_wall == null:
 
-			if not try_interact_recipe() and not try_interact_reusable():
+			if not try_interact_recipe() and not try_interact_tool() and not try_interact_static() and not try_interact_reusable():
 
 				# Fall back to existing pickup system
 				pickup_controller.try_interact()
@@ -143,6 +151,8 @@ func _physics_process(delta: float) -> void:
 	# Update reusable item hover
 	update_reusable_hover()
 	update_recipe_hover()
+	update_static_hover()
+	update_tool_hover()
 
 	# Wall interaction movement lock
 	if active_wall != null:
@@ -204,6 +214,34 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+# ==================================================
+# TOOL INTERACTION
+# ==================================================
+func try_interact_tool() -> bool:
+	interaction_raycast.force_raycast_update()
+
+	var target := interaction_raycast.get_collider() as ToolSprite
+
+	# Looking at a reusable item
+	if target != null:
+		# The legacy physics pickup and reusable items share one pair of hands.
+		if is_instance_valid(pickup_controller.holding):
+			pickup_controller.drop_object()
+		
+		# If already holding reusable, return it
+		if is_instance_valid(held_reusable_item):
+			held_reusable_item.add_to_bowl(target)
+			target.add_to_bowl()
+			SceneManager.add_to_bowl(held_reusable_item.true_item)
+		
+		# If already holding consumable, destroy it
+		if is_instance_valid(held_consumable):
+			held_consumable.add_to_bowl(target)
+			target.add_to_bowl()
+			SceneManager.add_to_bowl(held_consumable.item)
+			held_consumable = null
+		return true
+	return false
 
 # ==================================================
 # REUSABLE ITEM INTERACTION
@@ -221,10 +259,15 @@ func try_interact_reusable() -> bool:
 		if is_instance_valid(pickup_controller.holding):
 			pickup_controller.drop_object()
 
-		# If already holding something, return it
+		# If already holding reusable, return it
 		if is_instance_valid(held_reusable_item):
 			held_reusable_item.return_home()
 			held_reusable_item = null
+		
+		# If already holding consumable, destroy it
+		if is_instance_valid(held_consumable):
+			held_consumable.queue_free()
+			held_consumable = null
 
 		# Pick up the targeted item
 		target.pick_up(hand_socket)
@@ -249,7 +292,51 @@ func try_interact_reusable() -> bool:
 
 	# Not a reusable item interaction
 	return false
+	
+	
+# ==================================================
+# STATIC SPRITE INTERACTION
+# ==================================================
+func try_interact_static() -> bool:
+	interaction_raycast.force_raycast_update()
 
+	var target := interaction_raycast.get_collider() as StaticSprite
+
+	# Looking at a static sprite
+	if target != null:
+		# The legacy physics pickup and reusable items share one pair of hands.
+		if is_instance_valid(pickup_controller.holding):
+			pickup_controller.drop_object()
+
+		# If already holding reusable, return it
+		if is_instance_valid(held_reusable_item):
+			held_reusable_item.return_home()
+			held_reusable_item = null
+			
+		# If already holding consumable, destroy it
+		if is_instance_valid(held_consumable):
+			held_consumable.queue_free()
+			held_consumable = null
+
+		# Pick up the targeted item
+		var consumed = target.generate_consumable()
+		consumed.pick_up(hand_socket)
+		held_consumable = consumed
+
+		return true
+	return false
+
+	# Click while holding an item
+	# Return it to its original position
+	if is_instance_valid(held_reusable_item):
+
+		held_reusable_item.return_home()
+		held_reusable_item = null
+
+		return true
+
+	# Not a reusable item interaction
+	return false
 
 # ==================================================
 # REUSABLE ITEM HOVER
@@ -279,6 +366,53 @@ func update_reusable_hover() -> void:
 	if is_instance_valid(hovered_reusable_item):
 		hovered_reusable_item.set_hovered(true)
 
+# ==================================================
+# STATIC SPRITES HOVER
+# ==================================================
+func update_static_hover() -> void:
+	var target: StaticSprite = null
+	if active_wall == null and not recipe_card_view.visible:
+		interaction_raycast.force_raycast_update()
+		if interaction_raycast.is_colliding():
+			target = interaction_raycast.get_collider() as StaticSprite
+
+	# Don't repeatedly update the same item
+	if target == hovered_static_sprite:
+		return
+
+	# Remove highlight from previous item
+	if is_instance_valid(hovered_static_sprite):
+		hovered_static_sprite.set_hovered(false)
+
+	hovered_static_sprite = target
+
+	# Highlight new item
+	if is_instance_valid(hovered_static_sprite):
+		hovered_static_sprite.set_hovered(true)
+		
+# ==================================================
+# TOOL SPRITES HOVER
+# ==================================================
+func update_tool_hover() -> void:
+	var target: ToolSprite = null
+	if active_wall == null and not recipe_card_view.visible:
+		interaction_raycast.force_raycast_update()
+		if interaction_raycast.is_colliding():
+			target = interaction_raycast.get_collider() as ToolSprite
+
+	# Don't repeatedly update the same item
+	if target == hovered_tool_sprite:
+		return
+
+	# Remove highlight from previous item
+	if is_instance_valid(hovered_tool_sprite):
+		hovered_tool_sprite.set_hovered(false)
+
+	hovered_tool_sprite = target
+
+	# Highlight new item
+	if is_instance_valid(hovered_tool_sprite):
+		hovered_tool_sprite.set_hovered(true)
 
 # ==================================================
 # RECIPE TIN / CARD

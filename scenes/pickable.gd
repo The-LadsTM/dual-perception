@@ -49,15 +49,6 @@ func pick_up_object() -> bool:
 		holding.freeze = true
 		holding.collision_layer = 2
 		return true
-	elif object is StaticSprite:
-		if object.Consumable:
-			holding = object.generate_consumable()
-	elif object is ToolSprite:
-		if holding != null:
-			object.add_to_bowl(holding);
-		else: holding = object;
-			
-		pass
 	return false
 
 
