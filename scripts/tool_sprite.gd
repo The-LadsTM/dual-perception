@@ -20,7 +20,8 @@ var close: bool = true
 
 func _ready() -> void:
 	if objectName == "oven":
-		sprite.billboard = 0
+		print_debug("oven here")
+		sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	pass # Replace with function body.
 	_update_animation()
 
@@ -31,6 +32,13 @@ func _update_animation() -> void:
 		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty") + suffix
 	else:
 		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty")
+		
+
+func _process(delta: float) -> void:
+	if objectName == "oven":
+		print_debug(sprite.billboard)
+		sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		
 
 
 func set_pour_hover(active: bool) -> void:
@@ -74,5 +82,5 @@ func get_pour_position() -> Vector3:
 
 
 func add_to_bowl() -> void:
-	full = 1
+	full +=1
 	_update_animation()

@@ -75,11 +75,12 @@ true_item = "pepperShaker"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3398027, 2.0906951, 3.7024922)
 true_item = "vanillaExtract"
 
-[node name="ToolSprite" parent="." unique_id=273789271 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21068382, 1.1896131, 2.8182702)
-objectName = "oven"
 [node name="Sprite3D" parent="vanilla" index="1" unique_id=1185922637]
 texture = ExtResource("13_k1cyo")
+
+[node name="oven" parent="." unique_id=273789271 instance=ExtResource("6_g3o0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21068382, 1.1896131, 2.8182702)
+objectName = "oven"
 
 [node name="RecipeTin" parent="." unique_id=765580693 instance=ExtResource("14_3fy06")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5604553, 1.5177835, 3.1176512)

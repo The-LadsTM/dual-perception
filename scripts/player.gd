@@ -421,14 +421,14 @@ func update_tool_hover() -> void:
 		return
 
 	# Remove highlight from previous item
-	if is_instance_valid(hovered_tool_sprite):
-		hovered_tool_sprite.set_hovered(false)
+	#if is_instance_valid(hovered_tool_sprite):
+		#hovered_tool_sprite.set_hovered(false)
 
 	hovered_tool_sprite = target
 
 	# Highlight new item
-	if is_instance_valid(hovered_tool_sprite):
-		hovered_tool_sprite.set_hovered(true)
+	#if is_instance_valid(hovered_tool_sprite):
+		#hovered_tool_sprite.set_hovered(true)
 
 # ==================================================
 # RECIPE TIN / CARD
