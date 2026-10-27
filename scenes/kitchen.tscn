@@ -7,8 +7,26 @@
 [ext_resource type="PackedScene" uid="uid://c02ny5q477n4r" path="res://prefabs/consumable.tscn" id="5_v3ycp"]
 [ext_resource type="PackedScene" uid="uid://c5ly7iqhvhmik" path="res://scenes/tool_sprite.tscn" id="6_g3o0j"]
 [ext_resource type="PackedScene" uid="uid://tsr4ikkiqnkv" path="res://prefabs/reusable_item.tscn" id="7_58u3k"]
+[ext_resource type="Script" uid="uid://b10rsh0muyils" path="res://scripts/reusable_item.gd" id="8_ktc20"]
+[ext_resource type="Shader" uid="uid://bab584q52a4cu" path="res://shaders/reusable_outline.gdshader" id="9_bs8bs"]
+[ext_resource type="Texture2D" uid="uid://pm4kjro5mxhx" path="res://assets/Sprites/milkCarton.png" id="10_88wuv"]
+[ext_resource type="Texture2D" uid="uid://0ngnrl48jsm" path="res://assets/Sprites/pepperShaker.png" id="11_acu1m"]
+[ext_resource type="Texture2D" uid="uid://bf2snf7r5c402" path="res://assets/Sprites/saltShaker.png" id="12_87bic"]
+[ext_resource type="Texture2D" uid="uid://f6mbha7mwgkn" path="res://assets/Sprites/vanillaExtract.png" id="13_k1cyo"]
+[ext_resource type="PackedScene" path="res://prefabs/recipe_tin.tscn" id="14_3fy06"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e7cmp"]
+size = Vector3(0.6, 1, 0.6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f125y"]
+render_priority = 0
+shader = ExtResource("9_bs8bs")
+shader_parameter/sprite_texture = ExtResource("10_88wuv")
+shader_parameter/is_hovered = false
+shader_parameter/outline_color = Color(1, 0.85, 0.1, 1)
+shader_parameter/outline_width = 4.000000142499999
 
 [node name="kitchen" type="Node3D" unique_id=1141478606]
 script = ExtResource("1_2b6py")
@@ -41,7 +59,7 @@ true_item = "sugarJar"
 Consumable = ExtResource("5_v3ycp")
 
 [node name="cakePan" parent="." unique_id=2142255679 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7381454, 2.4423432, 2.810239)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.06997, 2.4423432, 3.7960122)
 objectName = "cakePan"
 
 [node name="mixer" parent="." unique_id=852364789 instance=ExtResource("6_g3o0j")]
@@ -63,3 +81,69 @@ true_item = "pepperShaker"
 [node name="vanilla" parent="." unique_id=1654556683 instance=ExtResource("7_58u3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4433646, 2.878089, 3.7024922)
 true_item = "vanillaExtract"
+
+[node name="milk" type="StaticBody3D" parent="." unique_id=26639456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.144086, 2.4896104, -4.60729)
+script = ExtResource("8_ktc20")
+held_height = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="milk" unique_id=1021902215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004794121, -0.13541532, 7.644835)
+shape = SubResource("BoxShape3D_e7cmp")
+
+[node name="Sprite3D" type="Sprite3D" parent="milk" unique_id=1908397062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.464609, -0.11140752, 3.7596598)
+material_override = SubResource("ShaderMaterial_f125y")
+pixel_size = 0.003
+billboard = 1
+texture = ExtResource("10_88wuv")
+
+[node name="pepper2" type="StaticBody3D" parent="." unique_id=1952950254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.485524, 2.1856449, -4.6273913)
+script = ExtResource("8_ktc20")
+held_height = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pepper2" unique_id=820910836]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.004793167, -0.13541508, 7.644835)
+shape = SubResource("BoxShape3D_e7cmp")
+
+[node name="Sprite3D" type="Sprite3D" parent="pepper2" unique_id=183884849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11140752, 7.644835)
+material_override = SubResource("ShaderMaterial_f125y")
+pixel_size = 0.003
+billboard = 1
+texture = ExtResource("11_acu1m")
+
+[node name="salt2" type="StaticBody3D" parent="." unique_id=988717435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.323041, 2.1779032, 2.1612039)
+script = ExtResource("8_ktc20")
+held_height = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="salt2" unique_id=348073526]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+shape = SubResource("BoxShape3D_e7cmp")
+
+[node name="Sprite3D" type="Sprite3D" parent="salt2" unique_id=959436722]
+material_override = SubResource("ShaderMaterial_f125y")
+pixel_size = 0.003
+billboard = 1
+texture = ExtResource("12_87bic")
+
+[node name="VanillaExtract" type="StaticBody3D" parent="." unique_id=554733544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.807805, 2.3220608, -5.5284824)
+script = ExtResource("8_ktc20")
+held_height = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VanillaExtract" unique_id=678505905]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.004793167, -0.13541532, 7.644835)
+shape = SubResource("BoxShape3D_e7cmp")
+
+[node name="Sprite3D" type="Sprite3D" parent="VanillaExtract" unique_id=1626049782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11140752, 7.644835)
+material_override = SubResource("ShaderMaterial_f125y")
+pixel_size = 0.006
+billboard = 1
+texture = ExtResource("13_k1cyo")
+
+[node name="RecipeTin" parent="." unique_id=765580693 instance=ExtResource("14_3fy06")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6834042, 1.5177835, 3.686084)
