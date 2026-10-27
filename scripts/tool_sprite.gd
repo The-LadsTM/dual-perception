@@ -45,7 +45,7 @@ func _update_animation() -> void:
 		sprite.animation = objectName + ("_Full" if full > HALF else "_Empty") + suffix
 	elif objectName == "oven":
 		sprite.animation = "oven_Empty_Close" if close else "oven_Empty_Open"
-	else:
+	elif objectName == "cakePan":
 		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty")
 		
 	if highlight_material != null and sprite.sprite_frames.has_animation(sprite.animation):

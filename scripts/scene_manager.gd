@@ -7,7 +7,7 @@ var photo_gallery = []
 @onready var cooldown_bar = $CameraCooldownBar
 var bowl_array = [];
 
-var pair_dict = { "sugarJar_flourJar": false, "butter_cheese": false, "salt_soda": false }
+var pair_dict = { "sugarJar_flourJar": false, "butter_cheese": false, "salt_soda": false, "eggCarton": true }
 
 signal change_texture;
 
