@@ -30,6 +30,7 @@ var wall_look_pitch_offset: float = 0.0
 var held_reusable_item: ReusableItem = null
 var hovered_reusable_item: ReusableItem = null
 var pour_hover_mixer: ToolSprite = null
+var hovered_cake: CakeDecoration = null
 
 # Static Sprite
 var hovered_static_sprite: StaticSprite = null
@@ -158,6 +159,7 @@ func _physics_process(delta: float) -> void:
 	update_recipe_hover()
 	update_static_hover()
 	update_tool_hover()
+	update_cake_hover()
 
 	# Wall interaction movement lock
 	if active_wall != null:
@@ -223,30 +225,18 @@ func _physics_process(delta: float) -> void:
 # TOOL INTERACTION
 # ==================================================
 func try_interact_tool() -> bool:
-	interaction_raycast.force_raycast_update()
-
-	var target := interaction_raycast.get_collider() as ToolSprite
-
-	# Looking at a reusable item
-	if target != null:
-		# The legacy physics pickup and reusable items share one pair of hands.
-		if is_instance_valid(pickup_controller.holding):
-			pickup_controller.drop_object()
-		
-		# If already holding reusable, return it
-		if is_instance_valid(held_reusable_item):
-			held_reusable_item.add_to_bowl(target)
-			target.add_to_bowl()
-			SceneManager.add_to_bowl(held_reusable_item.true_item)
-		
-		# If already holding consumable, destroy it
-		if is_instance_valid(held_consumable):
-			held_consumable.add_to_bowl(target)
-			target.add_to_bowl()
-			SceneManager.add_to_bowl(held_consumable.item)
-			held_consumable = null
-		return true
-	return false
+	var target := get_pour_target()
+	if target == null:
+		return false
+	target.set_pour_hover(true)
+	if is_instance_valid(held_reusable_item):
+		held_reusable_item.play_pour()
+		target.pour_ingredient(held_reusable_item.true_item)
+	elif is_instance_valid(held_consumable):
+		target.pour_ingredient(held_consumable.ingredient)
+		held_consumable.add_to_bowl(target)
+		held_consumable = null
+	return true
 
 # ==================================================
 # REUSABLE ITEM INTERACTION
@@ -263,9 +253,7 @@ func try_interact_reusable() -> bool:
 
 	var mixer := get_pour_target()
 	if mixer != null:
-		mixer.set_pour_hover(true)
-		mixer.pour_ingredient(held_reusable_item.true_item)
-		return true
+		return try_interact_tool()
 
 	var target := interaction_raycast.get_collider() as ReusableItem
 
@@ -306,6 +294,10 @@ func try_interact_reusable() -> bool:
 
 		return true
 
+	if is_instance_valid(held_consumable):
+		held_consumable.queue_free()
+		held_consumable = null
+		return true
 	# Not a reusable item interaction
 	return false
 	
@@ -336,6 +328,8 @@ func try_interact_static() -> bool:
 
 		# Pick up the targeted item
 		var consumed = target.generate_consumable()
+		if consumed == null:
+			return false
 		consumed.pick_up(hand_socket)
 		held_consumable = consumed
 
@@ -421,14 +415,14 @@ func update_tool_hover() -> void:
 		return
 
 	# Remove highlight from previous item
-	#if is_instance_valid(hovered_tool_sprite):
-		#hovered_tool_sprite.set_hovered(false)
+	if is_instance_valid(hovered_tool_sprite):
+		hovered_tool_sprite.set_hovered(false)
 
 	hovered_tool_sprite = target
 
 	# Highlight new item
-	#if is_instance_valid(hovered_tool_sprite):
-		#hovered_tool_sprite.set_hovered(true)
+	if is_instance_valid(hovered_tool_sprite):
+		hovered_tool_sprite.set_hovered(true)
 
 # ==================================================
 # RECIPE TIN / CARD
@@ -587,7 +581,8 @@ func _on_take_photo_timeout() -> void:
 func get_pour_target() -> ToolSprite:
 	if active_wall != null or recipe_card_view.visible:
 		return null
-	if not is_instance_valid(held_reusable_item) or not held_reusable_item.can_pour():
+	var has_reusable: bool = is_instance_valid(held_reusable_item) and held_reusable_item.can_pour()
+	if not has_reusable and not is_instance_valid(held_consumable):
 		return null
 	interaction_raycast.force_raycast_update()
 	var target := interaction_raycast.get_collider() as ToolSprite
@@ -604,6 +599,8 @@ func update_pouring(delta: float) -> void:
 		pour_hover_mixer = target
 		if is_instance_valid(pour_hover_mixer):
 			pour_hover_mixer.set_pour_hover(true)
+	if is_instance_valid(held_consumable):
+		held_consumable.update_pour_pose(target, delta)
 	if is_instance_valid(held_reusable_item):
 		var cake := get_decoration_target()
 		if cake != null:
@@ -619,3 +616,16 @@ func get_decoration_target() -> CakeDecoration:
 		return null
 	interaction_raycast.force_raycast_update()
 	return interaction_raycast.get_collider() as CakeDecoration
+
+
+func update_cake_hover() -> void:
+	var target: CakeDecoration = null
+	if active_wall == null and not recipe_card_view.visible:
+		target = interaction_raycast.get_collider() as CakeDecoration
+	if target == hovered_cake:
+		return
+	if is_instance_valid(hovered_cake):
+		hovered_cake.set_hovered(false)
+	hovered_cake = target
+	if is_instance_valid(hovered_cake):
+		hovered_cake.set_hovered(true)

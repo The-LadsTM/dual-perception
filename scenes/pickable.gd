@@ -12,13 +12,6 @@ var raycast_receiver;
 func _process(_delta: float) -> void:
 	if holding != null:
 		holding.global_transform = hand.global_transform
-	#get interactable sprites to react on hover
-	if raycast_receiver is StaticSprite:
-		raycast_receiver.get_hovered = false
-	if raycasting.is_colliding():
-		raycast_receiver = raycasting.get_collider()
-		if raycast_receiver is StaticSprite:
-			raycast_receiver.get_hovered = true
 
 
 func try_interact() -> bool:

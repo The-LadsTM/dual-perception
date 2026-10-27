@@ -63,3 +63,4 @@ func swap_items():
 
 func add_to_bowl(ingredient: String):
 	bowl_array.append(ingredient)
+	print_debug(bowl_array)

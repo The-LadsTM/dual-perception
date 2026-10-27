@@ -1,6 +1,9 @@
 class_name ReusableItem
 extends StaticBody3D
 
+const HOVER_FLOAT = preload("res://scripts/hover_float.gd")
+var hover_float: Node
+
 const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
 
 @export_range(0.1, 1.0, 0.01) var held_height: float = 0.42
@@ -20,6 +23,7 @@ const PIPING_BAGS: Array[String] = ["pipingBag_White", "pipingBag_Pink", "piping
 var is_held: bool = false
 var held_position: Vector3
 var pour_angle: float = 0.0
+var pour_time_left: float = 0.0
 
 
 func can_pour() -> bool:
@@ -35,7 +39,12 @@ func update_pour_pose(mixer: ToolSprite, delta: float) -> void:
 	update_use_pose(active, mixer.get_pour_position() if active else Vector3.ZERO, delta)
 
 
+func play_pour() -> void:
+	pour_time_left = 0.45
+
+
 func update_use_pose(active: bool, world_position: Vector3, delta: float) -> void:
+	pour_time_left = maxf(pour_time_left - delta, 0.0)
 	if not is_held:
 		return
 	var target_position: Vector3 = held_position
@@ -47,13 +56,17 @@ func update_use_pose(active: bool, world_position: Vector3, delta: float) -> voi
 		# Shader angles are counterclockwise; subtract 70 degrees while decorating.
 		target_angle = deg_to_rad(20.0 if active else 90.0)
 	else:
-		target_angle = deg_to_rad(115.0) if active else 0.0
+		target_angle = deg_to_rad(115.0) if active and pour_time_left > 0.0 else 0.0
 	pour_angle = lerpf(pour_angle, target_angle, 1.0 - exp(-12.0 * delta))
 	(sprite.material_override as ShaderMaterial).set_shader_parameter("pour_angle", pour_angle)
 
 
 
 func _ready() -> void:
+	hover_float = HOVER_FLOAT.new()
+	add_child(hover_float)
+	hover_float.configure([sprite])
+
 	home_parent = get_parent()
 	home_transform = global_transform
 
@@ -99,6 +112,7 @@ func _fit_collision_to_sprite() -> void:
 
 
 func set_hovered(active: bool) -> void:
+	hover_float.set_hovered(active and not is_held and (can_pour() or is_piping_bag()))
 	var mat := sprite.material_override as ShaderMaterial
 	if mat != null:
 		mat.set_shader_parameter("is_hovered", active and not is_held)
@@ -110,6 +124,7 @@ func pick_up(hand_socket: Marker3D) -> void:
 
 	is_held = true
 	set_hovered(false)
+	hover_float.reset()
 
 	# Prevent raycast and physics collision while held
 	collision_layer = 0
@@ -131,6 +146,7 @@ func return_home() -> void:
 	if not is_held or not is_instance_valid(home_parent):
 		return
 
+	pour_time_left = 0.0
 	pour_angle = deg_to_rad(90.0) if is_piping_bag() else 0.0
 	(sprite.material_override as ShaderMaterial).set_shader_parameter("pour_angle", pour_angle)
 	reparent(home_parent, true)
