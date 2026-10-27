@@ -43,10 +43,8 @@ func _on_camera_cooldown_timeout() -> void:
 	player.retake = true
 
 func get_random_item(true_item: String):
-	print_debug("random")
 	for pair in pair_dict:
 		if pair.contains(true_item):
-			print_debug("whoa")
 			var string = pair.replace(true_item, "");
 			string = string.remove_chars("_");
 			if pair_dict[pair]:

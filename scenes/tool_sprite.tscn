@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bbcjevbedhii0" path="res://scripts/tool_sprite.gd" id="1_mvf1b"]
 [ext_resource type="Texture2D" uid="uid://xd0x6m7ebfyh" path="res://assets/Sprites/cakePan_Empty.png" id="2_8e7si"]
+[ext_resource type="Texture2D" uid="uid://dmsung7uwcbqr" path="res://assets/Sprites/bowl_Empty.png" id="2_lc0ay"]
 [ext_resource type="Texture2D" uid="uid://odouvcuy4b3e" path="res://assets/Sprites/mixer_Empty_Close.png" id="2_n83mf"]
 [ext_resource type="Texture2D" uid="uid://x166mosq66i2" path="res://assets/Sprites/mixer_Empty_Open.png" id="3_ccisf"]
 [ext_resource type="Texture2D" uid="uid://dqogyp6hm2no4" path="res://assets/Sprites/cakePan_Full.png" id="3_lfwx2"]
+[ext_resource type="Texture2D" uid="uid://ufoxspis0kqj" path="res://assets/Sprites/bowl_Full.png" id="3_w7837"]
 [ext_resource type="Texture2D" uid="uid://xeftyahebri7" path="res://assets/Sprites/mixer_Full_Close.png" id="4_8e7si"]
 [ext_resource type="Texture2D" uid="uid://h5hj4haq7se7" path="res://assets/Sprites/mixer_Full_Open.png" id="5_lfwx2"]
 [ext_resource type="Texture2D" uid="uid://dqr3bnjqg5rnd" path="res://assets/Sprites/oven_Empty_Close.png" id="8_lfwx2"]
@@ -14,6 +16,22 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lv8av"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lc0ay")
+}],
+"loop": 1,
+"name": &"bowl_Empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w7837")
+}],
+"loop": 1,
+"name": &"bowl_Full",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_8e7si")
@@ -62,6 +80,11 @@ animations = [{
 "name": &"mixer_Full_Open",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("8_lfwx2")
@@ -89,7 +112,7 @@ shape = SubResource("SphereShape3D_mvf1b")
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_lv8av")
-animation = &"oven_Empty_Open"
+animation = &"bowl_Empty"
 
 [node name="Timer" type="Timer" parent="." unique_id=609815543]
 wait_time = 5.0

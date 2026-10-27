@@ -134,7 +134,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if active_wall == null:
 
 			if not try_interact_recipe() and not try_interact_tool() and not try_interact_static() and not try_interact_reusable():
-
+				print_debug("dang")
 				# Fall back to existing pickup system
 				pickup_controller.try_interact()
 
@@ -225,11 +225,13 @@ func _physics_process(delta: float) -> void:
 # TOOL INTERACTION
 # ==================================================
 func try_interact_tool() -> bool:
-	var target := get_pour_target()
+	#var target := get_pour_target()
+	var target := interaction_raycast.get_collider() as ToolSprite
 	if target == null:
 		return false
 		
 	target.set_pour_hover(true)
+	print_debug("take it")
 	if is_instance_valid(held_reusable_item):
 		held_reusable_item.play_pour()
 		target.pour_ingredient(held_reusable_item.true_item)
@@ -237,9 +239,11 @@ func try_interact_tool() -> bool:
 		target.pour_ingredient(held_consumable.ingredient)
 		held_consumable.add_to_bowl(target)
 		held_consumable = null
-		
 	else: 
-		target.get_bowl()
+		print_debug("take the bowl")
+		var bowl = target.get_bowl()
+		held_consumable = bowl
+		bowl.pick_up(hand_socket)
 	return true
 
 # ==================================================
@@ -257,6 +261,10 @@ func try_interact_reusable() -> bool:
 
 	var mixer := get_pour_target()
 	if mixer != null:
+		return try_interact_tool()
+		
+	var cakePan:= get_pour_target()
+	if cakePan != null:
 		return try_interact_tool()
 
 	var target := interaction_raycast.get_collider() as ReusableItem
@@ -288,6 +296,8 @@ func try_interact_reusable() -> bool:
 		hovered_reusable_item = null
 
 		return true
+	
+	
 
 	# Click while holding an item
 	# Return it to its original position
@@ -590,7 +600,7 @@ func get_pour_target() -> ToolSprite:
 		return null
 	interaction_raycast.force_raycast_update()
 	var target := interaction_raycast.get_collider() as ToolSprite
-	if target != null and target.objectName == "mixer":
+	if target != null and (target.objectName == "mixer" or target.objectName == "cakePan"):
 		return target
 	return null
 

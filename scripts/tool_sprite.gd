@@ -15,6 +15,7 @@ const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader"
 var highlight_material: ShaderMaterial
 var state = "empty"
 @export var objectName: String
+var bowl: PackedScene = preload("res://prefabs/consumable.tscn")
 const HALF = 4;
 var hovered
 @onready var timer = $Timer
@@ -123,9 +124,19 @@ func add_to_bowl() -> void:
 	_update_animation()
 
 func get_bowl():
-	pass
+	print_debug("you got bow")
+	#change mixer art and put bowl in hand
+	var bowl_child = bowl.instantiate()
+	add_child(bowl_child)
+	if full > HALF:
+		bowl_child.item = "bowl_Full"
+		bowl_child.sprite.animation = "bowl_Full"
+	else:
+		bowl_child.item = "bowl_Full"
+		bowl_child.sprite.animation = "bowl_Full"
+	#sprite.animation = 
+	return bowl_child
 
 func open(hovered) -> void:
-	print_debug("hovering")
 	close = !hovered;
 	_update_animation()

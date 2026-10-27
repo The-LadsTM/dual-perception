@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://b150q6k1rkfu8" path="res://scripts/consumable.gd" id="1_vhoni"]
 [ext_resource type="Texture2D" uid="uid://d0332i8ejrecx" path="res://assets/Sprites/egg.png" id="2_6om6e"]
 [ext_resource type="Texture2D" uid="uid://cgf8hi6wkwvh8" path="res://assets/Sprites/flourScoop_Full.png" id="2_i5kn6"]
+[ext_resource type="Texture2D" uid="uid://dmsung7uwcbqr" path="res://assets/Sprites/bowl_Empty.png" id="2_rlqn8"]
 [ext_resource type="Texture2D" uid="uid://c01mrkx7mts46" path="res://assets/Sprites/teaspoon_Full.png" id="3_6om6e"]
+[ext_resource type="Texture2D" uid="uid://ufoxspis0kqj" path="res://assets/Sprites/bowl_Full.png" id="3_ev6j5"]
 [ext_resource type="Texture2D" uid="uid://cbq5ksnhhfdvh" path="res://assets/Sprites/egg_Cracked.png" id="3_gk2us"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ymk7a"]
@@ -11,6 +13,22 @@ radius = 0.17665471
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ymk7a"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rlqn8")
+}],
+"loop": 1,
+"name": &"bowl_Empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ev6j5")
+}],
+"loop": 1,
+"name": &"bowl_Full",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_6om6e")
@@ -54,7 +72,7 @@ shape = SubResource("SphereShape3D_ymk7a")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_ymk7a")
-animation = &"teaspoon"
+animation = &"bowl_Empty"
 
 [node name="Timer" type="Timer" parent="." unique_id=402937502]
 one_shot = true
