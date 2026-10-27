@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bf2snf7r5c402" path="res://assets/Sprites/saltShaker.png" id="12_87bic"]
 [ext_resource type="Texture2D" uid="uid://f6mbha7mwgkn" path="res://assets/Sprites/vanillaExtract.png" id="13_k1cyo"]
 [ext_resource type="PackedScene" path="res://prefabs/recipe_tin.tscn" id="14_3fy06"]
-[ext_resource type="PackedScene" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
+[ext_resource type="PackedScene" uid="uid://bx1thsbxcrvwy" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
 
@@ -99,6 +99,11 @@ true_item = "pipingBag_Pink"
 [node name="PipingBagRed" parent="." unique_id=264107394 instance=ExtResource("7_58u3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.041663, 2.17, 3.468257)
 true_item = "pipingBag_Red"
+
+[node name="StaticSprite" parent="." unique_id=639103028 instance=ExtResource("4_bems3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1976285, 2.1716511, -2.1174521)
+true_item = "eggCarton"
+Consumable = ExtResource("5_v3ycp")
 
 [editable path="milkCarton"]
 [editable path="salt"]

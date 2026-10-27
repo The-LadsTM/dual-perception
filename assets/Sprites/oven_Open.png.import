@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8x3n1w7gdn88"
-path="res://.godot/imported/eggCarton_8.png-2797428dbb620e28e9661adfc2a982cd.ctex"
+uid="uid://lvqvei8w0okx"
+path="res://.godot/imported/oven_Open.png-f04c2270e1a8b991ff9d4e0cdaad59cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sprites/eggCarton_8.png"
-dest_files=["res://.godot/imported/eggCarton_8.png-2797428dbb620e28e9661adfc2a982cd.ctex"]
+source_file="res://assets/Sprites/oven_Open.png"
+dest_files=["res://.godot/imported/oven_Open.png-f04c2270e1a8b991ff9d4e0cdaad59cc.ctex"]
 
 [params]
 
