@@ -52,12 +52,7 @@ func pick_up_object() -> bool:
 	elif object is StaticSprite:
 		if object.Consumable:
 			holding = object.generate_consumable()
-	elif object is ToolSprite:
-		if holding != null:
-			object.add_to_bowl(holding);
-		else: holding = object;
-			
-		pass
+	# Fixed tools stay on the counter; Player handles pouring into the mixer.
 	return false
 
 

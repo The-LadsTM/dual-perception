@@ -2,6 +2,8 @@
 class_name Player
 extends CharacterBody3D
 
+const CakeDecoration = preload("res://scripts/decoratable_cake.gd")
+
 @export var look_sensitivity = 0.005
 @export var speed: float = 5.0
 @export var fall_acceleration = 75
@@ -27,6 +29,7 @@ var wall_look_pitch_offset: float = 0.0
 # Reusable Items
 var held_reusable_item: ReusableItem = null
 var hovered_reusable_item: ReusableItem = null
+var pour_hover_mixer: ToolSprite = null
 
 var hovered_recipe_tin: RecipeTin = null
 var active_recipe_tin: RecipeTin = null
@@ -140,6 +143,8 @@ func _physics_process(delta: float) -> void:
 			recipe_card_view.close_card()
 		return
 
+	update_pouring(delta)
+
 	# Update reusable item hover
 	update_reusable_hover()
 	update_recipe_hover()
@@ -212,6 +217,17 @@ func _physics_process(delta: float) -> void:
 func try_interact_reusable() -> bool:
 
 	interaction_raycast.force_raycast_update()
+
+	var cake := get_decoration_target()
+	if cake != null:
+		cake.decorate(held_reusable_item.true_item)
+		return true
+
+	var mixer := get_pour_target()
+	if mixer != null:
+		mixer.set_pour_hover(true)
+		mixer.pour_ingredient(held_reusable_item.true_item)
+		return true
 
 	var target := interaction_raycast.get_collider() as ReusableItem
 
@@ -432,3 +448,40 @@ func _on_take_photo_timeout() -> void:
 	camera.make_current()
 
 	SceneManager.change_texture.emit(false)
+
+
+func get_pour_target() -> ToolSprite:
+	if active_wall != null or recipe_card_view.visible:
+		return null
+	if not is_instance_valid(held_reusable_item) or not held_reusable_item.can_pour():
+		return null
+	interaction_raycast.force_raycast_update()
+	var target := interaction_raycast.get_collider() as ToolSprite
+	if target != null and target.objectName == "mixer":
+		return target
+	return null
+
+
+func update_pouring(delta: float) -> void:
+	var target := get_pour_target()
+	if pour_hover_mixer != target:
+		if is_instance_valid(pour_hover_mixer):
+			pour_hover_mixer.set_pour_hover(false)
+		pour_hover_mixer = target
+		if is_instance_valid(pour_hover_mixer):
+			pour_hover_mixer.set_pour_hover(true)
+	if is_instance_valid(held_reusable_item):
+		var cake := get_decoration_target()
+		if cake != null:
+			held_reusable_item.update_use_pose(true, cake.get_decoration_position(), delta)
+		else:
+			held_reusable_item.update_pour_pose(target, delta)
+
+
+func get_decoration_target() -> CakeDecoration:
+	if active_wall != null or recipe_card_view.visible:
+		return null
+	if not is_instance_valid(held_reusable_item) or not held_reusable_item.is_piping_bag():
+		return null
+	interaction_raycast.force_raycast_update()
+	return interaction_raycast.get_collider() as CakeDecoration

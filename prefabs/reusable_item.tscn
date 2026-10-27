@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://tsr4ikkiqnkv"]
 
 [ext_resource type="Script" uid="uid://b10rsh0muyils" path="res://scripts/reusable_item.gd" id="1_ajgyk"]
-[ext_resource type="Texture2D" uid="uid://pm4kjro5mxhx" path="res://assets/Sprites/milkCarton.png" id="2_a5nce"]
+[ext_resource type="Texture2D" uid="uid://0ngnrl48jsm" path="res://assets/Sprites/pepperShaker.png" id="2_a5nce"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ymk7a"]
 size = Vector3(1, 0.68359375, 0.44433594)
