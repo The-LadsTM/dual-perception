@@ -44,7 +44,7 @@ func _update_animation() -> void:
 		var suffix: String = "_Close" if close else "_Open"
 		sprite.animation = objectName + ("_Full" if full > HALF else "_Empty") + suffix
 	elif objectName == "oven":
-		sprite.animation = "oven_Empty_Close" if close else "oven_Empty_Open"
+		sprite.animation = "oven_Empty_Close" if close else "oven_Empty_Open" 
 	elif objectName == "cakePan":
 		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty")
 		
@@ -120,4 +120,12 @@ func get_pour_position() -> Vector3:
 
 func add_to_bowl() -> void:
 	full +=1
+	_update_animation()
+
+func get_bowl():
+	pass
+
+func open(hovered) -> void:
+	print_debug("hovering")
+	close = !hovered;
 	_update_animation()

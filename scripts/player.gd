@@ -228,6 +228,7 @@ func try_interact_tool() -> bool:
 	var target := get_pour_target()
 	if target == null:
 		return false
+		
 	target.set_pour_hover(true)
 	if is_instance_valid(held_reusable_item):
 		held_reusable_item.play_pour()
@@ -236,6 +237,9 @@ func try_interact_tool() -> bool:
 		target.pour_ingredient(held_consumable.ingredient)
 		held_consumable.add_to_bowl(target)
 		held_consumable = null
+		
+	else: 
+		target.get_bowl()
 	return true
 
 # ==================================================
@@ -416,13 +420,13 @@ func update_tool_hover() -> void:
 
 	# Remove highlight from previous item
 	if is_instance_valid(hovered_tool_sprite):
-		hovered_tool_sprite.set_hovered(false)
+		hovered_tool_sprite.open(false)
 
 	hovered_tool_sprite = target
-
+	
 	# Highlight new item
-	if is_instance_valid(hovered_tool_sprite):
-		hovered_tool_sprite.set_hovered(true)
+	if is_instance_valid(hovered_tool_sprite) and hovered_tool_sprite.objectName != "oven":
+		hovered_tool_sprite.open(true)
 
 # ==================================================
 # RECIPE TIN / CARD

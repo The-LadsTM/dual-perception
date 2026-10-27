@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dqogyp6hm2no4" path="res://assets/Sprites/cakePan_Full.png" id="3_lfwx2"]
 [ext_resource type="Texture2D" uid="uid://xeftyahebri7" path="res://assets/Sprites/mixer_Full_Close.png" id="4_8e7si"]
 [ext_resource type="Texture2D" uid="uid://h5hj4haq7se7" path="res://assets/Sprites/mixer_Full_Open.png" id="5_lfwx2"]
-[ext_resource type="Texture2D" uid="uid://dqr3bnjqg5rnd" path="res://assets/Sprites/oven_Close.png" id="8_lfwx2"]
+[ext_resource type="Texture2D" uid="uid://dqr3bnjqg5rnd" path="res://assets/Sprites/oven_Empty_Close.png" id="8_lfwx2"]
+[ext_resource type="Texture2D" uid="uid://lvqvei8w0okx" path="res://assets/Sprites/oven_Empty_Open.png" id="9_rjn6i"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mvf1b"]
 
@@ -71,7 +72,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_lfwx2")
+"texture": ExtResource("9_rjn6i")
 }],
 "loop": 1,
 "name": &"oven_Empty_Open",
