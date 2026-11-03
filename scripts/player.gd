@@ -25,6 +25,7 @@ var wall_look_base_yaw: float
 var wall_look_base_pitch: float
 var wall_look_yaw_offset: float = 0.0
 var wall_look_pitch_offset: float = 0.0
+var _ray_target_before_wall: Vector3
 
 # Reusable Items
 var held_reusable_item: ReusableItem = null
@@ -50,6 +51,7 @@ var _mouse_mode_before_recipe: Input.MouseMode = Input.MOUSE_MODE_CAPTURED
 @onready var interaction_raycast: RayCast3D = $Head/Main_Camera/RayCast3D
 @onready var hand_socket: Marker3D = $Head/Main_Camera/HandSocket
 @onready var recipe_card_view: RecipeCardView = $RecipeCardView
+@onready var decoration_interaction = $DecorationInteraction
 
 @onready var photo = $Head/Photo_Camera
 @onready var pickup_controller = $pickup_script
@@ -75,6 +77,11 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if recipe_card_view.visible:
 		return
+	if decoration_interaction.handle_input(event):
+		if event.is_action_pressed("interact"):
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		get_viewport().set_input_as_handled()
+		return
 
 	# Mouse Look
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -82,6 +89,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if active_wall != null:
 			var yaw_limit: float = deg_to_rad(wall_yaw_limit_degrees)
 			var pitch_limit: float = deg_to_rad(wall_pitch_limit_degrees)
+			if active_wall is DecorationWall:
+				yaw_limit = deg_to_rad(active_wall.look_yaw_limit_degrees)
+				pitch_limit = deg_to_rad(active_wall.look_pitch_limit_degrees)
 
 			wall_look_yaw_offset = clamp(
 				wall_look_yaw_offset - event.relative.x * look_sensitivity,
@@ -502,6 +512,9 @@ func handle_wall_interact() -> void:
 func enter_wall_interaction(wall: InteractiveWall) -> void:
 
 	active_wall = wall
+	_ray_target_before_wall = interaction_raycast.target_position
+	if wall is DecorationWall:
+		interaction_raycast.target_position = _ray_target_before_wall.normalized() * maxf(_ray_target_before_wall.length(), 5.0)
 
 	var marker_position: Vector3 = wall.get_player_lock_position()
 
@@ -549,6 +562,8 @@ func enter_wall_interaction(wall: InteractiveWall) -> void:
 
 func exit_wall_interaction() -> void:
 
+	if active_wall != null:
+		interaction_raycast.target_position = _ray_target_before_wall
 	active_wall = null
 	velocity = Vector3.ZERO
 

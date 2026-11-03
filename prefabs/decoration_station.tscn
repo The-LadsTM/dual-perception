@@ -1,0 +1,316 @@
+[gd_scene load_steps=29 format=3]
+
+[ext_resource type="Script" path="res://scripts/decoration_wall.gd" id="1_wall"]
+[ext_resource type="Script" path="res://scripts/decoration_slot.gd" id="2_slot"]
+[ext_resource type="Script" path="res://scripts/decoration_box.gd" id="3_box"]
+[ext_resource type="Texture2D" path="res://assets/Sprites/bannerString_Happy.png" id="4_happy"]
+[ext_resource type="Texture2D" path="res://assets/Sprites/bannerString_Birthday.png" id="5_birthday"]
+
+[ext_resource type="Script" path="res://scripts/balloon_supply.gd" id="6_supply"]
+[ext_resource type="Script" path="res://scripts/balloon_pump.gd" id="7_pump"]
+[ext_resource type="Texture2D" path="res://assets/Sprites/balloonWeight.png" id="8_weight"]
+
+[sub_resource type="StandardMaterial3D" id="WallMaterial"]
+albedo_color = Color(0.64, 0.71, 0.65, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="WallMesh"]
+material = SubResource("WallMaterial")
+size = Vector3(6, 4.6, 0.2)
+
+[sub_resource type="BoxShape3D" id="WallShape"]
+size = Vector3(6, 4.6, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="Cardboard"]
+albedo_color = Color(0.54, 0.34, 0.19, 1)
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="BoxSide"]
+material = SubResource("Cardboard")
+size = Vector3(1.1, 0.6, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxEnd"]
+material = SubResource("Cardboard")
+size = Vector3(0.05, 0.6, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxBase"]
+material = SubResource("Cardboard")
+size = Vector3(1.1, 0.05, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape"]
+size = Vector3(1.2, 0.7, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="FloorMaterial"]
+albedo_color = Color(0.32, 0.24, 0.19, 1)
+
+[sub_resource type="BoxMesh" id="FloorMesh"]
+material = SubResource("FloorMaterial")
+size = Vector3(7, 0.08, 5)
+
+[sub_resource type="BoxMesh" id="TableMesh"]
+material = SubResource("Cardboard")
+size = Vector3(5.2, 0.12, 1.2)
+
+[sub_resource type="BoxShape3D" id="TableShape"]
+size = Vector3(5.2, 0.9, 1.2)
+
+[sub_resource type="BoxShape3D" id="WeightShape"]
+size = Vector3(0.4, 0.6, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="PumpMetal"]
+albedo_color = Color(0.23, 0.31, 0.32, 1)
+metallic = 0.35
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="PumpRubber"]
+albedo_color = Color(0.12, 0.12, 0.1, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="PumpBody"]
+material = SubResource("PumpMetal")
+top_radius = 0.1
+bottom_radius = 0.12
+height = 0.8
+
+[sub_resource type="BoxMesh" id="PumpBase"]
+material = SubResource("PumpRubber")
+size = Vector3(0.6, 0.08, 0.4)
+
+[sub_resource type="BoxMesh" id="PumpHandle"]
+material = SubResource("PumpRubber")
+size = Vector3(0.55, 0.07, 0.1)
+
+[sub_resource type="CylinderMesh" id="PumpNozzle"]
+material = SubResource("PumpMetal")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.4
+
+[sub_resource type="BoxShape3D" id="PumpShape"]
+size = Vector3(0.85, 1.2, 0.65)
+
+[node name="DecorationStation" type="Node3D"]
+
+[node name="DecorationWall" type="StaticBody3D" parent="."]
+position = Vector3(0, 2.3, 0)
+script = ExtResource("1_wall")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DecorationWall"]
+mesh = SubResource("WallMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DecorationWall"]
+shape = SubResource("WallShape")
+
+[node name="PlayerLockPoint" type="Marker3D" parent="DecorationWall"]
+position = Vector3(0, -0.8, 3.2)
+
+[node name="HappyString" type="Sprite3D" parent="DecorationWall"]
+position = Vector3(0, 1.24, 0.16)
+pixel_size = 0.0035
+texture = ExtResource("4_happy")
+
+[node name="BirthdayString" type="Sprite3D" parent="DecorationWall"]
+position = Vector3(0, 0.24, 0.16)
+pixel_size = 0.0035
+texture = ExtResource("5_birthday")
+
+[node name="BannerSlots" type="Node3D" parent="DecorationWall"]
+
+[node name="Happy_01_H" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(-1.2247, 0.9760, 0.14)
+rotation = Vector3(0, 0, -0.4858)
+script = ExtResource("2_slot")
+item_id = "H"
+
+[node name="Happy_02_A" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(-0.6191, 0.7365, 0.14)
+rotation = Vector3(0, 0, -0.2581)
+script = ExtResource("2_slot")
+item_id = "A"
+
+[node name="Happy_03_P" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(0.0000, 0.6550, 0.14)
+rotation = Vector3(0, 0, 0.0000)
+script = ExtResource("2_slot")
+item_id = "P"
+
+[node name="Happy_04_P" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(0.6191, 0.7365, 0.14)
+rotation = Vector3(0, 0, 0.2581)
+script = ExtResource("2_slot")
+item_id = "P"
+
+[node name="Happy_05_Y" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(1.2247, 0.9760, 0.14)
+rotation = Vector3(0, 0, 0.4858)
+script = ExtResource("2_slot")
+item_id = "Y"
+
+[node name="Birthday_01_B" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(-2.0117, 0.0909, 0.14)
+rotation = Vector3(0, 0, -0.5300)
+script = ExtResource("2_slot")
+item_id = "B"
+
+[node name="Birthday_02_I" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(-1.4447, -0.1937, 0.14)
+rotation = Vector3(0, 0, -0.3963)
+script = ExtResource("2_slot")
+item_id = "I"
+
+[node name="Birthday_03_R" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(-0.8705, -0.3859, 0.14)
+rotation = Vector3(0, 0, -0.2460)
+script = ExtResource("2_slot")
+item_id = "R"
+
+[node name="Birthday_04_T" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(-0.2909, -0.4828, 0.14)
+rotation = Vector3(0, 0, -0.0835)
+script = ExtResource("2_slot")
+item_id = "T"
+
+[node name="Birthday_05_H" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(0.2909, -0.4828, 0.14)
+rotation = Vector3(0, 0, 0.0835)
+script = ExtResource("2_slot")
+item_id = "H"
+
+[node name="Birthday_06_D" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(0.8705, -0.3859, 0.14)
+rotation = Vector3(0, 0, 0.2460)
+script = ExtResource("2_slot")
+item_id = "D"
+
+[node name="Birthday_07_A" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(1.4447, -0.1937, 0.14)
+rotation = Vector3(0, 0, 0.3963)
+script = ExtResource("2_slot")
+item_id = "A"
+
+[node name="Birthday_08_Y" type="Marker3D" parent="DecorationWall/BannerSlots"]
+position = Vector3(2.0117, 0.0909, 0.14)
+rotation = Vector3(0, 0, 0.5300)
+script = ExtResource("2_slot")
+item_id = "Y"
+
+[node name="DecorationBox" type="StaticBody3D" parent="."]
+position = Vector3(-1.9, 1.2, 1.05)
+script = ExtResource("3_box")
+wall_path = NodePath("../DecorationWall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DecorationBox"]
+shape = SubResource("BoxShape")
+
+[node name="Front" type="MeshInstance3D" parent="DecorationBox"]
+position = Vector3(0, 0, 0.4)
+mesh = SubResource("BoxSide")
+
+[node name="Back" type="MeshInstance3D" parent="DecorationBox"]
+position = Vector3(0, 0, -0.4)
+mesh = SubResource("BoxSide")
+
+[node name="Left" type="MeshInstance3D" parent="DecorationBox"]
+position = Vector3(-0.55, 0, 0)
+mesh = SubResource("BoxEnd")
+
+[node name="Right" type="MeshInstance3D" parent="DecorationBox"]
+position = Vector3(0.55, 0, 0)
+mesh = SubResource("BoxEnd")
+
+[node name="Base" type="MeshInstance3D" parent="DecorationBox"]
+position = Vector3(0, -0.3, 0)
+mesh = SubResource("BoxBase")
+
+[node name="LeftFlap" type="MeshInstance3D" parent="DecorationBox"]
+position = Vector3(-0.7, 0.3, 0)
+rotation_degrees = Vector3(0, 0, -65)
+mesh = SubResource("BoxEnd")
+
+[node name="RightFlap" type="MeshInstance3D" parent="DecorationBox"]
+position = Vector3(0.7, 0.3, 0)
+rotation_degrees = Vector3(0, 0, 65)
+mesh = SubResource("BoxEnd")
+
+[node name="HoverLabel" type="Label3D" parent="DecorationBox"]
+visible = false
+text = "Decoration Box"
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+position = Vector3(0, 0.8, 0)
+billboard = 1
+font_size = 24
+pixel_size = 0.0025
+outline_size = 5
+
+[node name="BoxTable" type="StaticBody3D" parent="."]
+position = Vector3(-0.5, 0.84, 1.05)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoxTable"]
+mesh = SubResource("TableMesh")
+
+[node name="Pedestal" type="MeshInstance3D" parent="BoxTable"]
+position = Vector3(0, -0.42, 0)
+scale = Vector3(0.12, 6, 0.5)
+mesh = SubResource("TableMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoxTable"]
+position = Vector3(0, -0.4, 0)
+shape = SubResource("TableShape")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.04, 1.9)
+mesh = SubResource("FloorMesh")
+
+[node name="StationLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 4, 3)
+omni_range = 9.0
+light_energy = 2.0
+
+[node name="BalloonWeight" type="StaticBody3D" parent="."]
+position = Vector3(-0.45, 0.9, 1.05)
+script = ExtResource("6_supply")
+box_path = NodePath("../DecorationBox")
+
+[node name="Sprite3D" type="Sprite3D" parent="BalloonWeight"]
+position = Vector3(0, 0.272, 0)
+texture = ExtResource("8_weight")
+pixel_size = 0.004
+billboard = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BalloonWeight"]
+position = Vector3(0, 0.3, 0)
+shape = SubResource("WeightShape")
+
+[node name="BalloonPump" type="StaticBody3D" parent="."]
+position = Vector3(1.1, 0.9, 1.05)
+script = ExtResource("7_pump")
+
+[node name="Body" type="MeshInstance3D" parent="BalloonPump"]
+position = Vector3(0, 0.44, 0)
+mesh = SubResource("PumpBody")
+
+[node name="Base" type="MeshInstance3D" parent="BalloonPump"]
+position = Vector3(0, 0.04, 0)
+mesh = SubResource("PumpBase")
+
+[node name="Handle" type="MeshInstance3D" parent="BalloonPump"]
+position = Vector3(0, 0.88, 0)
+mesh = SubResource("PumpHandle")
+
+[node name="NozzlePipe" type="MeshInstance3D" parent="BalloonPump"]
+position = Vector3(0.2, 0.6, 0.15)
+rotation_degrees = Vector3(0, 0, -90)
+mesh = SubResource("PumpNozzle")
+
+[node name="NozzleTip" type="MeshInstance3D" parent="BalloonPump"]
+position = Vector3(0.4, 0.65, 0.15)
+scale = Vector3(1, 0.25, 1)
+mesh = SubResource("PumpNozzle")
+
+[node name="Nozzle" type="Marker3D" parent="BalloonPump"]
+position = Vector3(0.4, 0.7, 0.15)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BalloonPump"]
+position = Vector3(0.1, 0.55, 0.05)
+shape = SubResource("PumpShape")
