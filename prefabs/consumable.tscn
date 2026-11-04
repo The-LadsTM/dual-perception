@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c01mrkx7mts46" path="res://assets/Sprites/teaspoon_Full.png" id="3_6om6e"]
 [ext_resource type="Texture2D" uid="uid://ufoxspis0kqj" path="res://assets/Sprites/bowl_Full.png" id="3_ev6j5"]
 [ext_resource type="Texture2D" uid="uid://cbq5ksnhhfdvh" path="res://assets/Sprites/egg_Cracked.png" id="3_gk2us"]
+[ext_resource type="Texture2D" uid="uid://dylchsclscp82" path="res://assets/Sprites/cakePan_Baked.png" id="4_sd23y"]
+[ext_resource type="Texture2D" uid="uid://xd0x6m7ebfyh" path="res://assets/Sprites/cakePan_Empty.png" id="5_38jjs"]
+[ext_resource type="Texture2D" uid="uid://dqogyp6hm2no4" path="res://assets/Sprites/cakePan_Full.png" id="6_lrqt8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ymk7a"]
 radius = 0.17665471
@@ -15,18 +18,26 @@ radius = 0.17665471
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_rlqn8")
+"texture": ExtResource("4_sd23y")
 }],
 "loop": 1,
-"name": &"bowl_Empty",
+"name": &"cakePan_Baked",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ev6j5")
+"texture": ExtResource("5_38jjs")
 }],
 "loop": 1,
-"name": &"bowl_Full",
+"name": &"cakePan_Empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_lrqt8")
+}],
+"loop": 1,
+"name": &"cakePan_Full",
 "speed": 5.0
 }, {
 "frames": [{
@@ -43,6 +54,22 @@ animations = [{
 }],
 "loop": 1,
 "name": &"egg_put",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rlqn8")
+}],
+"loop": 1,
+"name": &"mixerBowl_Empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ev6j5")
+}],
+"loop": 1,
+"name": &"mixerBowl_Full",
 "speed": 5.0
 }, {
 "frames": [{
@@ -72,7 +99,7 @@ shape = SubResource("SphereShape3D_ymk7a")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_ymk7a")
-animation = &"bowl_Empty"
+animation = &"mixerBowl_Full"
 
 [node name="Timer" type="Timer" parent="." unique_id=402937502]
 one_shot = true

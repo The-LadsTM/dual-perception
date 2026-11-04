@@ -13,7 +13,7 @@ const INGREDIENT_LABELS: Dictionary = {
 
 const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
 var highlight_material: ShaderMaterial
-var state = "empty"
+var bowl_taken = false
 @export var objectName: String
 var bowl: PackedScene = preload("res://prefabs/consumable.tscn")
 const HALF = 4;
@@ -21,6 +21,7 @@ var hovered
 @onready var timer = $Timer
 var full: int = 0
 var close: bool = true
+var baked: bool = false
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
@@ -28,6 +29,12 @@ var close: bool = true
 func _ready() -> void:
 	if objectName == "oven":
 		sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		var box : BoxShape3D = BoxShape3D.new()
+		box.extents.x = 1
+		box.extents.y = 1
+		box.extents.z = 0.2
+
+		$CollisionShape3D.shape = box
 	highlight_material = ShaderMaterial.new()
 	highlight_material.shader = OUTLINE_SHADER
 	highlight_material.set_shader_parameter("billboard_enabled", objectName != "oven")
@@ -41,13 +48,17 @@ func set_hovered(active: bool) -> void:
 
 
 func _update_animation() -> void:
-	if objectName == "mixer":
-		var suffix: String = "_Close" if close else "_Open"
-		sprite.animation = objectName + ("_Full" if full > HALF else "_Empty") + suffix
-	elif objectName == "oven":
-		sprite.animation = "oven_Empty_Close" if close else "oven_Empty_Open" 
-	elif objectName == "cakePan":
-		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty")
+	if bowl_taken and objectName != "oven":
+		sprite.animation = objectName +"_Hidden"
+	else:
+		if objectName == "mixer":
+			var suffix: String = "_Close" if close else "_Open"
+			sprite.animation = objectName + ("_Full" if full > HALF else "_Empty") + suffix
+			
+		elif objectName == "oven":
+			sprite.animation = "oven_Empty_Close" if close else "oven_Empty_Open" 
+		elif objectName == "cakePan":
+			sprite.animation = objectName + ("_Full" if full > 0 else "_Empty")
 		
 	if highlight_material != null and sprite.sprite_frames.has_animation(sprite.animation):
 		highlight_material.set_shader_parameter("sprite_texture", sprite.sprite_frames.get_frame_texture(sprite.animation, 0))
@@ -120,23 +131,51 @@ func get_pour_position() -> Vector3:
 
 
 func add_to_bowl() -> void:
-	full +=1
+	full += 1
 	_update_animation()
 
 func get_bowl():
-	print_debug("you got bow")
 	#change mixer art and put bowl in hand
+	bowl_taken = true
 	var bowl_child = bowl.instantiate()
 	add_child(bowl_child)
-	if full > HALF:
-		bowl_child.item = "bowl_Full"
-		bowl_child.sprite.animation = "bowl_Full"
-	else:
-		bowl_child.item = "bowl_Full"
-		bowl_child.sprite.animation = "bowl_Full"
-	#sprite.animation = 
-	return bowl_child
+	if objectName == "mixer":
+		if full > HALF:
+			bowl_child.item = "mixerBowl_Full"
+			bowl_child.sprite.animation = "mixerBowl_Full"
+		else:
+			bowl_child.item = "mixerBowl_Empty"
+			bowl_child.sprite.animation = "mixerBowl_Empty"
+		print_debug(sprite.animation)
+		return bowl_child
+	elif objectName == "cakePan":
+		if full > 0:
+			bowl_child.item = "cakePan_Full"
+			bowl_child.sprite.animation = "cakePan_Full"
+		else:
+			bowl_child.item = "cakePan_Empty"
+			bowl_child.sprite.animation = "cakePan_Empty"
+		return bowl_child
+	elif objectName == "oven":
+		if full > 0:
+			if baked:
+				bowl_child.item = "cakePan_Baked"
+				bowl_child.sprite.animation = "cakePan_Baked"
+			else:
+				bowl_child.item = "cakePan_Full"
+				bowl_child.sprite.animation = "cakePan_Full"
+		else:
+			bowl_child.queue_free()
+			return null;
+		return bowl_child
 
 func open(hovered) -> void:
 	close = !hovered;
 	_update_animation()
+
+func return_bowl():
+	bowl_taken = false
+	_update_animation()
+	
+func empty():
+	full = 0

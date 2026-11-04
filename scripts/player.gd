@@ -140,11 +140,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	# Item Interaction
 	elif event.is_action_pressed("interact"):
-
+	
 		if active_wall == null:
-
-			if not try_interact_recipe() and not try_interact_tool() and not try_interact_static() and not try_interact_reusable():
-				print_debug("dang")
+			if !try_interact_recipe() and !try_interact_tool() and !try_interact_static() and !try_interact_reusable():
 				# Fall back to existing pickup system
 				pickup_controller.try_interact()
 
@@ -241,19 +239,43 @@ func try_interact_tool() -> bool:
 		return false
 		
 	target.set_pour_hover(true)
-	print_debug("take it")
 	if is_instance_valid(held_reusable_item):
 		held_reusable_item.play_pour()
 		target.pour_ingredient(held_reusable_item.true_item)
 	elif is_instance_valid(held_consumable):
-		target.pour_ingredient(held_consumable.ingredient)
-		held_consumable.add_to_bowl(target)
-		held_consumable = null
+		if held_consumable.item.contains("cakePan") or held_consumable.item.contains("mixer"):
+			if ("mixer" in target.objectName and "mixer" in held_consumable.item) or ("cakePan" in target.objectName and "cakePan" in held_consumable.item):
+				target.bowl_taken = false
+				held_consumable.queue_free()
+				held_consumable = null
+			else:
+				target.add_to_bowl()
+				target.pour_ingredient(held_consumable.ingredient)
+				held_consumable.add_to_bowl(target)
+				held_consumable = null
+				var return_home: String = "mixer" if target.objectName == "cakePan" else "cakePan"
+				get_parent().get_node(return_home).empty();
+				get_parent().get_node(return_home).return_bowl();
+		elif !held_consumable.item.contains("Empty") and !held_consumable.item.contains("mixer"):
+			target.add_to_bowl()
+			target.pour_ingredient(held_consumable.ingredient)
+			held_consumable.add_to_bowl(target)
+			held_consumable = null
+			print_debug("huh")
+		elif !held_consumable.item.contains("Empty") and held_consumable.item.contains("mixer") and target.objectName.contains("cakePan"):
+			target.add_to_bowl()
+			target.pour_ingredient(held_consumable.ingredient)
+			held_consumable.add_to_bowl(target)
+			held_consumable = null
+			get_parent().get_node("mixer").empty();
+			get_parent().get_node("mixer").return_bowl();
+			
 	else: 
-		print_debug("take the bowl")
 		var bowl = target.get_bowl()
-		held_consumable = bowl
-		bowl.pick_up(hand_socket)
+		if bowl:
+			held_consumable = bowl
+			bowl.pick_up(hand_socket)
+	print_debug("tool")
 	return true
 
 # ==================================================
@@ -304,10 +326,7 @@ func try_interact_reusable() -> bool:
 			hovered_reusable_item.set_hovered(false)
 
 		hovered_reusable_item = null
-
 		return true
-	
-	
 
 	# Click while holding an item
 	# Return it to its original position
@@ -319,6 +338,11 @@ func try_interact_reusable() -> bool:
 		return true
 
 	if is_instance_valid(held_consumable):
+		
+		if held_consumable.item.contains("mixer"):
+			get_parent().get_node("mixer").return_bowl()
+		elif held_consumable.item.contains("cakePan"):
+			get_parent().get_node("cakePan").return_bowl()
 		held_consumable.queue_free()
 		held_consumable = null
 		return true
@@ -356,20 +380,9 @@ func try_interact_static() -> bool:
 			return false
 		consumed.pick_up(hand_socket)
 		held_consumable = consumed
-
+		print_debug("static true")
 		return true
-	return false
-
-	# Click while holding an item
-	# Return it to its original position
-	if is_instance_valid(held_reusable_item):
-
-		held_reusable_item.return_home()
-		held_reusable_item = null
-
-		return true
-
-	# Not a reusable item interaction
+	print_debug("static false")
 	return false
 
 # ==================================================
@@ -445,7 +458,8 @@ func update_tool_hover() -> void:
 	hovered_tool_sprite = target
 	
 	# Highlight new item
-	if is_instance_valid(hovered_tool_sprite) and hovered_tool_sprite.objectName != "oven":
+	#if is_instance_valid(hovered_tool_sprite) and hovered_tool_sprite.objectName != "oven":
+	if is_instance_valid(hovered_tool_sprite):
 		hovered_tool_sprite.open(true)
 
 # ==================================================
@@ -478,6 +492,7 @@ func try_interact_recipe() -> bool:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	update_reusable_hover()
 	update_recipe_hover()
+	print_debug("recipe")
 	return true
 
 
