@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dag4c3ua88o76" path="res://assets/Sprites/cakeDecor_BottomFrosting.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://d2t1kx3necvd2" path="res://assets/Sprites/cakeDecor_topFrosting.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://y6fsfcg02w35" path="res://assets/Sprites/cakeDecor_RibbonPiping.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://wsg0o47a5r5c" path="res://assets/Sprites/cake_Reality.png" id="7_hp1k5"]
 
 [sub_resource type="BoxShape3D" id="Shape"]
 size = Vector3(0.9, 0.96, 0.5)
@@ -18,7 +19,7 @@ visible = false
 shape = SubResource("Shape")
 
 [node name="Tray" type="Sprite3D" parent="." unique_id=488047989]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5169911, 0)
+offset = Vector2(0, -129.91)
 pixel_size = 0.0036
 billboard = 1
 texture = ExtResource("2_iuax0")
@@ -39,17 +40,24 @@ render_priority = 2
 texture = ExtResource("3")
 
 [node name="TopFrosting" type="Sprite3D" parent="." unique_id=312896925]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, -0.0009357929)
 visible = false
+offset = Vector2(0, 37.23)
 pixel_size = 0.0036
 billboard = 1
-render_priority = 2
+render_priority = 3
 texture = ExtResource("4")
 
 [node name="RibbonPiping" type="Sprite3D" parent="." unique_id=1294814065]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, 0)
+visible = false
+offset = Vector2(0, -39.86)
+pixel_size = 0.0034
+billboard = 1
+render_priority = 4
+texture = ExtResource("5")
+
+[node name="CakeReal" type="Sprite3D" parent="." unique_id=688367052]
 visible = false
 pixel_size = 0.0034
 billboard = 1
-render_priority = 3
-texture = ExtResource("5")
+render_priority = 5
+texture = ExtResource("7_hp1k5")

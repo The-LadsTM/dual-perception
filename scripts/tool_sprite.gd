@@ -192,5 +192,7 @@ func start_oven():
 func _on_timer_timeout() -> void:
 	on = false
 	baked = true
+	print_debug(SceneManager.bowl_array)
+	
 	#play audio of oven ding
 	pass # Replace with function body.

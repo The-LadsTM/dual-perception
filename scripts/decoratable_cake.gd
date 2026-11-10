@@ -8,9 +8,11 @@ extends StaticBody3D
 
 const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
 var highlight_material: ShaderMaterial
+var reveal = false
 
 
 func _ready() -> void:
+	SceneManager.change_texture.connect(changeTexture)
 	highlight_material = ShaderMaterial.new()
 	highlight_material.shader = OUTLINE_SHADER
 	highlight_material.set_shader_parameter("sprite_texture", base.texture)
@@ -53,3 +55,12 @@ func decorate(bag: String) -> void:
 
 func get_decoration_position() -> Vector3:
 	return global_position + Vector3.UP * 0.65
+
+func changeTexture(args):
+	if args:
+		print_debug("true texture")
+		reveal = true
+	else:
+		print_debug("false texture")
+		reveal = false
+	
