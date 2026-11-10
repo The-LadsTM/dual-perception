@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cnm3sc4qdc65g"]
+
+[ext_resource type="Texture2D" uid="uid://dy78x8swoq7ec" path="res://assets/Sprites/pennon_P.png" id="1_kn3w8"]
+[ext_resource type="Script" uid="uid://27kuv26usnra" path="res://scripts/table_runner.gd" id="1_pxnpn"]
+
+[node name="tableRunner" type="Sprite3D" unique_id=1895262275]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+texture = ExtResource("1_kn3w8")
+script = ExtResource("1_pxnpn")

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://drqdphjmpgq1q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s4am8"]
+size = Vector3(3, 0.1, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s4am8"]
+size = Vector3(3, 0.1, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gu86w"]
+subdivide_width = 3
+subdivide_height = 3
+
+[node name="table" type="StaticBody3D" unique_id=1131551431]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=279912759]
+shape = SubResource("BoxShape3D_s4am8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=967586095]
+mesh = SubResource("BoxMesh_s4am8")
+
+[node name="north" type="Marker3D" parent="MeshInstance3D" unique_id=258582382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2620859, 0, 2)
+
+[node name="south" type="Marker3D" parent="MeshInstance3D" unique_id=1712809452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.262, 0, 2)
+
+[node name="north2" type="Marker3D" parent="MeshInstance3D" unique_id=1938601712]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2620859, 0, -2.009048)
+
+[node name="south2" type="Marker3D" parent="MeshInstance3D" unique_id=1293543458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.262, 0, -2.009048)
+
+[node name="SoftBody3D" type="SoftBody3D" parent="." unique_id=1088274450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.270041, 0)
+mesh = SubResource("BoxMesh_gu86w")
+parent_collision_ignore = NodePath("..")
