@@ -102,6 +102,7 @@ sprite_frames = SubResource("SpriteFrames_ymk7a")
 animation = &"mixerBowl_Full"
 
 [node name="Timer" type="Timer" parent="." unique_id=402937502]
+wait_time = 10.0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
