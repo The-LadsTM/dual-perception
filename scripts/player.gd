@@ -51,6 +51,7 @@ var _mouse_mode_before_recipe: Input.MouseMode = Input.MOUSE_MODE_CAPTURED
 @onready var interaction_raycast: RayCast3D = $Head/Main_Camera/RayCast3D
 @onready var hand_socket: Marker3D = $Head/Main_Camera/HandSocket
 @onready var recipe_card_view: RecipeCardView = $RecipeCardView
+@onready var interaction_reticle: InteractionReticle = $InteractionReticle/Reticle
 @onready var decoration_interaction = $DecorationInteraction
 
 @onready var photo = $Head/Photo_Camera
@@ -77,9 +78,13 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if recipe_card_view.visible:
 		return
+	var previous_decoration: Node3D = decoration_interaction.held_item
 	if decoration_interaction.handle_input(event):
 		if event.is_action_pressed("interact"):
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			var held_decoration: Node3D = decoration_interaction.held_item
+			if is_instance_valid(held_decoration) and held_decoration != previous_decoration:
+				interaction_reticle.play_grab(interaction_raycast.get_collider() as Node3D)
 		get_viewport().set_input_as_handled()
 		return
 
@@ -144,7 +149,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if active_wall == null:
 			if !try_interact_recipe() and !try_interact_tool() and !try_interact_static() and !try_interact_reusable():
 				# Fall back to existing pickup system
-				pickup_controller.try_interact()
+				if pickup_controller.try_interact() and is_instance_valid(pickup_controller.holding):
+					interaction_reticle.play_grab(pickup_controller.holding)
 
 		get_viewport().set_input_as_handled()
 
@@ -154,6 +160,7 @@ func _unhandled_input(event: InputEvent) -> void:
 # ==================================================
 
 func _physics_process(delta: float) -> void:
+	interaction_reticle.visible = camera.is_current() and not recipe_card_view.visible
 	if recipe_card_view.visible:
 		velocity = Vector3.ZERO
 		if not is_instance_valid(active_recipe_tin):
@@ -168,6 +175,7 @@ func _physics_process(delta: float) -> void:
 	update_static_hover()
 	update_tool_hover()
 	update_cake_hover()
+	interaction_reticle.set_target(_get_interaction_reticle_target())
 
 	# Wall interaction movement lock
 	if active_wall != null:
@@ -229,6 +237,19 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
+func _get_interaction_reticle_target() -> Node3D:
+	var target := interaction_raycast.get_collider() as Node3D
+	if target == null or decoration_interaction.is_reticle_target(target):
+		return target
+	if active_wall != null or is_instance_valid(decoration_interaction.held_item):
+		return null
+	if target == hovered_static_sprite:
+		return target if hovered_static_sprite.Consumable != null else null
+	if target in [hovered_reusable_item, hovered_tool_sprite, hovered_recipe_tin, hovered_cake]:
+		return target
+	return pickup_controller.get_pickup_target()
+
 # ==================================================
 # TOOL INTERACTION
 # ==================================================
@@ -280,6 +301,7 @@ func try_interact_tool() -> bool:
 		if bowl:
 			held_consumable = bowl
 			bowl.pick_up(hand_socket)
+			interaction_reticle.play_grab(target)
 	print_debug("tool")
 	return true
 
@@ -331,6 +353,7 @@ func try_interact_reusable() -> bool:
 		# Pick up the targeted item
 		target.pick_up(hand_socket)
 		held_reusable_item = target
+		interaction_reticle.play_grab(target)
 
 		# Clear hover
 		if is_instance_valid(hovered_reusable_item):
@@ -391,6 +414,7 @@ func try_interact_static() -> bool:
 			return false
 		consumed.pick_up(hand_socket)
 		held_consumable = consumed
+		interaction_reticle.play_grab(target)
 		return true
 	return false
 
@@ -498,6 +522,7 @@ func try_interact_recipe() -> bool:
 	velocity = Vector3.ZERO
 	target.set_open(true)
 	recipe_card_view.open_card(target.recipe_title, target.recipe_text, target.card_texture)
+	interaction_reticle.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	update_reusable_hover()
 	update_recipe_hover()

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dkgn04rt6w7l3" path="res://scenes/pickable.gd" id="2_g2els"]
 [ext_resource type="PackedScene" path="res://scenes/recipe_card_view.tscn" id="3_recipe_card"]
 [ext_resource type="Script" path="res://scripts/decoration_interaction.gd" id="4_deco"]
+[ext_resource type="PackedScene" path="res://scenes/interaction_reticle.tscn" id="5_reticle"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ymk7a"]
 
@@ -44,6 +45,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 script = ExtResource("2_g2els")
 
 [node name="RecipeCardView" parent="." unique_id=10433263 instance=ExtResource("3_recipe_card")]
+
+[node name="InteractionReticle" parent="." instance=ExtResource("5_reticle")]
 
 [node name="DecorationInteraction" type="Node" parent="."]
 script = ExtResource("4_deco")
