@@ -22,6 +22,7 @@ var hovered
 var full: int = 0
 var close: bool = true
 var baked: bool = false
+var on: bool = false
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
@@ -65,7 +66,7 @@ func _update_animation() -> void:
 
 
 func set_pour_hover(active: bool) -> void:
-	close = not active
+	close = !active
 	_update_animation()
 
 
@@ -170,6 +171,8 @@ func get_bowl():
 		return bowl_child
 
 func open(hovered) -> void:
+	if objectName == "oven" and on:
+		return
 	close = !hovered;
 	_update_animation()
 
@@ -179,3 +182,15 @@ func return_bowl():
 	
 func empty():
 	full = 0
+
+func start_oven():
+	timer.start()
+	on = true;
+	
+
+
+func _on_timer_timeout() -> void:
+	on = false
+	baked = true
+	#play audio of oven ding
+	pass # Replace with function body.

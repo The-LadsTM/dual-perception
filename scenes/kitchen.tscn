@@ -51,7 +51,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6244478, 2.4423432, 0.1259
 objectName = "cakePan"
 
 [node name="mixer" parent="." unique_id=852364789 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85201216, 2.4602149, 3.4599824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6306602, 2.4602149, 3.4599824)
 objectName = "mixer"
 
 [node name="milkCarton" parent="." unique_id=1199836084 instance=ExtResource("7_58u3k")]
@@ -62,18 +62,18 @@ true_item = "milkCarton"
 texture = ExtResource("10_88wuv")
 
 [node name="salt" parent="." unique_id=348972104 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78302, 2.0645099, 3.7024922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3807917, 2.0645099, 3.7024922)
 true_item = "saltShaker"
 
 [node name="Sprite3D" parent="salt" index="1" unique_id=1185922637]
 texture = ExtResource("12_87bic")
 
 [node name="pepper" parent="." unique_id=325910496 instance=ExtResource("7_58u3k")]
-transform = Transform3D(0.99482405, 0.08170997, 0.06040387, -0.0774279, 0.9945288, -0.07012445, -0.065803245, 0.06508455, 0.99570775, 2.6565285, 2.070229, 3.7024922)
+transform = Transform3D(0.99482405, 0.08170997, 0.06040387, -0.0774279, 0.9945288, -0.07012445, -0.065803245, 0.06508455, 0.99570775, 2.8075309, 2.070229, 3.7024922)
 true_item = "pepperShaker"
 
 [node name="vanilla" parent="." unique_id=1654556683 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3398027, 2.0906951, 3.7024922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2775216, 2.0906951, 3.7024922)
 true_item = "vanillaExtract"
 
 [node name="Sprite3D" parent="vanilla" index="1" unique_id=1185922637]
@@ -87,7 +87,7 @@ objectName = "oven"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5604553, 1.5177835, 3.1176512)
 
 [node name="DecorationCake" parent="." unique_id=902749823 instance=ExtResource("20_cake")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33007315, 2.45, 3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33007315, 2.8700912, 3.5)
 
 [node name="PipingBagWhite" parent="." unique_id=169879998 instance=ExtResource("7_58u3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5567448, 2.17, 3.5932465)

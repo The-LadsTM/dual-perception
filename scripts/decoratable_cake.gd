@@ -27,18 +27,28 @@ var ribbon_piped: bool = false
 
 
 func decorate(bag: String) -> void:
+	
 	match bag:
 		"pipingBag_White":
+			if !base.visible:
+				return
 			frosted = true
 			base.texture = preload("res://assets/Sprites/cake_Frosted.png")
+			base.render_priority = 0
 			highlight_material.set_shader_parameter("sprite_texture", base.texture)
 			bottom.visible = true
 		"pipingBag_Pink":
+			if !base.visible:
+				return
 			top_frosted = true
 			top.visible = true
 		"pipingBag_Red":
+			if !base.visible:
+				return
 			ribbon_piped = true
 			ribbon.visible = true
+		"cakePan_Baked":
+			base.visible = true
 
 
 func get_decoration_position() -> Vector3:

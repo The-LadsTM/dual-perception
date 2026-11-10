@@ -249,19 +249,24 @@ func try_interact_tool() -> bool:
 				held_consumable.queue_free()
 				held_consumable = null
 			else:
-				target.add_to_bowl()
-				target.pour_ingredient(held_consumable.ingredient)
-				held_consumable.add_to_bowl(target)
-				held_consumable = null
-				var return_home: String = "mixer" if target.objectName == "cakePan" else "cakePan"
-				get_parent().get_node(return_home).empty();
-				get_parent().get_node(return_home).return_bowl();
+				if target.objectName == "oven":
+					target.add_to_bowl()
+					held_consumable.move_to_oven(target)
+					target.start_oven()
+					
+				else:
+					target.add_to_bowl()
+					target.pour_ingredient(held_consumable.ingredient)
+					held_consumable.add_to_bowl(target)
+					held_consumable = null
+					var return_home: String = "mixer" if target.objectName == "cakePan" else "cakePan"
+					get_parent().get_node(return_home).empty();
+					get_parent().get_node(return_home).return_bowl();
 		elif !held_consumable.item.contains("Empty") and !held_consumable.item.contains("mixer"):
 			target.add_to_bowl()
 			target.pour_ingredient(held_consumable.ingredient)
 			held_consumable.add_to_bowl(target)
 			held_consumable = null
-			print_debug("huh")
 		elif !held_consumable.item.contains("Empty") and held_consumable.item.contains("mixer") and target.objectName.contains("cakePan"):
 			target.add_to_bowl()
 			target.pour_ingredient(held_consumable.ingredient)
@@ -288,7 +293,13 @@ func try_interact_reusable() -> bool:
 
 	var cake := get_decoration_target()
 	if cake != null:
-		cake.decorate(held_reusable_item.true_item)
+		if is_instance_valid(held_reusable_item):
+			cake.decorate(held_reusable_item.true_item)
+		elif is_instance_valid(held_consumable):
+			print_debug("got a cake ready")
+			cake.decorate(held_consumable.item)
+			held_consumable.queue_free()
+			held_consumable = null
 		return true
 
 	var mixer := get_pour_target()
@@ -380,9 +391,7 @@ func try_interact_static() -> bool:
 			return false
 		consumed.pick_up(hand_socket)
 		held_consumable = consumed
-		print_debug("static true")
 		return true
-	print_debug("static false")
 	return false
 
 # ==================================================
@@ -492,7 +501,6 @@ func try_interact_recipe() -> bool:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	update_reusable_hover()
 	update_recipe_hover()
-	print_debug("recipe")
 	return true
 
 
@@ -630,7 +638,7 @@ func get_pour_target() -> ToolSprite:
 		return null
 	interaction_raycast.force_raycast_update()
 	var target := interaction_raycast.get_collider() as ToolSprite
-	if target != null and (target.objectName == "mixer" or target.objectName == "cakePan"):
+	if target != null and (target.objectName):
 		return target
 	return null
 
@@ -644,7 +652,19 @@ func update_pouring(delta: float) -> void:
 		if is_instance_valid(pour_hover_mixer):
 			pour_hover_mixer.set_pour_hover(true)
 	if is_instance_valid(held_consumable):
-		held_consumable.update_pour_pose(target, delta)
+		var cake := get_decoration_target()
+		if cake != null and held_consumable.item.contains("cakePan"):
+			held_consumable.update_use_pose(cake, delta)
+		elif held_consumable.item.contains("cakePan"):
+			held_consumable.update_pour_pose(target, delta)
+		#check that consumable is ingredient and its in a mixer
+		if target != null and target.objectName != "oven":
+			held_consumable.update_pour_pose(target, delta)
+		#check that consumable is bowl and its in a mixer
+		elif held_consumable.item.contains("cakePan"):
+			held_consumable.update_pour_pose(target, delta)
+		elif target == null:
+			held_consumable.update_pour_pose(target, delta)
 	if is_instance_valid(held_reusable_item):
 		var cake := get_decoration_target()
 		if cake != null:
@@ -656,8 +676,9 @@ func update_pouring(delta: float) -> void:
 func get_decoration_target() -> CakeDecoration:
 	if active_wall != null or recipe_card_view.visible:
 		return null
-	if not is_instance_valid(held_reusable_item) or not held_reusable_item.is_piping_bag():
-		return null
+	if !is_instance_valid(held_reusable_item) or !held_reusable_item.is_piping_bag():
+		if !is_instance_valid(held_consumable) or !held_consumable.item.contains("cakePan"):
+			return null
 	interaction_raycast.force_raycast_update()
 	return interaction_raycast.get_collider() as CakeDecoration
 
