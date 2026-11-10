@@ -10,7 +10,7 @@ var _open_tween: Tween
 @onready var _paper: TextureRect = $Overlay/Margin/Column/Aspect/CardButton/Paper
 @onready var _content: MarginContainer = $Overlay/Margin/Column/Aspect/CardButton/Content
 @onready var _title: Label = $Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text/Title
-@onready var _body: Label = $Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text/Body
+@onready var _body: RichTextLabel = $Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text/Body
 @onready var _scroll: ScrollContainer = $Overlay/Margin/Column/Aspect/CardButton/Content/Scroll
 
 
@@ -18,6 +18,7 @@ func _ready() -> void:
 	hide()
 	_card_button.pressed.connect(close_card)
 	_card_button.resized.connect(_resize_card)
+	update_recipe_text()
 
 
 func open_card(title: String, body: String, texture: Texture2D) -> void:
@@ -64,3 +65,6 @@ func _resize_card() -> void:
 	_content.add_theme_constant_override("margin_bottom", vertical_margin)
 	_title.add_theme_font_size_override("font_size", clampi(int(_card_button.size.y * 0.07), 24, 48))
 	_body.add_theme_font_size_override("font_size", clampi(int(_card_button.size.y * 0.045), 16, 30))
+
+func update_recipe_text():
+	_body.text = "hlopasfkn"

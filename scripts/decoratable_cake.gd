@@ -5,6 +5,7 @@ extends StaticBody3D
 @onready var bottom: Sprite3D = $BottomFrosting
 @onready var top: Sprite3D = $TopFrosting
 @onready var ribbon: Sprite3D = $RibbonPiping
+@onready var real: Sprite3D = $CakeReal
 
 const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
 var highlight_material: ShaderMaterial
@@ -38,19 +39,17 @@ func decorate(bag: String) -> void:
 			base.texture = preload("res://assets/Sprites/cake_Frosted.png")
 			base.render_priority = 0
 			highlight_material.set_shader_parameter("sprite_texture", base.texture)
-			bottom.visible = true
 		"pipingBag_Pink":
 			if !base.visible:
 				return
 			top_frosted = true
-			top.visible = true
 		"pipingBag_Red":
 			if !base.visible:
 				return
 			ribbon_piped = true
-			ribbon.visible = true
 		"cakePan_Baked":
 			base.visible = true
+	_update_animation()
 
 
 func get_decoration_position() -> Vector3:
@@ -63,4 +62,26 @@ func changeTexture(args):
 	else:
 		print_debug("false texture")
 		reveal = false
+	_update_animation()
 	
+
+func _update_animation():
+	if reveal:
+		var correct = SceneManager.check_correct()
+		if !correct:
+			base.visible = false
+			bottom.visible = false
+			top.visible = false
+			ribbon.visible = false
+			real.visible = true
+		else:
+			pass
+	else:
+		if ribbon_piped:
+			ribbon.visible = true
+		if frosted:
+			base.visible = true
+			bottom.visible = true
+		if top_frosted:
+			top.visible = true
+		real.visible = false
