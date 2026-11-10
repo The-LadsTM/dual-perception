@@ -16,7 +16,7 @@ var highlight_material: ShaderMaterial
 var bowl_taken = false
 @export var objectName: String
 var bowl: PackedScene = preload("res://prefabs/consumable.tscn")
-const HALF = 4;
+const HALF = 2;
 var hovered
 @onready var timer = $Timer
 var full: int = 0
