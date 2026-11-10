@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bf2snf7r5c402" path="res://assets/Sprites/saltShaker.png" id="12_87bic"]
 [ext_resource type="Texture2D" uid="uid://f6mbha7mwgkn" path="res://assets/Sprites/vanillaExtract.png" id="13_k1cyo"]
 [ext_resource type="PackedScene" path="res://prefabs/recipe_tin.tscn" id="14_3fy06"]
-[ext_resource type="PackedScene" uid="uid://bx1thsbxcrvwy" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
+[ext_resource type="PackedScene" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
 [ext_resource type="PackedScene" path="res://prefabs/decoration_station.tscn" id="21_deco"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
