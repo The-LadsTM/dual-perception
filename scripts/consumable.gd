@@ -7,6 +7,7 @@ var item: String
 var ingredient: String
 var held_position: Vector3 = Vector3.ZERO
 var pour_angle: float = 0.0
+var move_distance: float = 0.0
 var pouring: bool = false
 
 
@@ -34,9 +35,22 @@ func update_pour_pose(mixer: ToolSprite, delta: float) -> void:
 	var target_position: Vector3 = held_position
 	if active:
 		target_position = get_parent().to_local(mixer.get_pour_position())
+	else:
+		target_position = Vector3.ZERO
 	position = position.lerp(target_position, 1.0 - exp(-12.0 * delta))
+	
 	# Tilt only after the player clicks to pour.
 
+func update_use_pose(cake: DecoratableCake, delta: float) -> void:
+	if pouring:
+		return
+	var active: bool = is_instance_valid(cake)
+	var target_position: Vector3 = held_position
+	if active:
+		target_position = get_parent().to_local(cake.get_decoration_position())
+	else:
+		target_position = Vector3.ZERO
+	position = position.lerp(target_position, 1.0 - exp(-12.0 * delta))
 
 func add_to_bowl(target: ToolSprite) -> void:
 	pouring = true
@@ -47,6 +61,13 @@ func add_to_bowl(target: ToolSprite) -> void:
 	tween.tween_property(sprite, "modulate:a", 0.0, 0.18)
 	tween.tween_callback(queue_free)
 
+func move_to_oven(target: ToolSprite) -> void:
+	pouring = true
+	var tween := create_tween()
+	tween.tween_interval(0.2)
+	tween.tween_property(sprite, "position", Vector3(), 1.0).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_callback(queue_free)
+	
 
 func _on_timer_timeout() -> void:
 	queue_free()
