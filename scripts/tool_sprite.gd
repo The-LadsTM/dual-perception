@@ -12,7 +12,10 @@ const INGREDIENT_LABELS: Dictionary = {
 }
 
 const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
+const COUNTDOWN_SHADER: Shader = preload("res://shaders/oven_countdown.gdshader")
 var highlight_material: ShaderMaterial
+var countdown: MeshInstance3D
+var countdown_material: ShaderMaterial
 var bowl_taken = false
 @export var objectName: String
 var bowl: PackedScene = preload("res://prefabs/consumable.tscn")
@@ -28,6 +31,7 @@ var on: bool = false
 
 
 func _ready() -> void:
+	set_process(false)
 	if objectName == "oven":
 		sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		var box : BoxShape3D = BoxShape3D.new()
@@ -36,11 +40,39 @@ func _ready() -> void:
 		box.extents.z = 0.2
 
 		$CollisionShape3D.shape = box
+		_create_countdown()
 	highlight_material = ShaderMaterial.new()
 	highlight_material.shader = OUTLINE_SHADER
 	highlight_material.set_shader_parameter("billboard_enabled", objectName != "oven")
 	sprite.material_override = highlight_material
 	_update_animation()
+
+
+func _create_countdown() -> void:
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.38, 0.38)
+	countdown_material = ShaderMaterial.new()
+	countdown_material.shader = COUNTDOWN_SHADER
+	countdown = MeshInstance3D.new()
+	countdown.name = "OvenCountdown"
+	countdown.position = Vector3(0.0, 1.52, -0.12)
+	countdown.mesh = quad
+	countdown.material_override = countdown_material
+	countdown.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	countdown.hide()
+	add_child(countdown)
+
+
+func _process(_delta: float) -> void:
+	if timer.is_stopped():
+		_hide_countdown()
+		return
+	countdown_material.set_shader_parameter("remaining", timer.time_left / timer.wait_time)
+
+
+func _hide_countdown() -> void:
+	countdown.hide()
+	set_process(false)
 
 
 func set_hovered(active: bool) -> void:
@@ -186,10 +218,16 @@ func empty():
 func start_oven():
 	timer.start()
 	on = true;
+	if countdown != null:
+		countdown_material.set_shader_parameter("remaining", 1.0)
+		countdown.show()
+		set_process(true)
 	
 
 
 func _on_timer_timeout() -> void:
+	if countdown != null:
+		_hide_countdown()
 	on = false
 	baked = true
 	print_debug(SceneManager.bowl_array)

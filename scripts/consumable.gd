@@ -56,7 +56,9 @@ func add_to_bowl(target: ToolSprite) -> void:
 	pouring = true
 	var material := sprite.material_override as ShaderMaterial
 	var tween := create_tween()
-	tween.tween_method(func(angle: float): material.set_shader_parameter("pour_angle", angle), 0.0, deg_to_rad(115.0), 0.18)
+	var is_flour_or_sugar_scoop := item == "scoop" and (ingredient == "flourJar" or ingredient == "sugarJar")
+	var tilt := deg_to_rad(25.0 if is_flour_or_sugar_scoop else 115.0)
+	tween.tween_method(func(angle: float): material.set_shader_parameter("pour_angle", angle), 0.0, tilt, 0.18)
 	tween.tween_interval(0.2)
 	tween.tween_property(sprite, "modulate:a", 0.0, 0.18)
 	tween.tween_callback(queue_free)
