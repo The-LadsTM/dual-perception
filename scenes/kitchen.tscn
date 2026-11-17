@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://drqdphjmpgq1q" path="res://scenes/table.tscn" id="14_ktc20"]
 [ext_resource type="PackedScene" uid="uid://cnm3sc4qdc65g" path="res://scenes/table_runner.tscn" id="15_bs8bs"]
 [ext_resource type="PackedScene" uid="uid://pajc1oonv8i8" path="res://assets/house/MODEL_house_nosprites_scaleddown.fbx" id="16_88wuv"]
+[ext_resource type="PackedScene" uid="uid://d0jdde555wqtg" path="res://global_pause_ui.tscn" id="18_87bic"]
 [ext_resource type="PackedScene" uid="uid://bx1thsbxcrvwy" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
 [ext_resource type="PackedScene" path="res://prefabs/decoration_station.tscn" id="21_deco"]
 [ext_resource type="PackedScene" uid="uid://cjjclnesc5pmm" path="res://prefabs/dining_table_setting.tscn" id="22_dining"]
@@ -52,11 +53,11 @@ true_item = "sugar"
 Consumable = ExtResource("5_v3ycp")
 
 [node name="cakePan" parent="." unique_id=2142255679 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.02479, 2.8373141, -14.118599)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.258686, 2.8373141, -12.947643)
 objectName = "cakePan"
 
 [node name="mixer" parent="." unique_id=852364789 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.97087, 2.859183, -12.729992)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.45418, 2.859183, -13.299707)
 objectName = "mixer"
 
 [node name="milkCarton" parent="." unique_id=1199836084 instance=ExtResource("7_58u3k")]
@@ -97,7 +98,7 @@ objectName = "oven"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.01417, 1.9716376, -17.085058)
 
 [node name="DecorationCake" parent="." unique_id=902749823 instance=ExtResource("20_cake")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.27878, 3.2510865, -13.104681)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.991817, 3.0524566, -25.298918)
 
 [node name="PipingBagWhite" parent="." unique_id=169879998 instance=ExtResource("7_58u3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.674023, 2.4604971, -12.799617)
@@ -112,7 +113,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.63498, 2.4604971, -12.924
 true_item = "pipingBag_Red"
 
 [node name="eggCarton" parent="." unique_id=639103028 instance=ExtResource("4_bems3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.927498, 2.1716511, -20.57265)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.868225, 2.7539132, -12.620151)
 true_item = "eggCarton"
 Consumable = ExtResource("5_v3ycp")
 
@@ -302,8 +303,14 @@ light_size = 1.0
 area_range = 20.0
 area_size = Vector2(17.261177, 8.358864)
 
+[node name="StaticBody3D" type="StaticBody3D" parent="MODEL_house_nosprites_scaleddown" unique_id=1377411406]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MODEL_house_nosprites_scaleddown/StaticBody3D" unique_id=358214279]
+
 [node name="DiningTableSetting" parent="." unique_id=1431366031 instance=ExtResource("22_dining")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -42.428, -1.093, -31.361832)
+
+[node name="GlobalPauseUI" parent="." unique_id=539434669 instance=ExtResource("18_87bic")]
 
 [editable path="milkCarton"]
 [editable path="salt"]
