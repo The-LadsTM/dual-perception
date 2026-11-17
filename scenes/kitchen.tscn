@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://pajc1oonv8i8" path="res://assets/house/MODEL_house_nosprites_scaleddown.fbx" id="16_88wuv"]
 [ext_resource type="PackedScene" uid="uid://bx1thsbxcrvwy" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
 [ext_resource type="PackedScene" path="res://prefabs/decoration_station.tscn" id="21_deco"]
-[ext_resource type="PackedScene" path="res://prefabs/dining_table_setting.tscn" id="22_dining"]
+[ext_resource type="PackedScene" uid="uid://cjjclnesc5pmm" path="res://prefabs/dining_table_setting.tscn" id="22_dining"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
 
@@ -83,6 +83,11 @@ true_item = "vanillaExtract"
 
 [node name="Sprite3D" parent="vanilla" index="1" unique_id=1185922637]
 texture = ExtResource("13_k1cyo")
+
+[node name="bakingPowder" parent="." unique_id=2029461425 instance=ExtResource("4_bems3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5134711, 1.971359, -2.8086154)
+true_item = "bakingPowder"
+Consumable = ExtResource("5_v3ycp")
 
 [node name="oven" parent="." unique_id=273789271 instance=ExtResource("6_g3o0j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.804, 1.1896131, -16.525993)
@@ -249,13 +254,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.395641, 0.05, 0.9443207)
 [node name="tableRunner" parent="." unique_id=1895262275 instance=ExtResource("15_bs8bs")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 7.024474, 0.73838717, 0.36856127)
 
-[node name="bakingPowder" parent="." unique_id=2029461425 instance=ExtResource("4_bems3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5134711, 1.971359, -2.8086154)
-true_item = "bakingPowder"
-Consumable = ExtResource("5_v3ycp")
-
 [node name="MODEL_house_nosprites_scaleddown" parent="." unique_id=2073857932 instance=ExtResource("16_88wuv")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -49.611694, -7.382921, -19.77679)
+transform = Transform3D(0.39, 0, 0, 0, 0.39, 0, 0, 0, 0.39, -49.611694, -7.166543, -19.77679)
 
 [node name="AreaLight3D2" type="AreaLight3D" parent="MODEL_house_nosprites_scaleddown" unique_id=968739426]
 transform = Transform3D(-1.0927848e-07, -2.5, -1.0927848e-07, 0, -1.0927848e-07, 2.5, -2.5, 1.0927848e-07, 4.7767144e-15, 52.879875, 44.849625, 17.834503)
@@ -304,8 +304,9 @@ light_energy = 16.0
 light_size = 1.0
 area_range = 20.0
 area_size = Vector2(17.261177, 8.358864)
+
 [node name="DiningTableSetting" parent="." unique_id=1431366031 instance=ExtResource("22_dining")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -42.428, -1.093, -31.361832)
 
 [editable path="milkCarton"]
 [editable path="salt"]
