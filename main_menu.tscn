@@ -1,6 +1,51 @@
 [gd_scene format=3 uid="uid://okh5vssvytux"]
 
-[ext_resource type="FontFile" uid="uid://ccwttcqeyhrht" path="res://fonts/ArexaDemo-Regular.otf" id="1_06t4h"]
+[ext_resource type="VideoStream" uid="uid://cnod4pxpbxqqv" path="res://docs/snapshot_wallpaper_720p.ogv" id="1_7vrkn"]
+[ext_resource type="Script" uid="uid://c1ce7jjkwrieo" path="res://main_menu.gd" id="1_fu7sn"]
+[ext_resource type="FontFile" uid="uid://d4ik2hn5u6evu" path="res://fonts/JungleAdventurer.otf" id="3_jix8l"]
+[ext_resource type="FontFile" uid="uid://buo07ehoo7al3" path="res://fonts/snapshot font.ttf" id="4_jix8l"]
+[ext_resource type="Texture2D" uid="uid://umpywjpbtaqd" path="res://assets/GAMECONTROL.png" id="5_glbon"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jix8l"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.96862745, 0.89411765, 0.7921569, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qe12f"]
+bg_color = Color(0, 0, 0, 0.7019608)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+corner_detail = 5
 
 [node name="MainMenu" type="Control" unique_id=352977372]
 layout_mode = 3
@@ -9,6 +54,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fu7sn")
 
 [node name="Background" type="ColorRect" parent="." unique_id=529236163]
 layout_mode = 0
@@ -18,43 +64,112 @@ offset_right = 132556.0
 offset_bottom = 87556.0
 color = Color(0, 0, 0, 1)
 
-[node name="MenuLayout" type="VBoxContainer" parent="." unique_id=2020666578]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=80788944]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stream = ExtResource("1_7vrkn")
+autoplay = true
+expand = true
+loop = true
+
+[node name="MenuLayout" type="VBoxContainer" parent="." unique_id=2020666578]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 235.0
+offset_right = 35.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MenuLayout" unique_id=1080114420]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 200
-text = "Dual Perception"
-horizontal_alignment = 1
-
 [node name="PlayButton" type="Button" parent="MenuLayout" unique_id=153295792]
-custom_minimum_size = Vector2(600, 90)
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_stretch_ratio = 14.93
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 50
-text = "PLAY"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jix8l")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_jix8l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qe12f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fu7sn")
+text = "Play"
 
-[node name="SettingsButton" type="Button" parent="MenuLayout" unique_id=197394941]
-custom_minimum_size = Vector2(600, 90)
+[node name="GameControlsButton" type="Button" parent="MenuLayout" unique_id=197394941]
+custom_minimum_size = Vector2(450, 75)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 50
-text = "SETTINGS"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jix8l")
+theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxFlat_jix8l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qe12f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fu7sn")
+text = "GAME CONTROLS"
 
 [node name="ExitButton" type="Button" parent="MenuLayout" unique_id=611101763]
-custom_minimum_size = Vector2(600, 90)
+custom_minimum_size = Vector2(450, 45)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("1_06t4h")
-theme_override_font_sizes/font_size = 50
-text = "EXIT"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jix8l")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_jix8l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qe12f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fu7sn")
+text = "Exit"
+
+[node name="Label" type="Label" parent="." unique_id=1080114420]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -512.0
+offset_right = 512.0
+offset_bottom = 384.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4627451, 0.27450982, 0.18039216, 1)
+theme_override_colors/font_outline_color = Color(0.96862745, 0.89411765, 0.7921569, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_jix8l")
+theme_override_font_sizes/font_size = 300
+text = "Snapshot"
+horizontal_alignment = 1
+
+[node name="ControlsPopup" type="Control" parent="." unique_id=794121129]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="ControlsPopup" unique_id=1271521340]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlsImage" type="TextureRect" parent="ControlsPopup/CenterContainer" unique_id=1075989078]
+custom_minimum_size = Vector2(950, 750)
+layout_mode = 2
+texture = ExtResource("5_glbon")
+expand_mode = 1
+stretch_mode = 5

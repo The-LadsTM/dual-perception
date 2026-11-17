@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://pajc1oonv8i8" path="res://assets/house/MODEL_house_nosprites_scaleddown.fbx" id="16_88wuv"]
 [ext_resource type="PackedScene" uid="uid://bx1thsbxcrvwy" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
 [ext_resource type="PackedScene" path="res://prefabs/decoration_station.tscn" id="21_deco"]
+[ext_resource type="PackedScene" path="res://prefabs/dining_table_setting.tscn" id="22_dining"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
 
@@ -303,6 +304,8 @@ light_energy = 16.0
 light_size = 1.0
 area_range = 20.0
 area_size = Vector2(17.261177, 8.358864)
+[node name="DiningTableSetting" parent="." unique_id=1431366031 instance=ExtResource("22_dining")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04, 0)
 
 [editable path="milkCarton"]
 [editable path="salt"]

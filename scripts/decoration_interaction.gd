@@ -10,7 +10,7 @@ var hovered_supply: BalloonSupply
 
 
 func _physics_process(delta: float) -> void:
-	if player.recipe_card_view.visible:
+	if player.is_card_view_open():
 		_set_hovered_box(null)
 		_set_hovered_supply(null)
 		return
@@ -140,7 +140,7 @@ func handle_input(event: InputEvent) -> bool:
 
 
 func _hands_empty() -> bool:
-	return not is_instance_valid(held_item) and not is_instance_valid(player.held_reusable_item) and not is_instance_valid(player.held_consumable) and not is_instance_valid(player.held_tool) and not is_instance_valid(player.pickup_controller.holding)
+	return not is_instance_valid(held_item) and not player.table_setting_interaction.is_holding() and not is_instance_valid(player.held_reusable_item) and not is_instance_valid(player.held_consumable) and not is_instance_valid(player.held_tool) and not is_instance_valid(player.pickup_controller.holding)
 
 
 func try_place() -> bool:
