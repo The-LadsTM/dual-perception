@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwhv3r6tmislh"
-path="res://.godot/imported/sugarJar_Closed.png-fe5441d99bd7ebeb78b9ef1c6483bca2.ctex"
+uid="uid://ejpkbbarpji8"
+path="res://.godot/imported/bakingPowder_Closed.png-13dc372085412a5b2908237f0073a0dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sprites/sugarJar_Closed.png"
-dest_files=["res://.godot/imported/sugarJar_Closed.png-fe5441d99bd7ebeb78b9ef1c6483bca2.ctex"]
+source_file="res://assets/Sprites/bakingPowder_Closed.png"
+dest_files=["res://.godot/imported/bakingPowder_Closed.png-13dc372085412a5b2908237f0073a0dc.ctex"]
 
 [params]
 

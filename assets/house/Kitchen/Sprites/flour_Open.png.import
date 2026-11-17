@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kkxrgtsras61"
-path.s3tc="res://.godot/imported/flourJar_Closed.png-21d5719e26f840105ee2d0c3de438096.s3tc.ctex"
+uid="uid://4lnoxctb8qef"
+path="res://.godot/imported/flour_Open.png-64ddbf34db9a4eb9e410fd53fb5807a4.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sprites/flourJar_Closed.png"
-dest_files=["res://.godot/imported/flourJar_Closed.png-21d5719e26f840105ee2d0c3de438096.s3tc.ctex"]
+source_file="res://assets/house/Kitchen/Sprites/flour_Open.png"
+dest_files=["res://.godot/imported/flour_Open.png-64ddbf34db9a4eb9e410fd53fb5807a4.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

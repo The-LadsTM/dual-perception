@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4lnoxctb8qef"
-path="res://.godot/imported/flourJar_Open.png-ec2b6aa3b8097272a9c52b558a7c23f3.ctex"
+uid="uid://cwhv3r6tmislh"
+path="res://.godot/imported/sugar_Closed.png-eb3c32384fc8621efcffc73b5928562f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/house/Kitchen/Sprites/flourJar_Open.png"
-dest_files=["res://.godot/imported/flourJar_Open.png-ec2b6aa3b8097272a9c52b558a7c23f3.ctex"]
+source_file="res://assets/Sprites/sugar_Closed.png"
+dest_files=["res://.godot/imported/sugar_Closed.png-eb3c32384fc8621efcffc73b5928562f.ctex"]
 
 [params]
 

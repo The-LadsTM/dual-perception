@@ -99,7 +99,7 @@ shape = SubResource("SphereShape3D_ymk7a")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_ymk7a")
-animation = &"mixerBowl_Full"
+animation = &"teaspoon"
 
 [node name="Timer" type="Timer" parent="." unique_id=402937502]
 wait_time = 10.0

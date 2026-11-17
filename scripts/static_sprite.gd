@@ -29,6 +29,7 @@ var sprite_bottom: float
 func _ready() -> void:
 	SceneManager.change_texture.connect(changeTexture)
 	random_item = SceneManager.get_random_item(true_item);
+	print_debug(random_item)
 
 	if random_item != true_item:
 		close_false = load("res://assets/Sprites/" + random_item + "_Closed.png")
@@ -95,10 +96,10 @@ func generate_consumable():
 			"eggCarton":
 				new_item.item = "egg"
 				new_item.sprite.animation = "egg"
-			"sugarJar":
+			"sugar":
 				new_item.item = "scoop"
 				new_item.sprite.animation = "scoop"
-			"flourJar":
+			"flour":
 				new_item.item = "scoop"
 				new_item.sprite.animation = "scoop"
 			"bakingPowder":

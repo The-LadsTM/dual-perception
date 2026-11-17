@@ -9,7 +9,7 @@ var _open_tween: Tween
 @onready var _card_button: Button = $Overlay/Margin/Column/Aspect/CardButton
 @onready var _paper: TextureRect = $Overlay/Margin/Column/Aspect/CardButton/Paper
 @onready var _content: MarginContainer = $Overlay/Margin/Column/Aspect/CardButton/Content
-@onready var _title: Label = $Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text/Title
+@onready var _title: RichTextLabel = $Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text/Title
 @onready var _body: RichTextLabel = $Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text/Body
 @onready var _scroll: ScrollContainer = $Overlay/Margin/Column/Aspect/CardButton/Content/Scroll
 
@@ -21,22 +21,15 @@ func _ready() -> void:
 	update_recipe_text()
 
 
-func open_card(title: String, body: String, texture: Texture2D) -> void:
+func open_card(title: String, texture: Texture2D) -> void:
 	_title.text = title
 	_title.visible = not title.is_empty()
-	_body.text = body
-	_body.visible = not body.is_empty()
+	_body.text = SceneManager.get_recipe(title)
+	_body.visible = not title.is_empty()
 	_paper.texture = texture
 	_aspect.ratio = float(texture.get_width()) / float(texture.get_height())
 	_scroll.scroll_vertical = 0
-	show()
-	_resize_card()
-	_card_button.grab_focus()
-	if _open_tween != null:
-		_open_tween.kill()
-	_card_button.scale = Vector2.ONE * 0.94
-	_open_tween = create_tween()
-	_open_tween.tween_property(_card_button, "scale", Vector2.ONE, 0.16).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	$show_card.start()
 
 
 func close_card() -> void:
@@ -68,3 +61,14 @@ func _resize_card() -> void:
 
 func update_recipe_text():
 	_body.text = "hlopasfkn"
+
+
+func _on_show_card_timeout() -> void:
+	show()
+	_resize_card()
+	_card_button.grab_focus()
+	if _open_tween != null:
+		_open_tween.kill()
+	_card_button.scale = Vector2.ONE * 0.94
+	_open_tween = create_tween()
+	_open_tween.tween_property(_card_button, "scale", Vector2.ONE, 0.16).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

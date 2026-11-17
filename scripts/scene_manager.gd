@@ -9,22 +9,24 @@ var bowl_array = [];
 var correct_array = []
 
 var bowl_contents: Dictionary[String, int] = {}
-var recipe_contents: Dictionary[String, int] = {
-	"sugarJar": 1,
-	"flourJar": 3,
-	"milkCarton": 1,
-	"saltShaker": 1,
-	"eggCarton": 3,
-	"butter": 1,
-	"vanillaExtract": 1,
-	"bakingPowder": 1
+var recipes: Dictionary[String, Dictionary] = { "Yellow Sponge Cake":
+	{
+		"sugar": 1,
+		"flour": 3,
+		"milkCarton": 1,
+		"saltShaker": 1,
+		"eggCarton": 3,
+		"butter": 1,
+		"vanillaExtract": 1,
+		"bakingPowder": 1
+	}
+	
 }
 
 var pair_dict = { 
-	"sugarJar_flourJar": false,
+	"sugar_flour": false,
 	"saltShaker_pepperShaker": false,
 	"eggCarton_butter": true,
-	"vanillaExtract": false,
 	"H_P": false,
 	"A_Y": false,
 	"R_T": false,
@@ -91,8 +93,18 @@ func add_to_bowl(ingredient: String):
 	print_debug(bowl_contents)
 
 func check_correct() -> bool:
-	for i in recipe_contents:
-		if !bowl_contents.has(i) or !(bowl_contents[i] == recipe_contents[i]):
+	for i in recipes["Yellow Sponge Cake"]:
+		if !bowl_contents.has(i) or !(bowl_contents[i] == recipes["Yellow Sponge Cake"][i]):
 			return false
 	return true
+	
+func get_recipe(title):
+	var recipe_string = ""
+	if recipes[title]:
+		var recipe = recipes[title]
+		
+		for i in recipe:
+			recipe_string = recipe_string + str(recipe[i]) + " teaspoon " + i + "\n"
+			
+	return recipe_string
 	

@@ -521,7 +521,7 @@ func try_interact_recipe() -> bool:
 	_mouse_mode_before_recipe = Input.mouse_mode
 	velocity = Vector3.ZERO
 	target.set_open(true)
-	recipe_card_view.open_card(target.recipe_title, target.recipe_text, target.card_texture)
+	recipe_card_view.open_card(target.recipe_title, target.card_texture)
 	interaction_reticle.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	update_reusable_hover()

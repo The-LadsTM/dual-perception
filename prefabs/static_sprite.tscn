@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b05tgatqgassy"]
 
 [ext_resource type="Script" uid="uid://cdr6h0v5vkfwr" path="res://scripts/static_sprite.gd" id="1_lv8av"]
-[ext_resource type="Texture2D" uid="uid://kkxrgtsras61" path="res://assets/Sprites/flourJar_Closed.png" id="2_4otk0"]
+[ext_resource type="Texture2D" uid="uid://kkxrgtsras61" path="res://assets/Sprites/flour_Closed.png" id="2_4otk0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ymk7a"]
 

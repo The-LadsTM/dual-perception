@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://837ddbjssc8h"
-path="res://.godot/imported/bakingPowder.png-478f1628084d6a437e8a358783e8a498.ctex"
+uid="uid://npumv3e0w4wu"
+path="res://.godot/imported/sugar_Open.png-03c2b39042169ff393912f15ddfa081c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/house/Kitchen/Sprites/bakingPowder.png"
-dest_files=["res://.godot/imported/bakingPowder.png-478f1628084d6a437e8a358783e8a498.ctex"]
+source_file="res://assets/house/Kitchen/Sprites/sugar_Open.png"
+dest_files=["res://.godot/imported/sugar_Open.png-03c2b39042169ff393912f15ddfa081c.ctex"]
 
 [params]
 
