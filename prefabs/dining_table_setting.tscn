@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/dining_table.gd" id="1_table"]
+[ext_resource type="Script" path="res://scripts/table_setting_slot.gd" id="2_slot"]
+[ext_resource type="Script" path="res://scripts/china_cabinet.gd" id="3_cabinet"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tabletop"]
+size = Vector3(3.72, 0.1, 2.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cabinet"]
+size = Vector3(4.38, 4.53, 1.23)
+
+[node name="DiningTableSetting" type="Node3D"]
+
+[node name="DiningTable" type="StaticBody3D" parent="."]
+position = Vector3(50.08, 2.654, 5.1)
+script = ExtResource("1_table")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiningTable"]
+position = Vector3(0, -0.05, 0)
+shape = SubResource("BoxShape3D_tabletop")
+
+[node name="PlaceSettings" type="Node3D" parent="DiningTable"]
+
+[node name="SeatNorthWest" type="Marker3D" parent="DiningTable/PlaceSettings"]
+position = Vector3(-0.85, 0.005, 0.75)
+script = ExtResource("2_slot")
+
+[node name="SeatNorthEast" type="Marker3D" parent="DiningTable/PlaceSettings"]
+position = Vector3(0.55, 0.005, 0.75)
+script = ExtResource("2_slot")
+
+[node name="SeatSouthWest" type="Marker3D" parent="DiningTable/PlaceSettings"]
+position = Vector3(-0.85, 0.005, -0.75)
+rotation = Vector3(0, 3.1415927, 0)
+script = ExtResource("2_slot")
+
+[node name="SeatSouthEast" type="Marker3D" parent="DiningTable/PlaceSettings"]
+position = Vector3(0.55, 0.005, -0.75)
+rotation = Vector3(0, 3.1415927, 0)
+script = ExtResource("2_slot")
+
+[node name="SeatHead" type="Marker3D" parent="DiningTable/PlaceSettings"]
+position = Vector3(1.5, 0.005, 0)
+rotation = Vector3(0, 1.5707964, 0)
+script = ExtResource("2_slot")
+
+[node name="ChinaCabinet" type="StaticBody3D" parent="."]
+position = Vector3(41.67, 3.33, 3.436)
+script = ExtResource("3_cabinet")
+table_path = NodePath("../DiningTable")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChinaCabinet"]
+shape = SubResource("BoxShape3D_cabinet")
+
+[node name="HoverLabel" type="Label3D" parent="ChinaCabinet"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+position = Vector3(0, 1.45, 0.8)
+billboard = 1
+text = "China Cabinet"
+font_size = 32
+pixel_size = 0.004
+outline_size = 6

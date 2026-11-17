@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" path="res://scenes/recipe_card_view.tscn" id="3_recipe_card"]
 [ext_resource type="Script" path="res://scripts/decoration_interaction.gd" id="4_deco"]
 [ext_resource type="PackedScene" path="res://scenes/interaction_reticle.tscn" id="5_reticle"]
+[ext_resource type="Script" path="res://scripts/table_setting_interaction.gd" id="6_table_setting"]
+[ext_resource type="Script" path="res://scripts/name_card_view.gd" id="7_name_card"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ymk7a"]
 
@@ -14,6 +16,7 @@
 script = ExtResource("1_3vyb7")
 
 [node name="Pivot" type="MeshInstance3D" parent="." unique_id=605268361]
+layers = 2
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_ymk7a")
 
@@ -24,7 +27,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_ymk7a")
 
 [node name="Head" type="Node3D" parent="." unique_id=2084579038]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="Main_Camera" type="Camera3D" parent="Head" unique_id=1985709892]
 cull_mask = 1047553
@@ -50,6 +53,12 @@ script = ExtResource("2_g2els")
 
 [node name="DecorationInteraction" type="Node" parent="."]
 script = ExtResource("4_deco")
+
+[node name="TableSettingInteraction" type="Node" parent="."]
+script = ExtResource("6_table_setting")
+
+[node name="NameCardView" type="CanvasLayer" parent="."]
+script = ExtResource("7_name_card")
 
 [node name="Control" type="Control" parent="." unique_id=1844139223]
 visible = false
