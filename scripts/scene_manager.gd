@@ -16,9 +16,20 @@ var recipe_contents: Dictionary[String, int] = {
 	"saltShaker": 1,
 	"eggCarton": 3,
 	"butter": 1,
+	"vanillaExtract": 1,
+	"bakingPowder": 1
 }
 
-var pair_dict = { "sugarJar_flourJar": false, "butter_cheese": false, "salt_soda": false, "eggCarton": true }
+var pair_dict = { 
+	"sugarJar_flourJar": false,
+	"saltShaker_pepperShaker": false,
+	"eggCarton_butter": true,
+	"vanillaExtract": false,
+	"H_P": false,
+	"A_Y": false,
+	"R_T": false,
+	"B_D": false,
+	}
 
 signal change_texture;
 
@@ -53,7 +64,7 @@ func _on_photo_cooldown_timeout() -> void:
 func _on_camera_cooldown_timeout() -> void:
 	player.retake = true
 
-func get_random_item(true_item: String):
+func get_random_item(true_item: String) -> String:
 	for pair in pair_dict:
 		if pair.contains(true_item):
 			var string = pair.replace(true_item, "");
@@ -62,6 +73,7 @@ func get_random_item(true_item: String):
 				return string;
 			else:
 				return true_item;
+	return true_item;
 
 func swap_items():
 	for pair in pair_dict:

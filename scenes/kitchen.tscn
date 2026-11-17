@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://prefabs/recipe_tin.tscn" id="14_3fy06"]
 [ext_resource type="PackedScene" uid="uid://drqdphjmpgq1q" path="res://scenes/table.tscn" id="14_ktc20"]
 [ext_resource type="PackedScene" uid="uid://cnm3sc4qdc65g" path="res://scenes/table_runner.tscn" id="15_bs8bs"]
+[ext_resource type="PackedScene" uid="uid://i02s3wuqfols" path="res://assets/house/MODEL_house_withsprites.fbx" id="16_88wuv"]
 [ext_resource type="PackedScene" uid="uid://bx1thsbxcrvwy" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
 [ext_resource type="PackedScene" path="res://prefabs/decoration_station.tscn" id="21_deco"]
 
@@ -245,6 +246,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.395641, 0.05, 0.9443207)
 
 [node name="tableRunner" parent="." unique_id=1895262275 instance=ExtResource("15_bs8bs")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 7.024474, 0.73838717, 0.36856127)
+
+[node name="MODEL_house_withsprites" parent="." unique_id=1232760210 instance=ExtResource("16_88wuv")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 38.25968, -4.5343323, 9.061005)
 
 [editable path="milkCarton"]
 [editable path="salt"]

@@ -9,6 +9,7 @@ const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader"
 @export_range(0.1, 1.0, 0.01) var held_height: float = 0.42
 
 @export var true_item: String;
+var random_item: String;
 
 @onready var sprite: Sprite3D = $Sprite3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -17,6 +18,7 @@ var home_parent: Node
 var home_transform: Transform3D
 var original_collision_layer: int
 var original_collision_mask: int
+var reveal: bool = false
 
 const POURABLE_ITEMS: Array[String] = ["milkCarton", "pepperShaker", "saltShaker", "vanillaExtract"]
 const PIPING_BAGS: Array[String] = ["pipingBag_White", "pipingBag_Pink", "pipingBag_Red"]
@@ -63,6 +65,7 @@ func update_use_pose(active: bool, world_position: Vector3, delta: float) -> voi
 
 
 func _ready() -> void:
+	SceneManager.change_texture.connect(changeTexture)
 	hover_float = HOVER_FLOAT.new()
 	add_child(hover_float)
 	hover_float.configure([sprite])
@@ -73,8 +76,9 @@ func _ready() -> void:
 	original_collision_layer = collision_layer
 	original_collision_mask = collision_mask
 	
-	if not true_item.is_empty():
-		sprite.texture = load("res://assets/Sprites/" + true_item + ".png")
+	if !true_item.is_empty():
+		random_item = SceneManager.get_random_item(true_item)
+		sprite.texture = load("res://assets/Sprites/" + random_item  + ".png")
 
 	var mat := sprite.material_override as ShaderMaterial
 	if mat != null:
@@ -157,3 +161,46 @@ func return_home() -> void:
 
 	is_held = false
 	set_hovered(false)
+	
+func changeTexture(args):
+	if args:
+		reveal = true
+	else:
+		reveal = false
+	change_animation()
+
+func change_animation():
+	hover_float = HOVER_FLOAT.new()
+	add_child(hover_float)
+	hover_float.configure([sprite])
+
+	home_parent = get_parent()
+	home_transform = global_transform
+
+	original_collision_layer = collision_layer
+	original_collision_mask = collision_mask
+	
+	if reveal:
+		sprite.texture = load("res://assets/Sprites/" + true_item  + ".png")
+	else:
+		sprite.texture = load("res://assets/Sprites/" + random_item  + ".png")
+
+	var mat := sprite.material_override as ShaderMaterial
+	if mat != null:
+		mat = mat.duplicate() as ShaderMaterial
+	else:
+		mat = ShaderMaterial.new()
+	mat.shader = OUTLINE_SHADER
+	sprite.material_override = mat
+	mat.set_shader_parameter("sprite_texture", sprite.texture)
+	mat.set_shader_parameter("is_hovered", false)
+	pour_angle = deg_to_rad(90.0) if is_piping_bag() else 0.0
+	mat.set_shader_parameter("pour_angle", pour_angle)
+	sprite.extra_cull_margin = 0.05
+	_fit_collision_to_sprite()
+	
+	
+	
+	
+	if true_item == "saltShaker":
+		print_debug("texture chagned", sprite.texture)

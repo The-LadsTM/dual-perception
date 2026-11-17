@@ -1,6 +1,6 @@
 class_name StaticSprite extends StaticBody3D
 @export var true_item: String;
-var random_item;
+var random_item: String;
 @export var Consumable: PackedScene;
 const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
 var state = "close"
@@ -29,7 +29,6 @@ var sprite_bottom: float
 func _ready() -> void:
 	SceneManager.change_texture.connect(changeTexture)
 	random_item = SceneManager.get_random_item(true_item);
-	print_debug(random_item)
 
 	if random_item != true_item:
 		close_false = load("res://assets/Sprites/" + random_item + "_Closed.png")
@@ -117,10 +116,8 @@ func close():
 
 func changeTexture(args):
 	if args:
-		print_debug("true texture")
 		reveal = true
 	else:
-		print_debug("false texture")
 		reveal = false
 
 func set_hovered(active: bool) -> void:
