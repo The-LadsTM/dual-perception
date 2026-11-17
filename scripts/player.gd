@@ -59,9 +59,7 @@ var _mouse_mode_before_recipe: Input.MouseMode = Input.MOUSE_MODE_CAPTURED
 @onready var photo_taken = $TakePhoto
 
 
-# ==================================================
 # READY
-# ==================================================
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -70,9 +68,7 @@ func _ready() -> void:
 	recipe_card_view.closed.connect(_on_recipe_card_closed)
 
 
-# ==================================================
 # INPUT
-# ==================================================
 
 func _unhandled_input(event: InputEvent) -> void:
 	if recipe_card_view.visible:
@@ -151,9 +147,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-# ==================================================
 # PHYSICS / MOVEMENT
-# ==================================================
 
 func _physics_process(delta: float) -> void:
 	if recipe_card_view.visible:
@@ -231,9 +225,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-# ==================================================
 # TOOL INTERACTION
-# ==================================================
+
 func try_interact_tool() -> bool:
 	#var target := get_pour_target()
 	var target := interaction_raycast.get_collider() as ToolSprite
@@ -256,9 +249,8 @@ func try_interact_tool() -> bool:
 		bowl.pick_up(hand_socket)
 	return true
 
-# ==================================================
 # REUSABLE ITEM INTERACTION
-# ==================================================
+
 
 func try_interact_reusable() -> bool:
 
