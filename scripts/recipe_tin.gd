@@ -5,8 +5,8 @@ const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader"
 
 @export var closed_texture: Texture2D = preload("res://assets/Sprites/recipeTin_Closed.png")
 @export var open_texture: Texture2D = preload("res://assets/Sprites/recipeTin_Open.png")
-@export var card_texture: Texture2D = preload("res://assets/Sprites/recipeCard_Small.png")
-@export var recipe_title: String = ""
+@export var card_texture: Texture2D = preload("res://assets/house/Kitchen/Sprites/UI_notecard.png")
+@export var recipe_title: String = "Yellow Sponge Cake"
 @export_multiline var recipe_text: String = ""
 
 var is_open: bool = false

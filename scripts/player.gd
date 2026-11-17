@@ -53,6 +53,8 @@ var _mouse_mode_before_recipe: Input.MouseMode = Input.MOUSE_MODE_CAPTURED
 @onready var recipe_card_view: RecipeCardView = $RecipeCardView
 @onready var interaction_reticle: InteractionReticle = $InteractionReticle/Reticle
 @onready var decoration_interaction = $DecorationInteraction
+@onready var table_setting_interaction = $TableSettingInteraction
+@onready var name_card_view: NameCardView = $NameCardView
 
 @onready var photo = $Head/Photo_Camera
 @onready var pickup_controller = $pickup_script
@@ -76,7 +78,16 @@ func _ready() -> void:
 # ==================================================
 
 func _unhandled_input(event: InputEvent) -> void:
-	if recipe_card_view.visible:
+	if is_card_view_open():
+		return
+	var previous_stack: Node3D = table_setting_interaction.held_stack
+	if table_setting_interaction.handle_input(event):
+		if event.is_action_pressed("interact"):
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			var held_stack: Node3D = table_setting_interaction.held_stack
+			if is_instance_valid(held_stack) and held_stack != previous_stack:
+				interaction_reticle.play_grab(interaction_raycast.get_collider() as Node3D)
+		get_viewport().set_input_as_handled()
 		return
 	var previous_decoration: Node3D = decoration_interaction.held_item
 	if decoration_interaction.handle_input(event):
@@ -155,12 +166,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
+# Full-screen card close-ups (recipe card, guest name card) pause play.
+func is_card_view_open() -> bool:
+	return recipe_card_view.visible or name_card_view.visible
+
+
 # ==================================================
 # PHYSICS / MOVEMENT
 # ==================================================
 
 func _physics_process(delta: float) -> void:
-	interaction_reticle.visible = camera.is_current() and not recipe_card_view.visible
+	interaction_reticle.visible = camera.is_current() and not is_card_view_open()
+	if name_card_view.visible:
+		velocity = Vector3.ZERO
+		return
 	if recipe_card_view.visible:
 		velocity = Vector3.ZERO
 		if not is_instance_valid(active_recipe_tin):
@@ -240,9 +259,9 @@ func _physics_process(delta: float) -> void:
 
 func _get_interaction_reticle_target() -> Node3D:
 	var target := interaction_raycast.get_collider() as Node3D
-	if target == null or decoration_interaction.is_reticle_target(target):
+	if target == null or decoration_interaction.is_reticle_target(target) or table_setting_interaction.is_reticle_target(target):
 		return target
-	if active_wall != null or is_instance_valid(decoration_interaction.held_item):
+	if active_wall != null or is_instance_valid(decoration_interaction.held_item) or table_setting_interaction.is_holding():
 		return null
 	if target == hovered_static_sprite:
 		return target if hovered_static_sprite.Consumable != null else null
@@ -521,7 +540,7 @@ func try_interact_recipe() -> bool:
 	_mouse_mode_before_recipe = Input.mouse_mode
 	velocity = Vector3.ZERO
 	target.set_open(true)
-	recipe_card_view.open_card(target.recipe_title, target.recipe_text, target.card_texture)
+	recipe_card_view.open_card(target.recipe_title, target.card_texture)
 	interaction_reticle.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	update_reusable_hover()

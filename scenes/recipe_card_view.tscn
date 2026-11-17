@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://b4d2pod7sw6ro"]
 
 [ext_resource type="Script" uid="uid://cnvxlrha7n3dn" path="res://scripts/recipe_card_view.gd" id="1_view"]
-[ext_resource type="Texture2D" uid="uid://d13bhdvmromqi" path="res://assets/Sprites/recipeCard_Small.png" id="2_card"]
-[ext_resource type="FontFile" uid="uid://ccwttcqeyhrht" path="res://fonts/ArexaDemo-Regular.otf" id="3_5k2en"]
+[ext_resource type="Texture2D" uid="uid://b30rce4ng8u81" path="res://assets/house/Kitchen/Sprites/UI_notecard.png" id="2_5k2en"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_card"]
 
@@ -68,7 +67,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_card")
+texture = ExtResource("2_5k2en")
 expand_mode = 1
 
 [node name="Content" type="MarginContainer" parent="Overlay/Margin/Column/Aspect/CardButton" unique_id=1860160016]
@@ -76,10 +75,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 163.82501
-offset_top = 100.0
-offset_right = -189.82495
-offset_bottom = -78.0
+offset_left = 134.82501
+offset_right = -134.82495
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -94,20 +91,22 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text" unique_id=62000016]
+[node name="Title" type="RichTextLabel" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text" unique_id=2032901948]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.18, 0.15, 0.12, 1)
-theme_override_fonts/font = ExtResource("3_5k2en")
-theme_override_font_sizes/font_size = 80
+theme_override_colors/default_color = Color(0.5448441, 0.19689393, 0, 1)
+theme_override_font_sizes/normal_font_size = 72
 text = "Yellow Sponge Cake"
+fit_content = true
 horizontal_alignment = 1
-autowrap_mode = 3
 
 [node name="Body" type="RichTextLabel" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text" unique_id=1764876655]
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 32
-text = "RECIPE LIST HERE"
+theme_override_font_sizes/normal_font_size = 56
+text = "RECIPE LIST HERE
+dgkbmgklbmlkmlkms
+slb slsb gmf g
+akfbaldkb adk "
 fit_content = true
 
 [node name="Hint" type="Label" parent="Overlay/Margin/Column" unique_id=1172341081]
@@ -117,3 +116,9 @@ theme_override_font_sizes/font_size = 18
 text = "Click the card to return it to the tin."
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="show_card" type="Timer" parent="." unique_id=1481811026]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="show_card" to="." method="_on_show_card_timeout"]

@@ -5,6 +5,9 @@ var kind: String = "banner"
 var item_id: String = ""
 var tint: Color = Color.WHITE
 var placed: bool = false
+var reveal:bool = false
+var false_id: String
+var sprite: Sprite3D
 
 const HELD_POSITION := Vector3(-0.52, -0.3, -0.15)
 const HELD_SCALE: float = 0.75
@@ -13,12 +16,15 @@ const HOVER_DISTANCE: float = 0.06
 
 
 func setup(category: String, id: String, color: Color = Color.WHITE) -> void:
+	SceneManager.change_texture.connect(changeTexture)
 	kind = category
 	item_id = id
 	tint = color
+	false_id = SceneManager.get_random_item(item_id);
+	print_debug(false_id)
 	if kind == "banner":
-		var sprite := Sprite3D.new()
-		sprite.texture = load("res://assets/Sprites/pennon_%s.png" % item_id)
+		sprite = Sprite3D.new()
+		sprite.texture = load("res://assets/Sprites/pennon_%s.png" % false_id)
 		sprite.pixel_size = 0.0035
 		sprite.shaded = false
 		add_child(sprite)
@@ -52,3 +58,16 @@ func snap_to(slot: Marker3D) -> void:
 	reparent(slot)
 	transform = Transform3D.IDENTITY
 	placed = true
+	
+func changeTexture(args):
+	if args:
+		reveal = true
+	else:
+		reveal = false
+	change_animation()
+		
+func change_animation():
+	if reveal:
+		sprite.texture = load("res://assets/Sprites/pennon_%s.png" % item_id)
+	else:
+		sprite.texture = load("res://assets/Sprites/pennon_%s.png" % false_id)

@@ -1,6 +1,6 @@
 class_name StaticSprite extends StaticBody3D
 @export var true_item: String;
-var random_item;
+var random_item: String;
 @export var Consumable: PackedScene;
 const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
 var state = "close"
@@ -96,10 +96,10 @@ func generate_consumable():
 			"eggCarton":
 				new_item.item = "egg"
 				new_item.sprite.animation = "egg"
-			"sugarJar":
+			"sugar":
 				new_item.item = "scoop"
 				new_item.sprite.animation = "scoop"
-			"flourJar":
+			"flour":
 				new_item.item = "scoop"
 				new_item.sprite.animation = "scoop"
 			"bakingPowder":
@@ -117,10 +117,8 @@ func close():
 
 func changeTexture(args):
 	if args:
-		print_debug("true texture")
 		reveal = true
 	else:
-		print_debug("false texture")
 		reveal = false
 
 func set_hovered(active: bool) -> void:

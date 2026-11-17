@@ -9,7 +9,6 @@ const FOREGROUND_PRIORITY: int = 100
 
 var state: State = State.DEFLATED
 var variant: int = 1
-var sprite: Sprite3D
 var _inflation_tween: Tween
 
 

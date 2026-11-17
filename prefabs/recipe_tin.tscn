@@ -1,20 +1,20 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bj8rg12djfgw5"]
 
-[ext_resource type="Script" path="res://scripts/recipe_tin.gd" id="1_tin"]
-[ext_resource type="Texture2D" path="res://assets/Sprites/recipeTin_Closed.png" id="2_closed"]
+[ext_resource type="Script" uid="uid://bn33g27inl5sn" path="res://scripts/recipe_tin.gd" id="1_tin"]
+[ext_resource type="Texture2D" uid="uid://cceflh00a2uc6" path="res://assets/Sprites/recipeTin_Closed.png" id="2_closed"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tin"]
 size = Vector3(0.82, 0.54, 0.82)
 
-[node name="RecipeTin" type="StaticBody3D"]
+[node name="RecipeTin" type="StaticBody3D" unique_id=197295266]
 script = ExtResource("1_tin")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-position = Vector3(0, 0.65, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1442484526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("BoxShape3D_tin")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-position = Vector3(0, 0.65, 0)
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=345099545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 pixel_size = 0.004
 billboard = 1
 texture = ExtResource("2_closed")

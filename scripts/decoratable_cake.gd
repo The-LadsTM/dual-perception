@@ -68,14 +68,13 @@ func changeTexture(args):
 func _update_animation():
 	if reveal:
 		var correct = SceneManager.check_correct()
-		if !correct:
-			base.visible = false
-			bottom.visible = false
-			top.visible = false
-			ribbon.visible = false
-			real.visible = true
-		else:
-			pass
+		if frosted:
+			if !correct:
+				base.visible = false
+				bottom.visible = false
+				top.visible = false
+				ribbon.visible = false
+				real.visible = true
 	else:
 		if ribbon_piped:
 			ribbon.visible = true
