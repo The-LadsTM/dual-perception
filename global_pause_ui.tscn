@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://d0jdde555wqtg"]
+
+[ext_resource type="PackedScene" uid="uid://dbct7r1ci36yy" path="res://pause_menu.tscn" id="1_urh22"]
+[ext_resource type="Texture2D" uid="uid://bpqe7uqkiijh6" path="res://assets/icons/pausebuttonicon.png" id="2_q5fxl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q5fxl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3u5n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gtpc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2273"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fo7x5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rv253"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjnkq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1pnbs"]
+
+[node name="GlobalPauseUI" type="CanvasLayer" unique_id=539434669]
+
+[node name="Pause Menu" parent="." unique_id=1194028286 instance=ExtResource("1_urh22")]
+visible = false
+
+[node name="PauseButton" type="Button" parent="." unique_id=2051729292]
+custom_minimum_size = Vector2(60, 60)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q5fxl")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_c3u5n")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_8gtpc")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_f2273")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_fo7x5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rv253")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_rjnkq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1pnbs")
+action_mode = 0
+icon = ExtResource("2_q5fxl")
+icon_alignment = 2
+vertical_icon_alignment = 2
+expand_icon = true
