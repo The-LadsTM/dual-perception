@@ -1,8 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cjjclnesc5pmm"]
 
-[ext_resource type="Script" path="res://scripts/dining_table.gd" id="1_table"]
-[ext_resource type="Script" path="res://scripts/table_setting_slot.gd" id="2_slot"]
-[ext_resource type="Script" path="res://scripts/china_cabinet.gd" id="3_cabinet"]
+[ext_resource type="Script" uid="uid://bpctwes7yghvx" path="res://scripts/dining_table.gd" id="1_table"]
+[ext_resource type="Script" uid="uid://b4wu3p0ejoqkt" path="res://scripts/table_setting_slot.gd" id="2_slot"]
+[ext_resource type="Script" uid="uid://bfrrflywowflc" path="res://scripts/china_cabinet.gd" id="3_cabinet"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tabletop"]
 size = Vector3(3.72, 0.1, 2.25)
@@ -10,56 +10,52 @@ size = Vector3(3.72, 0.1, 2.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cabinet"]
 size = Vector3(4.38, 4.53, 1.23)
 
-[node name="DiningTableSetting" type="Node3D"]
+[node name="DiningTableSetting" type="Node3D" unique_id=2124576074]
 
-[node name="DiningTable" type="StaticBody3D" parent="."]
-position = Vector3(50.08, 2.654, 5.1)
+[node name="DiningTable" type="StaticBody3D" parent="." unique_id=1299033191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.80973, 2.654, 5.1)
 script = ExtResource("1_table")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiningTable"]
-position = Vector3(0, -0.05, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiningTable" unique_id=1725506611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 shape = SubResource("BoxShape3D_tabletop")
 
-[node name="PlaceSettings" type="Node3D" parent="DiningTable"]
+[node name="PlaceSettings" type="Node3D" parent="DiningTable" unique_id=1734062657]
 
-[node name="SeatNorthWest" type="Marker3D" parent="DiningTable/PlaceSettings"]
-position = Vector3(-0.85, 0.005, 0.75)
+[node name="SeatNorthWest" type="Marker3D" parent="DiningTable/PlaceSettings" unique_id=1029794108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 0.005, 0.75)
 script = ExtResource("2_slot")
 
-[node name="SeatNorthEast" type="Marker3D" parent="DiningTable/PlaceSettings"]
-position = Vector3(0.55, 0.005, 0.75)
+[node name="SeatNorthEast" type="Marker3D" parent="DiningTable/PlaceSettings" unique_id=2079828370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 0.005, 0.75)
 script = ExtResource("2_slot")
 
-[node name="SeatSouthWest" type="Marker3D" parent="DiningTable/PlaceSettings"]
-position = Vector3(-0.85, 0.005, -0.75)
-rotation = Vector3(0, 3.1415927, 0)
+[node name="SeatSouthWest" type="Marker3D" parent="DiningTable/PlaceSettings" unique_id=1012267411]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.85, 0.005, -0.75)
 script = ExtResource("2_slot")
 
-[node name="SeatSouthEast" type="Marker3D" parent="DiningTable/PlaceSettings"]
-position = Vector3(0.55, 0.005, -0.75)
-rotation = Vector3(0, 3.1415927, 0)
+[node name="SeatSouthEast" type="Marker3D" parent="DiningTable/PlaceSettings" unique_id=680016978]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.55, 0.005, -0.75)
 script = ExtResource("2_slot")
 
-[node name="SeatHead" type="Marker3D" parent="DiningTable/PlaceSettings"]
-position = Vector3(1.5, 0.005, 0)
-rotation = Vector3(0, 1.5707964, 0)
+[node name="SeatHead" type="Marker3D" parent="DiningTable/PlaceSettings" unique_id=1491597144]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.5, 0.005, 0)
 script = ExtResource("2_slot")
 
-[node name="ChinaCabinet" type="StaticBody3D" parent="."]
-position = Vector3(41.67, 3.33, 3.436)
+[node name="ChinaCabinet" type="StaticBody3D" parent="." unique_id=141224093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6002736, 3.33, 3.436)
 script = ExtResource("3_cabinet")
 table_path = NodePath("../DiningTable")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ChinaCabinet"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChinaCabinet" unique_id=894087264]
 shape = SubResource("BoxShape3D_cabinet")
 
-[node name="HoverLabel" type="Label3D" parent="ChinaCabinet"]
+[node name="HoverLabel" type="Label3D" parent="ChinaCabinet" unique_id=1159387270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0.8)
 visible = false
+pixel_size = 0.004
+billboard = 1
 modulate = Color(1, 1, 1, 0)
 outline_modulate = Color(0, 0, 0, 0)
-position = Vector3(0, 1.45, 0.8)
-billboard = 1
 text = "China Cabinet"
-font_size = 32
-pixel_size = 0.004
 outline_size = 6

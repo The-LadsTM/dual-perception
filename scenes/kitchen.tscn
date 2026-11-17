@@ -13,10 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://bj8rg12djfgw5" path="res://prefabs/recipe_tin.tscn" id="14_3fy06"]
 [ext_resource type="PackedScene" uid="uid://drqdphjmpgq1q" path="res://scenes/table.tscn" id="14_ktc20"]
 [ext_resource type="PackedScene" uid="uid://cnm3sc4qdc65g" path="res://scenes/table_runner.tscn" id="15_bs8bs"]
-[ext_resource type="PackedScene" uid="uid://i02s3wuqfols" path="res://assets/house/MODEL_house_withsprites.fbx" id="16_88wuv"]
+[ext_resource type="PackedScene" uid="uid://pajc1oonv8i8" path="res://assets/house/MODEL_house_nosprites_scaleddown.fbx" id="16_88wuv"]
 [ext_resource type="PackedScene" uid="uid://bx1thsbxcrvwy" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
 [ext_resource type="PackedScene" path="res://prefabs/decoration_station.tscn" id="21_deco"]
-[ext_resource type="PackedScene" path="res://prefabs/dining_table_setting.tscn" id="22_dining"]
+[ext_resource type="PackedScene" uid="uid://cjjclnesc5pmm" path="res://prefabs/dining_table_setting.tscn" id="22_dining"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
 
@@ -25,13 +25,14 @@ script = ExtResource("1_2b6py")
 
 [node name="kitchen_TEST" parent="." unique_id=1114722350 instance=ExtResource("1_7ilqw")]
 transform = Transform3D(0.5244214, 0, 0, 0, 1, 0, 0, 0, 1, -0.549639, -0.010026693, 0.08546126)
+visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="kitchen_TEST" unique_id=1728724310]
 transform = Transform3D(1, 0, 0, 0, 0.31154016, 0.950233, 0, -0.950233, 0.31154016, 0, 9.247669, 0)
 
 [node name="Player" parent="." unique_id=1811429097 instance=ExtResource("2_mrp8g")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.030506, 1.2156351, 0.4977833)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.760994, 1.6536741, -17.955345)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=543378461]
 transform = Transform3D(2.095, 0, 0, 0, 2.095, 0, 0, 0, 2.095, 0, 0, 0)
@@ -41,68 +42,73 @@ transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0,
 shape = SubResource("WorldBoundaryShape3D_ymk7a")
 
 [node name="flourJar" parent="." unique_id=1309829926 instance=ExtResource("4_bems3")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -2.6366785, 2.39218, 1.893749)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -43.229996, 2.39218, -17.692852)
 true_item = "flour"
 Consumable = ExtResource("5_v3ycp")
 
 [node name="sugarJar" parent="." unique_id=1833116709 instance=ExtResource("4_bems3")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -2.5392923, 2.425272, 1.0210061)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -43.132607, 2.425272, -18.565594)
 true_item = "sugar"
 Consumable = ExtResource("5_v3ycp")
 
 [node name="cakePan" parent="." unique_id=2142255679 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6244478, 2.4423432, 0.12592101)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.217766, 2.4423432, -19.460682)
 objectName = "cakePan"
 
 [node name="mixer" parent="." unique_id=852364789 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6306602, 2.4602149, 3.4599824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.962654, 2.4602149, -16.126617)
 objectName = "mixer"
 
 [node name="milkCarton" parent="." unique_id=1199836084 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6464186, 2.3540294, -0.83921885)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.23974, 2.3540294, -20.42582)
 true_item = "milkCarton"
 
 [node name="Sprite3D" parent="milkCarton" index="1" unique_id=1185922637]
 texture = ExtResource("10_88wuv")
 
 [node name="salt" parent="." unique_id=348972104 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3807917, 2.0645099, 3.7024922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.212524, 2.0645099, -15.88411)
 true_item = "saltShaker"
 
 [node name="Sprite3D" parent="salt" index="1" unique_id=1185922637]
 texture = ExtResource("12_87bic")
 
 [node name="pepper" parent="." unique_id=325910496 instance=ExtResource("7_58u3k")]
-transform = Transform3D(0.99482405, 0.08170997, 0.06040387, -0.0774279, 0.9945288, -0.07012445, -0.065803245, 0.06508455, 0.99570775, 2.8075309, 2.070229, 3.7024922)
+transform = Transform3D(0.99482405, 0.08170997, 0.06040387, -0.0774279, 0.9945288, -0.07012445, -0.065803245, 0.06508455, 0.99570775, -37.785786, 2.070229, -15.88411)
 true_item = "pepperShaker"
 
 [node name="vanilla" parent="." unique_id=1654556683 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2775216, 2.0906951, 3.7024922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.315796, 2.0906951, -15.88411)
 true_item = "vanillaExtract"
 
 [node name="Sprite3D" parent="vanilla" index="1" unique_id=1185922637]
 texture = ExtResource("13_k1cyo")
 
+[node name="bakingPowder" parent="." unique_id=2029461425 instance=ExtResource("4_bems3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5134711, 1.971359, -2.8086154)
+true_item = "bakingPowder"
+Consumable = ExtResource("5_v3ycp")
+
 [node name="oven" parent="." unique_id=273789271 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21068382, 1.1896131, 3.060607)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.804, 1.1896131, -16.525993)
 objectName = "oven"
 
 [node name="RecipeTin" parent="." unique_id=765580693 instance=ExtResource("14_3fy06")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5604553, 1.5177835, 3.1176512)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.15377, 1.5177835, -16.468948)
 
 [node name="DecorationCake" parent="." unique_id=902749823 instance=ExtResource("20_cake")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33007315, 2.8700912, 3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.92339, 2.8700912, -16.086601)
 
 [node name="PipingBagWhite" parent="." unique_id=169879998 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5567448, 2.17, 3.5932465)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.150063, 2.17, -15.993356)
 true_item = "pipingBag_White"
 
 [node name="PipingBagPink" parent="." unique_id=972766417 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6296737, 2.17, 2.6574395)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.222992, 2.17, -16.929161)
 true_item = "pipingBag_Pink"
 
 [node name="PipingBagRed" parent="." unique_id=264107394 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.041663, 2.17, 3.468257)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.63498, 2.17, -16.118343)
 true_item = "pipingBag_Red"
 
 [node name="StaticSprite" parent="." unique_id=639103028 instance=ExtResource("4_bems3")]
@@ -248,16 +254,59 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.395641, 0.05, 0.9443207)
 [node name="tableRunner" parent="." unique_id=1895262275 instance=ExtResource("15_bs8bs")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 7.024474, 0.73838717, 0.36856127)
 
-[node name="MODEL_house_withsprites" parent="." unique_id=1232760210 instance=ExtResource("16_88wuv")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 38.25968, -5.574332, 9.061005)
+[node name="MODEL_house_nosprites_scaleddown" parent="." unique_id=2073857932 instance=ExtResource("16_88wuv")]
+transform = Transform3D(0.39, 0, 0, 0, 0.39, 0, 0, 0, 0.39, -49.611694, -7.166543, -19.77679)
 
-[node name="bakingPowder" parent="." unique_id=2029461425 instance=ExtResource("4_bems3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5134711, 1.971359, -2.8086154)
-true_item = "bakingPowder"
-Consumable = ExtResource("5_v3ycp")
+[node name="AreaLight3D2" type="AreaLight3D" parent="MODEL_house_nosprites_scaleddown" unique_id=968739426]
+transform = Transform3D(-1.0927848e-07, -2.5, -1.0927848e-07, 0, -1.0927848e-07, 2.5, -2.5, 1.0927848e-07, 4.7767144e-15, 52.879875, 44.849625, 17.834503)
+light_color = Color(0.902592, 0.8391525, 0.6399092, 1)
+light_energy = 16.0
+light_size = 1.0
+area_range = 20.0
+area_size = Vector2(17.261177, 8.358864)
+
+[node name="AreaLight3D3" type="AreaLight3D" parent="MODEL_house_nosprites_scaleddown" unique_id=1956063806]
+transform = Transform3D(-1.0927848e-07, -2.5, -1.0927848e-07, 0, -1.0927848e-07, 2.5, -2.5, 1.0927848e-07, 4.7767144e-15, 52.879875, 44.849625, -11.649883)
+light_color = Color(0.902592, 0.8391525, 0.6399092, 1)
+light_energy = 16.0
+light_size = 1.0
+area_range = 20.0
+area_size = Vector2(17.261177, 8.358864)
+
+[node name="AreaLight3D4" type="AreaLight3D" parent="MODEL_house_nosprites_scaleddown" unique_id=503642308]
+transform = Transform3D(-1.0927848e-07, -2.5, -1.0927848e-07, 0, -1.0927848e-07, 2.5, -2.5, 1.0927848e-07, 4.7767144e-15, -0.7285385, 44.849625, -11.649883)
+light_color = Color(0.902592, 0.8391525, 0.6399092, 1)
+light_energy = 16.0
+light_size = 1.0
+area_range = 20.0
+area_size = Vector2(17.261177, 8.358864)
+
+[node name="AreaLight3D5" type="AreaLight3D" parent="MODEL_house_nosprites_scaleddown" unique_id=373124303]
+transform = Transform3D(-1.0927848e-07, -2.5, -1.0927848e-07, 0, -1.0927848e-07, 2.5, -2.5, 1.0927848e-07, 4.7767144e-15, 19.014679, 44.849625, -11.649883)
+light_color = Color(0.902592, 0.8391525, 0.6399092, 1)
+light_energy = 16.0
+light_size = 1.0
+area_range = 20.0
+area_size = Vector2(17.261177, 8.358864)
+
+[node name="AreaLight3D6" type="AreaLight3D" parent="MODEL_house_nosprites_scaleddown" unique_id=1212524019]
+transform = Transform3D(-1.0927848e-07, -2.5, -1.0927848e-07, 0, -1.0927848e-07, 2.5, -2.5, 1.0927848e-07, 4.7767144e-15, 14.806931, 44.849625, 8.482128)
+light_color = Color(0.902592, 0.8391525, 0.6399092, 1)
+light_energy = 16.0
+light_size = 1.0
+area_range = 20.0
+area_size = Vector2(17.261177, 8.358864)
+
+[node name="AreaLight3D7" type="AreaLight3D" parent="MODEL_house_nosprites_scaleddown" unique_id=1773072151]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 40.92424, 25.9665, 8.482128)
+light_color = Color(0.902592, 0.8391525, 0.6399092, 1)
+light_energy = 16.0
+light_size = 1.0
+area_range = 20.0
+area_size = Vector2(17.261177, 8.358864)
 
 [node name="DiningTableSetting" parent="." unique_id=1431366031 instance=ExtResource("22_dining")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -42.428, -1.093, -31.361832)
 
 [editable path="milkCarton"]
 [editable path="salt"]
