@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://0ngnrl48jsm" path="res://assets/Sprites/pepperShaker.png" id="2_a5nce"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ymk7a"]
-size = Vector3(1, 0.68359375, 0.44433594)
+size = Vector3(0.44702148, 0.68359375, 0.44433594)
 
 [node name="ReusableItem" type="StaticBody3D" unique_id=1199836084]
 script = ExtResource("1_ajgyk")

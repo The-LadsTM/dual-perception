@@ -6,6 +6,17 @@ var photo_gallery = []
 @onready var photo_cooldown = $Photo_cooldown
 @onready var cooldown_bar = $CameraCooldownBar
 var bowl_array = [];
+var correct_array = []
+
+var bowl_contents: Dictionary[String, int] = {}
+var recipe_contents: Dictionary[String, int] = {
+	"sugarJar": 1,
+	"flourJar": 3,
+	"milkCarton": 1,
+	"saltShaker": 1,
+	"eggCarton": 3,
+	"butter": 1,
+}
 
 var pair_dict = { "sugarJar_flourJar": false, "butter_cheese": false, "salt_soda": false, "eggCarton": true }
 
@@ -61,4 +72,15 @@ func swap_items():
 
 func add_to_bowl(ingredient: String):
 	bowl_array.append(ingredient)
-	print_debug(bowl_array)
+	if bowl_contents.has(ingredient):
+		bowl_contents[ingredient] += 1;
+	else:
+		bowl_contents.set(ingredient, 1)
+	print_debug(bowl_contents)
+
+func check_correct() -> bool:
+	for i in recipe_contents:
+		if !bowl_contents.has(i) or !(bowl_contents[i] == recipe_contents[i]):
+			return false
+	return true
+	

@@ -12,27 +12,67 @@ const INGREDIENT_LABELS: Dictionary = {
 }
 
 const OUTLINE_SHADER: Shader = preload("res://shaders/reusable_outline.gdshader")
+const COUNTDOWN_SHADER: Shader = preload("res://shaders/oven_countdown.gdshader")
 var highlight_material: ShaderMaterial
-var state = "empty"
+var countdown: MeshInstance3D
+var countdown_material: ShaderMaterial
+var bowl_taken = false
 @export var objectName: String
 var bowl: PackedScene = preload("res://prefabs/consumable.tscn")
-const HALF = 4;
+const HALF = 2;
 var hovered
 @onready var timer = $Timer
 var full: int = 0
 var close: bool = true
+var baked: bool = false
+var on: bool = false
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
 
 func _ready() -> void:
+	set_process(false)
 	if objectName == "oven":
 		sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		var box : BoxShape3D = BoxShape3D.new()
+		box.extents.x = 1
+		box.extents.y = 1
+		box.extents.z = 0.2
+
+		$CollisionShape3D.shape = box
+		_create_countdown()
 	highlight_material = ShaderMaterial.new()
 	highlight_material.shader = OUTLINE_SHADER
 	highlight_material.set_shader_parameter("billboard_enabled", objectName != "oven")
 	sprite.material_override = highlight_material
 	_update_animation()
+
+
+func _create_countdown() -> void:
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.38, 0.38)
+	countdown_material = ShaderMaterial.new()
+	countdown_material.shader = COUNTDOWN_SHADER
+	countdown = MeshInstance3D.new()
+	countdown.name = "OvenCountdown"
+	countdown.position = Vector3(0.0, 1.52, -0.12)
+	countdown.mesh = quad
+	countdown.material_override = countdown_material
+	countdown.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	countdown.hide()
+	add_child(countdown)
+
+
+func _process(_delta: float) -> void:
+	if timer.is_stopped():
+		_hide_countdown()
+		return
+	countdown_material.set_shader_parameter("remaining", timer.time_left / timer.wait_time)
+
+
+func _hide_countdown() -> void:
+	countdown.hide()
+	set_process(false)
 
 
 func set_hovered(active: bool) -> void:
@@ -41,20 +81,24 @@ func set_hovered(active: bool) -> void:
 
 
 func _update_animation() -> void:
-	if objectName == "mixer":
-		var suffix: String = "_Close" if close else "_Open"
-		sprite.animation = objectName + ("_Full" if full > HALF else "_Empty") + suffix
-	elif objectName == "oven":
-		sprite.animation = "oven_Empty_Close" if close else "oven_Empty_Open" 
-	elif objectName == "cakePan":
-		sprite.animation = objectName + ("_Full" if full > 0 else "_Empty")
+	if bowl_taken and objectName != "oven":
+		sprite.animation = objectName +"_Hidden"
+	else:
+		if objectName == "mixer":
+			var suffix: String = "_Close" if close else "_Open"
+			sprite.animation = objectName + ("_Full" if full > HALF else "_Empty") + suffix
+			
+		elif objectName == "oven":
+			sprite.animation = "oven_Empty_Close" if close else "oven_Empty_Open" 
+		elif objectName == "cakePan":
+			sprite.animation = objectName + ("_Full" if full > 0 else "_Empty")
 		
 	if highlight_material != null and sprite.sprite_frames.has_animation(sprite.animation):
 		highlight_material.set_shader_parameter("sprite_texture", sprite.sprite_frames.get_frame_texture(sprite.animation, 0))
 
 
 func set_pour_hover(active: bool) -> void:
-	close = not active
+	close = !active
 	_update_animation()
 
 
@@ -120,23 +164,73 @@ func get_pour_position() -> Vector3:
 
 
 func add_to_bowl() -> void:
-	full +=1
+	full += 1
 	_update_animation()
 
 func get_bowl():
-	print_debug("you got bow")
 	#change mixer art and put bowl in hand
+	bowl_taken = true
 	var bowl_child = bowl.instantiate()
 	add_child(bowl_child)
-	if full > HALF:
-		bowl_child.item = "bowl_Full"
-		bowl_child.sprite.animation = "bowl_Full"
-	else:
-		bowl_child.item = "bowl_Full"
-		bowl_child.sprite.animation = "bowl_Full"
-	#sprite.animation = 
-	return bowl_child
+	if objectName == "mixer":
+		if full > HALF:
+			bowl_child.item = "mixerBowl_Full"
+			bowl_child.sprite.animation = "mixerBowl_Full"
+		else:
+			bowl_child.item = "mixerBowl_Empty"
+			bowl_child.sprite.animation = "mixerBowl_Empty"
+		print_debug(sprite.animation)
+		return bowl_child
+	elif objectName == "cakePan":
+		if full > 0:
+			bowl_child.item = "cakePan_Full"
+			bowl_child.sprite.animation = "cakePan_Full"
+		else:
+			bowl_child.item = "cakePan_Empty"
+			bowl_child.sprite.animation = "cakePan_Empty"
+		return bowl_child
+	elif objectName == "oven":
+		if full > 0:
+			if baked:
+				bowl_child.item = "cakePan_Baked"
+				bowl_child.sprite.animation = "cakePan_Baked"
+			else:
+				bowl_child.item = "cakePan_Full"
+				bowl_child.sprite.animation = "cakePan_Full"
+		else:
+			bowl_child.queue_free()
+			return null;
+		return bowl_child
 
 func open(hovered) -> void:
+	if objectName == "oven" and on:
+		return
 	close = !hovered;
 	_update_animation()
+
+func return_bowl():
+	bowl_taken = false
+	_update_animation()
+	
+func empty():
+	full = 0
+
+func start_oven():
+	timer.start()
+	on = true;
+	if countdown != null:
+		countdown_material.set_shader_parameter("remaining", 1.0)
+		countdown.show()
+		set_process(true)
+	
+
+
+func _on_timer_timeout() -> void:
+	if countdown != null:
+		_hide_countdown()
+	on = false
+	baked = true
+	print_debug(SceneManager.bowl_array)
+	
+	#play audio of oven ding
+	pass # Replace with function body.

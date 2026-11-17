@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bf2snf7r5c402" path="res://assets/Sprites/saltShaker.png" id="12_87bic"]
 [ext_resource type="Texture2D" uid="uid://f6mbha7mwgkn" path="res://assets/Sprites/vanillaExtract.png" id="13_k1cyo"]
 [ext_resource type="PackedScene" path="res://prefabs/recipe_tin.tscn" id="14_3fy06"]
-[ext_resource type="PackedScene" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
+[ext_resource type="PackedScene" uid="uid://drqdphjmpgq1q" path="res://scenes/table.tscn" id="14_ktc20"]
+[ext_resource type="PackedScene" uid="uid://cnm3sc4qdc65g" path="res://scenes/table_runner.tscn" id="15_bs8bs"]
+[ext_resource type="PackedScene" uid="uid://bx1thsbxcrvwy" path="res://prefabs/decoratable_cake.tscn" id="20_cake"]
 [ext_resource type="PackedScene" path="res://prefabs/decoration_station.tscn" id="21_deco"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ymk7a"]
@@ -20,7 +22,7 @@
 script = ExtResource("1_2b6py")
 
 [node name="kitchen_TEST" parent="." unique_id=1114722350 instance=ExtResource("1_7ilqw")]
-transform = Transform3D(0.5244214, 0, 0, 0, 1, 0, 0, 0, 1, -0.56249714, 0, 0.097259164)
+transform = Transform3D(0.5244214, 0, 0, 0, 1, 0, 0, 0, 1, -0.549639, -0.010026693, 0.08546126)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="kitchen_TEST" unique_id=1728724310]
 transform = Transform3D(1, 0, 0, 0, 0.31154016, 0.950233, 0, -0.950233, 0.31154016, 0, 9.247669, 0)
@@ -51,7 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6244478, 2.4423432, 0.1259
 objectName = "cakePan"
 
 [node name="mixer" parent="." unique_id=852364789 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85201216, 2.4602149, 3.4599824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6306602, 2.4602149, 3.4599824)
 objectName = "mixer"
 
 [node name="milkCarton" parent="." unique_id=1199836084 instance=ExtResource("7_58u3k")]
@@ -62,32 +64,32 @@ true_item = "milkCarton"
 texture = ExtResource("10_88wuv")
 
 [node name="salt" parent="." unique_id=348972104 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78302, 2.0645099, 3.7024922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3807917, 2.0645099, 3.7024922)
 true_item = "saltShaker"
 
 [node name="Sprite3D" parent="salt" index="1" unique_id=1185922637]
 texture = ExtResource("12_87bic")
 
 [node name="pepper" parent="." unique_id=325910496 instance=ExtResource("7_58u3k")]
-transform = Transform3D(0.99482405, 0.08170997, 0.06040387, -0.0774279, 0.9945288, -0.07012445, -0.065803245, 0.06508455, 0.99570775, 2.6565285, 2.070229, 3.7024922)
+transform = Transform3D(0.99482405, 0.08170997, 0.06040387, -0.0774279, 0.9945288, -0.07012445, -0.065803245, 0.06508455, 0.99570775, 2.8075309, 2.070229, 3.7024922)
 true_item = "pepperShaker"
 
 [node name="vanilla" parent="." unique_id=1654556683 instance=ExtResource("7_58u3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3398027, 2.0906951, 3.7024922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2775216, 2.0906951, 3.7024922)
 true_item = "vanillaExtract"
 
 [node name="Sprite3D" parent="vanilla" index="1" unique_id=1185922637]
 texture = ExtResource("13_k1cyo")
 
 [node name="oven" parent="." unique_id=273789271 instance=ExtResource("6_g3o0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21068382, 1.1896131, 2.8182702)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21068382, 1.1896131, 3.060607)
 objectName = "oven"
 
 [node name="RecipeTin" parent="." unique_id=765580693 instance=ExtResource("14_3fy06")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5604553, 1.5177835, 3.1176512)
 
 [node name="DecorationCake" parent="." unique_id=902749823 instance=ExtResource("20_cake")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33007315, 2.45, 3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33007315, 2.8700912, 3.5)
 
 [node name="PipingBagWhite" parent="." unique_id=169879998 instance=ExtResource("7_58u3k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5567448, 2.17, 3.5932465)
@@ -160,18 +162,6 @@ transform = Transform3D(0.92249554, -0.38600776, 0, 0.38600776, 0.92249554, 0, 0
 [node name="Birthday_08_Y" parent="DecorationStation/DecorationWall/BannerSlots" index="12"]
 transform = Transform3D(0.8628071, -0.50553334, 0, 0.50553334, 0.8628071, 0, 0, 0, 1, 2.0117, 0.0909, 0.14)
 
-[node name="Balloon_01_pink" parent="DecorationStation/DecorationWall/BalloonSlots" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.95, 0.4)
-
-[node name="Balloon_02_red" parent="DecorationStation/DecorationWall/BalloonSlots" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0.95, 0.4)
-
-[node name="Balloon_03_green" parent="DecorationStation/DecorationWall/BalloonSlots" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45, -0.7, 0.4)
-
-[node name="Balloon_04_cream" parent="DecorationStation/DecorationWall/BalloonSlots" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, -0.7, 0.4)
-
 [node name="DecorationBox" parent="DecorationStation" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1.2, 1.05)
 
@@ -213,6 +203,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04, 1.9)
 
 [node name="StationLight" parent="DecorationStation" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 3)
+
+[node name="BalloonWeight" parent="DecorationStation" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.9, 1.05)
+
+[node name="Sprite3D" parent="DecorationStation/BalloonWeight" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.272, 0)
+
+[node name="CollisionShape3D" parent="DecorationStation/BalloonWeight" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="BalloonPump" parent="DecorationStation" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.9, 1.05)
+
+[node name="Body" parent="DecorationStation/BalloonPump" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0)
+
+[node name="Base" parent="DecorationStation/BalloonPump" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+
+[node name="Handle" parent="DecorationStation/BalloonPump" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88, 0)
+
+[node name="NozzlePipe" parent="DecorationStation/BalloonPump" index="3"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.2, 0.6, 0.15)
+
+[node name="NozzleTip" parent="DecorationStation/BalloonPump" index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.25, 0, 0, 0, 1, 0.4, 0.65, 0.15)
+
+[node name="Nozzle" parent="DecorationStation/BalloonPump" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.7, 0.15)
+
+[node name="CollisionShape3D" parent="DecorationStation/BalloonPump" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.55, 0.05)
+
+[node name="RecipeTin2" parent="." unique_id=119868101 instance=ExtResource("14_3fy06")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7872071, 1.6163828, -2.4986205)
+
+[node name="table" parent="." unique_id=1131551431 instance=ExtResource("14_ktc20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.395641, 0.05, 0.9443207)
+
+[node name="tableRunner" parent="." unique_id=1895262275 instance=ExtResource("15_bs8bs")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 7.024474, 0.73838717, 0.36856127)
 
 [editable path="milkCarton"]
 [editable path="salt"]

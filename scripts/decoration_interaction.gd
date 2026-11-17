@@ -54,6 +54,28 @@ func _set_hovered_box(box: DecorationBox) -> void:
 		hovered_box.set_hovered(true)
 
 
+func is_reticle_target(target: Node3D) -> bool:
+	if target == hovered_box:
+		return not is_instance_valid(held_item) and not hovered_box.banner_bag.is_empty()
+	if target == hovered_supply:
+		return (
+			_hands_empty()
+			and not hovered_supply.variants.is_empty()
+			and not is_instance_valid(hovered_supply.pump.occupant)
+		)
+	if target is BalloonPump:
+		if held_item is PartyBalloon:
+			return target.can_inflate(held_item)
+		return (
+			_hands_empty()
+			and is_instance_valid(target.occupant)
+			and target.occupant.state == PartyBalloon.State.INFLATED
+		)
+	if target == held_wall:
+		return is_instance_valid(target_slot) or (held_item is PartyBalloon and held_item.state == PartyBalloon.State.INFLATED)
+	return false
+
+
 func handle_input(event: InputEvent) -> bool:
 	if not event.is_action("interact"):
 		return false

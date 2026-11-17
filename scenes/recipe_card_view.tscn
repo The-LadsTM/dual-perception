@@ -1,16 +1,16 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b4d2pod7sw6ro"]
 
-[ext_resource type="Script" path="res://scripts/recipe_card_view.gd" id="1_view"]
-[ext_resource type="Texture2D" path="res://assets/Sprites/recipeCard_Small.png" id="2_card"]
+[ext_resource type="Script" uid="uid://cnvxlrha7n3dn" path="res://scripts/recipe_card_view.gd" id="1_view"]
+[ext_resource type="Texture2D" uid="uid://d13bhdvmromqi" path="res://assets/Sprites/recipeCard_Small.png" id="2_card"]
+[ext_resource type="FontFile" uid="uid://ccwttcqeyhrht" path="res://fonts/ArexaDemo-Regular.otf" id="3_5k2en"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_card"]
 
-[node name="RecipeCardView" type="CanvasLayer"]
+[node name="RecipeCardView" type="CanvasLayer" unique_id=1680940361]
 layer = 100
-visible = false
 script = ExtResource("1_view")
 
-[node name="Overlay" type="Control" parent="."]
+[node name="Overlay" type="Control" parent="." unique_id=231970432]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Backdrop" type="ColorRect" parent="Overlay"]
+[node name="Backdrop" type="ColorRect" parent="Overlay" unique_id=324854852]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.035, 0.045, 0.045, 0.8)
 
-[node name="Margin" type="MarginContainer" parent="Overlay"]
+[node name="Margin" type="MarginContainer" parent="Overlay" unique_id=976295551]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,26 +40,26 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 40
 
-[node name="Column" type="VBoxContainer" parent="Overlay/Margin"]
+[node name="Column" type="VBoxContainer" parent="Overlay/Margin" unique_id=1742464707]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="Aspect" type="AspectRatioContainer" parent="Overlay/Margin/Column"]
+[node name="Aspect" type="AspectRatioContainer" parent="Overlay/Margin/Column" unique_id=933811613]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 ratio = 1.725
 
-[node name="CardButton" type="Button" parent="Overlay/Margin/Column/Aspect"]
+[node name="CardButton" type="Button" parent="Overlay/Margin/Column/Aspect" unique_id=1567832731]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_card")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_card")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_card")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_card")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_card")
 
-[node name="Paper" type="TextureRect" parent="Overlay/Margin/Column/Aspect/CardButton"]
+[node name="Paper" type="TextureRect" parent="Overlay/Margin/Column/Aspect/CardButton" unique_id=1958870322]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -71,44 +71,49 @@ mouse_filter = 2
 texture = ExtResource("2_card")
 expand_mode = 1
 
-[node name="Content" type="MarginContainer" parent="Overlay/Margin/Column/Aspect/CardButton"]
+[node name="Content" type="MarginContainer" parent="Overlay/Margin/Column/Aspect/CardButton" unique_id=1860160016]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 163.82501
+offset_top = 100.0
+offset_right = -189.82495
+offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Scroll" type="ScrollContainer" parent="Overlay/Margin/Column/Aspect/CardButton/Content"]
+[node name="Scroll" type="ScrollContainer" parent="Overlay/Margin/Column/Aspect/CardButton/Content" unique_id=993254021]
 layout_mode = 2
-mouse_filter = 1
 horizontal_scroll_mode = 0
 
-[node name="Text" type="VBoxContainer" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll"]
+[node name="Text" type="VBoxContainer" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll" unique_id=1109314102]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text"]
+[node name="Title" type="Label" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text" unique_id=62000016]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.18, 0.15, 0.12, 1)
-text = "Recipe Card"
+theme_override_fonts/font = ExtResource("3_5k2en")
+theme_override_font_sizes/font_size = 80
+text = "Yellow Sponge Cake"
+horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Body" type="Label" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text"]
+[node name="Body" type="RichTextLabel" parent="Overlay/Margin/Column/Aspect/CardButton/Content/Scroll/Text" unique_id=1764876655]
 layout_mode = 2
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.18, 0.15, 0.12, 1)
-autowrap_mode = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "RECIPE LIST HERE"
+fit_content = true
 
-[node name="Hint" type="Label" parent="Overlay/Margin/Column"]
+[node name="Hint" type="Label" parent="Overlay/Margin/Column" unique_id=1172341081]
 layout_mode = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.94, 0.92, 0.85, 1)
 theme_override_font_sizes/font_size = 18
-text = "Click the card to put it back and close the tin  |  Esc to close"
+text = "Click the card to return it to the tin."
 horizontal_alignment = 1
 autowrap_mode = 3

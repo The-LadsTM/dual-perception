@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dqmihfqgvis0k"]
+
+[ext_resource type="PackedScene" uid="uid://pfef1l7laq4w" path="res://assets/kitchen_3D_test/textures/MODEL_house.fbx" id="1_house"]
+[ext_resource type="Texture2D" uid="uid://c8e4uwctph3ft" path="res://assets/kitchen_3D_test/textures/TEX_kitchen_backsplash.png" id="2_o8sle"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upbwm"]
+resource_name = "Kitchen Backsplash"
+albedo_texture = ExtResource("2_o8sle")
+
+[node name="House" type="Node3D" unique_id=447274281]
+
+[node name="Model" parent="." unique_id=392796284 instance=ExtResource("1_house")]
+
+[node name="Cube_023" parent="Model" index="17" unique_id=1888876209]
+surface_material_override/1 = SubResource("StandardMaterial3D_upbwm")
+
+[node name="Light" parent="Model" index="34" unique_id=750503153]
+visible = false
+
+[node name="Light_001" parent="Model" index="35" unique_id=1756780897]
+visible = false
+
+[node name="Light_003" parent="Model" index="36" unique_id=1771287706]
+visible = false
+
+[node name="Light_005" parent="Model" index="37" unique_id=834701412]
+visible = false
+
+[node name="Light_006" parent="Model" index="38" unique_id=1875549808]
+visible = false
+
+[node name="Light_008" parent="Model" index="39" unique_id=177730973]
+visible = false
+
+[node name="Light_009" parent="Model" index="40" unique_id=550600313]
+visible = false
+
+[node name="Light_011" parent="Model" index="41" unique_id=803857882]
+visible = false
+
+[node name="Light_012" parent="Model" index="42" unique_id=1120736496]
+visible = false
+
+[editable path="Model"]
