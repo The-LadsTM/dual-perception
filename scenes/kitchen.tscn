@@ -357,7 +357,7 @@ shape = SubResource("BoxShape3D_pouq5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.839478, 18.209316, 16.256935)
 shape = SubResource("BoxShape3D_1ure3")
 
-[node name="CollisionShape3D7" type="CollisionShape3D" parent="MODEL_house_nosprites_scaleddown/walls" unique_id=528110949]
+[node name="phone table2" type="CollisionShape3D" parent="MODEL_house_nosprites_scaleddown/walls" unique_id=528110949]
 transform = Transform3D(0.7660443, 0, 0.6427875, 0, 1, 0, -0.6427875, 0, 0.7660443, 25.912048, 20.46836, 14.811298)
 shape = SubResource("BoxShape3D_uoe4c")
 
@@ -369,7 +369,7 @@ shape = SubResource("BoxShape3D_d42ie")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.666634, 22.027958, 10.56609)
 shape = SubResource("BoxShape3D_wvxf7")
 
-[node name="CollisionShape3D8" type="CollisionShape3D" parent="MODEL_house_nosprites_scaleddown/walls" unique_id=971765621]
+[node name="coffee table" type="CollisionShape3D" parent="MODEL_house_nosprites_scaleddown/walls" unique_id=971765621]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.439262, 20.677048, 9.041508)
 shape = SubResource("BoxShape3D_5tc72")
 
@@ -379,7 +379,7 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -42.428, -1.093, -31.36
 [node name="GlobalPauseUI" parent="." unique_id=539434669 instance=ExtResource("18_87bic")]
 
 [node name="AudioPlayer" parent="." unique_id=1804638682 instance=ExtResource("19_k1cyo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.223495, 5.3850117, -22.02204)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 20, 14)
 
 [editable path="milkCarton"]
 [editable path="salt"]
