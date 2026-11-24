@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ci3vyhbxnsvu5"]
+
+[ext_resource type="Script" uid="uid://duciubp3fgbns" path="res://audio_player.gd" id="1_y41ra"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s4am8"]
+size = Vector3(1, 1.1583252, 2.2282715)
+
+[node name="AudioPlayer" type="Area3D" unique_id=1804638682]
+script = ExtResource("1_y41ra")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1485226052]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=784584296]
+transform = Transform3D(2.0413752, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0791626, 0)
+shape = SubResource("BoxShape3D_s4am8")

@@ -35,9 +35,9 @@ func _ready() -> void:
 	if objectName == "oven":
 		sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		var box : BoxShape3D = BoxShape3D.new()
-		box.extents.x = 1
+		box.extents.x = 0.2
 		box.extents.y = 1
-		box.extents.z = 0.2
+		box.extents.z = 1
 
 		$CollisionShape3D.shape = box
 		_create_countdown()
